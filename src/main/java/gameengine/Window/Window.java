@@ -5,16 +5,24 @@ import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
+import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11C.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Window {
 
+    //Resolution and info
     int width;
     int height;
     String title;
     private long glfwWindow; //Number where the window is memorized in the memory space
+
+    //Colors
+    private float r;
+    private float g;
+    private float b;
+    private float a;
 
     private static Window window = null;
 
@@ -23,22 +31,38 @@ public class Window {
         this.height = 1080;
 
         this.title = "JetEngine";
+
+        this.r = 1;
+        this.g = 1;
+        this.b = 1;
+        this.a = 1;
     }
 
-    public static Window get(){
+    public static Window get()
+    {
         if(Window.window == null) Window.window = new Window();
 
         return Window.window;
     }
 
-    public void run(){
+    public void run()
+    {
         System.out.println("Hello LWJGL " + Version.getVersion() + "!");
 
         init();
         loop();
+
+        //Free the memory
+        glfwFreeCallbacks(glfwWindow);
+        glfwDestroyWindow(glfwWindow);
+
+        //Terminate GLFW and free the error callback
+        glfwTerminate();
+        //glfwSetErrorCallback(null).free(); May cause a nullptr exception
     }
 
-    public void init(){
+    public void init()
+    {
         //Setup error callback
         GLFWErrorCallback.createPrint(System.err).set();
 
@@ -59,6 +83,13 @@ public class Window {
             throw new IllegalStateException("Failed to create the GLFW window");
         }
 
+        //Bind mouse delegates for mouse events
+        glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback); //Lamba expression to call delegate
+        glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
+        glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
+
+        glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
+
         //Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindow);
         //Enable v-sync
@@ -73,15 +104,28 @@ public class Window {
         GL.createCapabilities();
     }
 
-    public void loop(){
-        while(!glfwWindowShouldClose(glfwWindow)){
+    public void loop()
+    {
+        while(!glfwWindowShouldClose(glfwWindow))
+        {
             //Poll events
             glfwPollEvents();
 
-            glClearColor(1.0f,0.0f,0.0f,1.0f);
+            glClearColor(r,g,b,a);
             glClear(GL_COLOR_BUFFER_BIT);
 
+            /*TEST
+            if(KeyListener.isKeyPressed(GLFW_KEY_SPACE))
+            {
+                r = 0;
+                g = 0;
+                b = 0;
+            }
+            */
             glfwSwapBuffers(glfwWindow);
+
+
+
         }
     }
 }
