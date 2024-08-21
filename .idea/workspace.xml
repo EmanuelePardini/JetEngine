@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be5a7dae-daae-4114-a210-103589ae3a55" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Window/KeyListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Window/MouseListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Window/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Window/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +39,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "GiovanniSimbolotti-RBW"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/EmanuelePardini/JetEngine.git",
+    "accountId": "43dabbed-5ff8-44f2-99e4-7a9302f4906e"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -50,14 +62,19 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.Build JetEngine.executor": "Run",
     "Gradle.Download Sources.executor": "Run",
     "Gradle.JetEngine [:Main.main()].executor": "Run",
     "Gradle.JetEngine [:gameengine.Main.main()].executor": "Run",
     "Gradle.JetEngine [build].executor": "Run",
-    "Gradle.JetEngine.executor": "Run",
+    "Gradle.JetEngine.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
