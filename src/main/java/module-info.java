@@ -8,11 +8,10 @@ module org.example.gameengine {
     requires net.synedra.validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
-    requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires org.lwjgl.glfw;
     requires org.lwjgl.opengl;
 
-    opens org.example.gameengine to javafx.fxml;
-    exports org.example.gameengine;
+    opens gameengine to javafx.fxml;
+    exports gameengine;
 }

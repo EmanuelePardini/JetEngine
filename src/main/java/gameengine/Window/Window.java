@@ -1,4 +1,4 @@
-package Window;
+package gameengine.Window;
 
 
 import org.lwjgl.Version;
