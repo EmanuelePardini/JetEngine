@@ -26,6 +26,7 @@ public class MouseListener {
         this.lastY = 0;
     }
 
+    //Singleton
     public static MouseListener get()
     {
         if(instance == null) MouseListener.instance = new MouseListener();
@@ -35,22 +36,30 @@ public class MouseListener {
 
     public static void mousePosCallback(long window, double xpos, double ypos)
     {
+        //save last x and y pos
         get().lastX = get().xPos;
         get().lastY = get().yPos;
 
+        //set new x and y
         get().xPos = xpos;
         get().yPos = ypos;
+
+        //If mouse is moved while any button is pressed, dragging is true (user is dragging)
+        get().isDragging = get().mouseButtonPressed[0] || get().mouseButtonPressed[1] || get().mouseButtonPressed[2];
     }
 
     public static void mouseButtonCallback(long window, int button, int action, int mods)
     {
+        //Check if mouse was pressed
         if(action == GLFW_PRESS)
         {
+            //Check if only one button was pressed
             if(button < get().mouseButtonPressed.length)
             {
                 get().mouseButtonPressed[button] = true;
             }
         }
+
         else if(action == GLFW_RELEASE)
         {
             if(button < get().mouseButtonPressed.length)
@@ -75,6 +84,8 @@ public class MouseListener {
         get().lastY = get().yPos;
     }
 
+    //GETTERS Region
+    // <editor-fold>
     public static float getX()
     {
         return (float)get().xPos;
@@ -121,4 +132,5 @@ public class MouseListener {
             return false;
         }
     }
+    // </editor-fold> //getters
 }

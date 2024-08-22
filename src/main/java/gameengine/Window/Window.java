@@ -24,6 +24,7 @@ public class Window {
     private float b;
     private float a;
 
+
     private static Window window = null;
 
     private Window(){
@@ -38,6 +39,7 @@ public class Window {
         this.a = 1;
     }
 
+    //Singleton
     public static Window get()
     {
         if(Window.window == null) Window.window = new Window();
@@ -58,7 +60,7 @@ public class Window {
 
         //Terminate GLFW and free the error callback
         glfwTerminate();
-        //glfwSetErrorCallback(null).free(); May cause a nullptr exception
+        glfwSetErrorCallback(null).free(); //May cause a nullptr exception
     }
 
     public void init()
@@ -83,12 +85,26 @@ public class Window {
             throw new IllegalStateException("Failed to create the GLFW window");
         }
 
+
+
+        /*In Java :: è un operatore di riferimento al metodo, e può essere considerato una scorciatoia
+          per una Lambda expression. In c++ è un operatore di risoluzione dell'ambito, e può essere usato tra le altre cose
+          per implementare metodi fuori dalla dichiarazione di una classe
+          eg. void MyClass::myMethod() { implementazione fuori dalla classe }
+
+          Una Lambda expression è una funzione anonima, cioè senza nome, usata per scrivere codice in modo
+          più conciso o funzionale. Ad esempio (x, y) -> x + y, che somma i valori x ed y. Ti lascio un esempio in main.
+          Se vuoi rivederle insieme son felice che non le ho capite bene...
+         */
+
         //Bind mouse delegates for mouse events
-        glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback); //Lamba expression to call delegate
+        glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback); //Lambda to call delegates (forwards your position to the function)
         glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
         glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
 
+        //Bind key delegate
         glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
+
 
         //Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindow);
@@ -96,35 +112,50 @@ public class Window {
         glfwSwapInterval(1);
         //Make the window visible
         glfwShowWindow(glfwWindow);
-        /*This line is critical for LWGL interoperation with GLFW
+        /*This line is critical for LWJGL interoperation with GLFW
         OpenGL context, or any context that is managed externally
         LWJGL detects the context that is current in the current thread
         creates the GLCapabilities instance and makes the OpenGL
-        bindings avaible for use*/
+        bindings available for use*/
         GL.createCapabilities();
     }
+
 
     public void loop()
     {
         while(!glfwWindowShouldClose(glfwWindow))
         {
-            //Poll events
+            //Poll input events
             glfwPollEvents();
 
+            //choose color buffer color
             glClearColor(r,g,b,a);
+
+            //clears buffer, meaning it fills it in this case
             glClear(GL_COLOR_BUFFER_BIT);
 
-            /*TEST
+            //swaps back buffer with front buffer
+            glfwSwapBuffers(glfwWindow);
+
+             /*TESTS*/
             if(KeyListener.isKeyPressed(GLFW_KEY_SPACE))
             {
                 r = 0;
                 g = 0;
                 b = 0;
             }
-            */
-            glfwSwapBuffers(glfwWindow);
 
+            if(MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_1)){
+                r = 1;
+                g = 0;
+                b = 0;
+            }
 
+            if(MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_2)){
+                r = 1;
+                g = 1;
+                b = 0;
+            }
 
         }
     }

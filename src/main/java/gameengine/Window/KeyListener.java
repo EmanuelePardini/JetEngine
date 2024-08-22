@@ -12,6 +12,7 @@ public class KeyListener {
 
     }
 
+    //Singleton
     public static KeyListener get()
     {
         if(KeyListener.instance == null) KeyListener.instance = new KeyListener();
@@ -20,6 +21,7 @@ public class KeyListener {
 
     public static void keyCallback(long window, int key, int scancode, int action, int mods)
     {
+        //Check if key was pressed
         if(action == GLFW_PRESS)
         {
             get().keyPressed[key] = true;
@@ -30,7 +32,8 @@ public class KeyListener {
         }
     }
 
-    public static boolean isKeyPressed(int keyCode){
+    public static boolean isKeyPressed(int keyCode)
+    {
         return get().keyPressed[keyCode];
     }
 }
