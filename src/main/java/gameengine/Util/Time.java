@@ -1,4 +1,4 @@
-package gameengine.util;
+package gameengine.Util;
 
 public class Time
 {

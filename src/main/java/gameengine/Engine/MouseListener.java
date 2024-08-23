@@ -3,7 +3,8 @@ package gameengine.Engine;
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
-public class MouseListener {
+public class MouseListener
+{
     private static MouseListener instance;
     private double scrollX;
     private double scrollY;
@@ -16,9 +17,10 @@ public class MouseListener {
     private boolean mouseButtonPressed[] = new boolean[3];
     private boolean isDragging;
 
-    private MouseListener(){
+    private MouseListener()
+    {
         this.scrollX = 0;
-        this.scrollY =0;
+        this.scrollY = 0;
 
         this.xPos = 0;
         this.yPos = 0;
@@ -29,7 +31,7 @@ public class MouseListener {
     //Singleton
     public static MouseListener get()
     {
-        if(instance == null) MouseListener.instance = new MouseListener();
+        if (instance == null) MouseListener.instance = new MouseListener();
 
         return MouseListener.instance;
     }
@@ -51,18 +53,16 @@ public class MouseListener {
     public static void mouseButtonCallback(long window, int button, int action, int mods)
     {
         //Check if mouse was pressed
-        if(action == GLFW_PRESS)
+        if (action == GLFW_PRESS)
         {
             //Check if only one button was pressed
-            if(button < get().mouseButtonPressed.length)
+            if (button < get().mouseButtonPressed.length)
             {
                 get().mouseButtonPressed[button] = true;
             }
-        }
-
-        else if(action == GLFW_RELEASE)
+        } else if (action == GLFW_RELEASE)
         {
-            if(button < get().mouseButtonPressed.length)
+            if (button < get().mouseButtonPressed.length)
             {
                 get().mouseButtonPressed[button] = false;
                 get().isDragging = false;
@@ -88,32 +88,32 @@ public class MouseListener {
     // <editor-fold>
     public static float getX()
     {
-        return (float)get().xPos;
+        return (float) get().xPos;
     }
 
     public static float getY()
     {
-        return (float)get().yPos;
+        return (float) get().yPos;
     }
 
     public static float getDx()
     {
-        return (float)(get().lastX - get().xPos);
+        return (float) (get().lastX - get().xPos);
     }
 
     public static float getDy()
     {
-        return (float)(get().lastY - get().yPos);
+        return (float) (get().lastY - get().yPos);
     }
 
     public static float getScrollX()
     {
-        return (float)get().scrollX;
+        return (float) get().scrollX;
     }
 
     public static float getScrollY()
     {
-        return (float)get().scrollY;
+        return (float) get().scrollY;
     }
 
     public static boolean isDragging()
@@ -126,8 +126,7 @@ public class MouseListener {
         if (button < get().mouseButtonPressed.length)
         {
             return get().mouseButtonPressed[button];
-        }
-        else
+        } else
         {
             return false;
         }
