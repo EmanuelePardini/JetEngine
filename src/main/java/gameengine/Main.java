@@ -1,7 +1,7 @@
 package gameengine;
 
 
-import gameengine.Window.Window;
+import gameengine.Engine.Window;
 
 //temp lambda ex
 import java.util.Arrays;

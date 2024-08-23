@@ -1,4 +1,4 @@
-package gameengine.Window;
+package gameengine.Engine;
 
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
@@ -132,5 +132,5 @@ public class MouseListener {
             return false;
         }
     }
-    // </editor-fold> //getters
+    // </editor-fold>
 }

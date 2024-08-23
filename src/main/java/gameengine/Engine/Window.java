@@ -1,6 +1,7 @@
-package gameengine.Window;
+package gameengine.Engine;
 
 
+import gameengine.util.Time;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
@@ -27,6 +28,8 @@ public class Window {
 
     private static Window window = null;
 
+    private static Scene currentScene = null;
+
     private Window(){
         this.width = 1920;
         this.height = 1080;
@@ -45,6 +48,22 @@ public class Window {
         if(Window.window == null) Window.window = new Window();
 
         return Window.window;
+    }
+
+    //Changes scene dynamically
+    public static void changeScene(int newScene)
+    {
+        switch (newScene){
+            case 0:
+                currentScene = new LevelEditorScene();
+                //currentScene.init();
+                break;
+            case 1:
+                currentScene = new LevelScene();
+                break;
+            default:
+                assert false : "Unknown scene'" + newScene + "'";
+        }
     }
 
     public void run()
@@ -123,6 +142,10 @@ public class Window {
 
     public void loop()
     {
+        //Initialize frame time
+        float beginFrameTime = Time.getTime();
+        float endFrameTime = Time.getTime();
+
         while(!glfwWindowShouldClose(glfwWindow))
         {
             //Poll input events
@@ -138,6 +161,7 @@ public class Window {
             glfwSwapBuffers(glfwWindow);
 
              /*TESTS*/
+            // <editor-fold>
             if(KeyListener.isKeyPressed(GLFW_KEY_SPACE))
             {
                 r = 0;
@@ -156,7 +180,12 @@ public class Window {
                 g = 1;
                 b = 0;
             }
+            // </editor-fold>
 
+            //calculating dt, and updating time vars
+            endFrameTime = Time.getTime();
+            float dt = endFrameTime - beginFrameTime;
+            beginFrameTime = endFrameTime;
         }
     }
 }

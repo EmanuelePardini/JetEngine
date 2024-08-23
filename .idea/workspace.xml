@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be5a7dae-daae-4114-a210-103589ae3a55" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelEditorScene.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelScene.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Scene.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/util/Time.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Window/KeyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Window/KeyListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Window/MouseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Window/MouseListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Window/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Window/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Window/KeyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/KeyListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Window/MouseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/MouseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Window/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +78,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel"
