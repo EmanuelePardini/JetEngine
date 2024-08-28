@@ -1,6 +1,5 @@
 package gameengine.Engine;
 
-
 import gameengine.Util.Time;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -59,10 +58,11 @@ public class Window
         {
             case 0:
                 currentScene = new LevelEditorScene();
-                //currentScene.init();
+                currentScene.Init();
                 break;
             case 1:
                 currentScene = new LevelScene();
+                currentScene.Init();
                 break;
             default:
                 assert false : "Unknown scene'" + newScene + "'";
@@ -147,7 +147,6 @@ public class Window
         Window.changeScene(0);
     }
 
-
     public void loop()
     {
         //Initialize frame time
@@ -166,37 +165,10 @@ public class Window
             //clears buffer, meaning it fills it in this case
             glClear(GL_COLOR_BUFFER_BIT);
 
-            if (dt >= 0)
-            {
-                currentScene.Update(dt);
-            }
+            if (dt >= 0) currentScene.Update(dt);
 
             //swaps back buffer with front buffer
             glfwSwapBuffers(glfwWindow);
-
-            /*TESTS*/
-            // <editor-fold>
-            if (KeyListener.isKeyPressed(GLFW_KEY_SPACE))
-            {
-                r = 0;
-                g = 0;
-                b = 0;
-            }
-
-            if (MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_1))
-            {
-                r = 1;
-                g = 0;
-                b = 0;
-            }
-
-            if (MouseListener.mouseButtonDown(GLFW_MOUSE_BUTTON_2))
-            {
-                r = 1;
-                g = 1;
-                b = 0;
-            }
-            // </editor-fold>
 
             //calculating dt, and updating time vars
             endFrameTime = Time.getTime();

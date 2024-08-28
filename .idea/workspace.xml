@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be5a7dae-daae-4114-a210-103589ae3a55" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Shaders/default.glsl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/KeyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/KeyListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelEditorScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelEditorScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/MouseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/MouseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Scene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/util/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Util/Time.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,24 +66,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build JetEngine.executor": "Run",
-    "Gradle.Download Sources.executor": "Run",
-    "Gradle.JetEngine [:Main.main()].executor": "Run",
-    "Gradle.JetEngine [:gameengine.Main.main()].executor": "Run",
-    "Gradle.JetEngine [build].executor": "Run",
-    "Gradle.JetEngine.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "fileTemplates"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build JetEngine.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JetEngine [:Main.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JetEngine [:gameengine.Main.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JetEngine [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JetEngine.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.gameengine.Main">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
