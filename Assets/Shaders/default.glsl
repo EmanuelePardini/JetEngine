@@ -50,3 +50,4 @@ Vertex Shader:
 Fragment Shader:
  This shader takes the interpolated color received from the vertex shader (fColor),
  assigns it to the color output variable, which is then used to color the pixel corresponding to the fragment.
+*/
