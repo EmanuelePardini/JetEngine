@@ -23,7 +23,7 @@ public class Shader
         try
         {
             String source = new String(Files.readAllBytes(Paths.get(filepath)));
-            String[] splitString = source.split("(#type)( )+([a-zA-Z]+)");
+            String[] splitString = source.split("(#type)( )+([a-zA-Z]+)"); //RegEx: Regular Expressions
 
             //Find the first pattern after #type 'pattern'
             int index = source.indexOf("#type") + 6;
