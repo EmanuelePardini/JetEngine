@@ -13,6 +13,7 @@ import static org.lwjgl.opengl.GL20.*;
 
 public class LevelEditorScene extends Scene
 {
+    //define vertexes and respective colors (for a square)
     private float[] vertexArray =
             {/*position*/ 0.5f, -0.5f, 0.0f,     /*color*/ 1.0f, 0.0f,0.0f,1.0f, //Bottom Right 0
              /*position*/ -0.5f, 0.5f, 0.0f,     /*color*/ 0.0f, 1.0f,0.0f,1.0f, //Top Left 1
@@ -20,7 +21,7 @@ public class LevelEditorScene extends Scene
              /*position*/ -0.5f, -0.5f, 0.0f,     /*color*/ 1.0f, 1.0f,0.0f,1.0f //Bottom Left 3
     };
 
-    //IMPORT: Must be in counter-clockwise order
+    //IMPORTANT: Must be in counter-clockwise order, defines two triangles at top right and bottom left of the square
     private int[] elementArray = {
         /*
             x1    x2
@@ -31,6 +32,9 @@ public class LevelEditorScene extends Scene
         0,1,3 //Bottom left triangle
     };
 
+    //VAO (Vertex Array Object) Holds the configuration of which VBOs and EBOs are used and how the vertex data is linked to vertex attributes.
+    //VBO (Vertex Buffer Object) Stores your vertex data (like positions, colors, etc.).
+    //EBO (Element Buffer Object) Stores indices to reuse vertex data (especially useful for complex shapes).
     private int vaoId, vboId, eboId;
 
     private Shader defaultShader;
@@ -52,9 +56,6 @@ public class LevelEditorScene extends Scene
     private void SendBuffer()
     {
         //Generate VAO, VBO and EBO buffer object to send to the GPU
-        //VAO (Vertex Array Object) Holds the configuration of which VBOs and EBOs are used and how the vertex data is linked to vertex attributes.
-        //VBO (Vertex Buffer Object) Stores your vertex data (like positions, colors, etc.).
-        //EBO (Element Buffer Object) Stores indices to reuse vertex data (especially useful for complex shapes).
         vaoId = glGenVertexArrays();
         glBindVertexArray(vaoId);
 
@@ -67,22 +68,28 @@ public class LevelEditorScene extends Scene
 
         //Create VBO upload the vertex buffer
         vboId = glGenBuffers();
+        //Bind it to the ID
         glBindBuffer(GL_ARRAY_BUFFER, vboId);
+        //Send specific buffer data, only drawing statically, not changing what we draw
         glBufferData(GL_ARRAY_BUFFER, vertexBuffer, GL_STATIC_DRAW);
 
         //Create the indices and upload
         IntBuffer elementBuffer = BufferUtils.createIntBuffer(elementArray.length);
         elementBuffer.put(elementArray).flip();
 
+        //Generate, bind and make static element buffer
         eboId = glGenBuffers();
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboId);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementBuffer, GL_STATIC_DRAW);
 
-        //Add the vertex attribute
+        //Add the vertex attribute pointers
         int positionSize = 3;
         int colorSize = 4;
         int floatSizeBytes = 4;
+
         int vertexSizeBytes = (positionSize + colorSize) * floatSizeBytes;
+
+        //index depends on location in default.glsl variables
         glVertexAttribPointer(0, positionSize, GL_FLOAT, false, vertexSizeBytes, 0);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(1, colorSize, GL_FLOAT, false, vertexSizeBytes, positionSize * floatSizeBytes);
@@ -108,7 +115,7 @@ public class LevelEditorScene extends Scene
         glDisableVertexAttribArray(1);
 
         glBindVertexArray(0);
-
+        
         defaultShader.Detach();
     }
 
