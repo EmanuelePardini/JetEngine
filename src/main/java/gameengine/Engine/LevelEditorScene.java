@@ -2,6 +2,7 @@ package gameengine.Engine;
 
 
 import Renderer.Shader;
+import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
@@ -15,9 +16,9 @@ public class LevelEditorScene extends Scene
 {
     //define vertexes and respective colors (for a square)
     private float[] vertexArray =
-            {/*position*/ 0.5f, -0.5f, 0.0f,     /*color*/ 1.0f, 0.0f,0.0f,1.0f, //Bottom Right 0
-             /*position*/ -0.5f, 0.5f, 0.0f,     /*color*/ 0.0f, 1.0f,0.0f,1.0f, //Top Left 1
-             /*position*/ 0.5f, 0.5f, 0.0f,     /*color*/ 0.0f, 0.0f ,1.0f,1.0f, //Top Right 2
+            {/*position*/ 100.5f, -0.5f, 0.0f,     /*color*/ 1.0f, 0.0f,0.0f,1.0f, //Bottom Right 0
+             /*position*/ -0.5f, 100.5f, 0.0f,     /*color*/ 0.0f, 1.0f,0.0f,1.0f, //Top Left 1
+             /*position*/ 100.5f, 100.5f, 0.0f,     /*color*/ 0.0f, 0.0f ,1.0f,1.0f, //Top Right 2
              /*position*/ -0.5f, -0.5f, 0.0f,     /*color*/ 1.0f, 1.0f,0.0f,1.0f //Bottom Left 3
     };
 
@@ -47,6 +48,8 @@ public class LevelEditorScene extends Scene
     @Override
     public void Init()
     {
+        this.camera = new Camera(new Vector2f());
+
         defaultShader = new Shader("assets/shaders/default.glsl");
 
         defaultShader.Compile();
@@ -100,7 +103,11 @@ public class LevelEditorScene extends Scene
     @Override
     public void Update(float dt)
     {
+        camera.position.x -= dt * 50.0f;
+
         defaultShader.Use();
+        defaultShader.UploadMat4f("uProjection", camera.getProjectionMatrix());
+        defaultShader.UploadMat4f("uView", camera.getViewMatrix());
         //Bind the VAO that we're using
         glBindVertexArray(vaoId);
 

@@ -12,6 +12,7 @@ module org.example.gameengine {
     requires org.lwjgl.glfw;
     requires org.lwjgl.opengl;
     requires org.lwjgl;
+    requires org.joml;
 
     opens gameengine to javafx.fxml;
     exports gameengine;

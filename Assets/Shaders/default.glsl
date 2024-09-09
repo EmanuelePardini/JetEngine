@@ -10,6 +10,9 @@ layout (location=0) in vec3 aPos;
 // and represents the color of the vertex as a 4-component vector (vec4).
 layout (location=1) in vec4 aColor;
 
+uniform mat4 uProjection;
+uniform mat4 uView;
+
 // This is an output variable that will pass the color information from the vertex
 // shader to the fragment shader.
 out vec4 fColor;
@@ -23,7 +26,7 @@ void main()
     // The position of the vertex is transformed into a 4-component vector (vec4) 
     // by adding a 1.0 in the fourth component (w). This is necessary because OpenGL 
     // expects positions to be in homogeneous coordinates.
-    gl_Position = vec4(aPos, 1.0);
+    gl_Position = uProjection* uView * vec4(aPos, 1.0);
 }
 
 // Fragment Shader
