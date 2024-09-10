@@ -10,6 +10,7 @@ layout (location=0) in vec3 aPos;
 // and represents the color of the vertex as a 4-component vector (vec4).
 layout (location=1) in vec4 aColor;
 
+//can be in fragment or vertex. They don't change when obj changes (layout needs to be respecified)
 uniform mat4 uProjection;
 uniform mat4 uView;
 
@@ -33,16 +34,23 @@ void main()
 #type fragment
 #version 330 core
 
+
+uniform float uTime;
+
 // The fragment shader receives the interpolated color from the vertex shader through `fColor`.
 in vec4 fColor;
 
 // Declare an output variable `color` that will hold the final color value for the fragment.
 out vec4 color;
 
-void main(){
+void main()
+{
+    //rand number generator based on 2D input
+    float noise = fract(sin(dot(fColor.xy, vec2(12.9898,78.233))) * 43758.5453);
+
     // Assign the input color `fColor` to the output variable `color`.
     // This value will be used to color the corresponding fragment on the screen.
-    color = fColor;
+    color = fColor * noise;
 }
 
 /*
