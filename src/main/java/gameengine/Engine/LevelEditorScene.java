@@ -2,6 +2,7 @@ package gameengine.Engine;
 
 
 import Renderer.Shader;
+import Renderer.Texture;
 import gameengine.Util.Time;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
@@ -17,11 +18,10 @@ public class LevelEditorScene extends Scene
 {
     //define vertexes and respective colors (for a square)
     private float[] vertexArray =
-            {   //Position                    //Color                  UV Coordinates
-               100.5f, -0.5f, 0.0f,      1.0f, 0.0f,0.0f, 0.0f,        1,0   //Bottom Right 0
-              - 0.5f, 100.5f, 0.0f,       0.0f, 1.0f,0.0f,1.0f,        0,1,  //Top Left 1
-              100.5f, 100.5f, 0.0f,      1.0f, 0.0f ,1.0f,1.0f,        1,1,  //Top Right 2
-                -0.5f, -0.5f, 0.0f,       1.0f, 1.0f,0.0f,1.0f,        0,0   //Bottom Left 3
+            {/*position*/ 100.5f, -0.5f, 0.0f,     /*color*/ 1.0f, 0.0f,0.0f,1.0f, /*UV*/ 1, 0, //Bottom Right 0
+                    /*position*/ -0.5f, 100.5f, 0.0f,     /*color*/ 0.0f, 1.0f,0.0f,1.0f, /*UV*/0,1, //Top Left 1
+                    /*position*/ 100.5f, 100.5f, 0.0f,     /*color*/ 0.0f, 0.0f ,1.0f,1.0f, /*UV*/1,1, //Top Right 2
+                    /*position*/ -0.5f, -0.5f, 0.0f,     /*color*/ 1.0f, 1.0f,0.0f,1.0f,  /*UV*/ 0,0 //Bottom Left 3
     };
 
     //IMPORTANT: Must be in counter-clockwise order, defines two triangles at top right and bottom left of the square
@@ -41,6 +41,7 @@ public class LevelEditorScene extends Scene
     private int vaoId, vboId, eboId;
 
     private Shader defaultShader;
+    private Texture testTexture;
 
     public LevelEditorScene()
     {
@@ -52,9 +53,14 @@ public class LevelEditorScene extends Scene
     {
         this.camera = new Camera(new Vector2f());
 
+        camera.position.y -=  100.0f;
+        camera.position.x -=  100.0f;
+
         defaultShader = new Shader("assets/shaders/default.glsl");
 
         defaultShader.Compile();
+
+        this.testTexture = new Texture("assets/images/testImage.jpg");
         SendBuffer();
     }
 
@@ -90,25 +96,40 @@ public class LevelEditorScene extends Scene
         //Add the vertex attribute pointers
         int positionSize = 3;
         int colorSize = 4;
-        int floatSizeBytes = 4;
-
-        int vertexSizeBytes = (positionSize + colorSize) * floatSizeBytes;
+        int uvSize = 2;
+        int vertexSizeBytes = (positionSize + colorSize + uvSize) * Float.BYTES;
 
         //index depends on location in default.glsl variables
         glVertexAttribPointer(0, positionSize, GL_FLOAT, false, vertexSizeBytes, 0);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(1, colorSize, GL_FLOAT, false, vertexSizeBytes, positionSize * floatSizeBytes);
+        glVertexAttribPointer(1, colorSize, GL_FLOAT, false, vertexSizeBytes, positionSize * Float.BYTES);
         glEnableVertexAttribArray(1);
 
+
+        /* Defines the vertex attribute with index 2 (for example, UV coordinates for a texture).
+        uvSize specifies the number of components for this attribute.
+        GL_FLOAT indicates that each component is a float (floating-point value).
+        false means the data should not be normalized (no need to map values to a specific range).
+        vertexSizeBytes is the stride, i.e., the total size in bytes of a single vertex.
+        (positionSize + colorSize) * Float.BYTES calculates the offset in bytes from the start of the vertex data
+        to the beginning of the UV attribute data (skipping the position and color data). */
+        glVertexAttribPointer(2, uvSize, GL_FLOAT, false, vertexSizeBytes, (positionSize + colorSize) * Float.BYTES);
+        glEnableVertexAttribArray(2);
     }
 
     @Override
     public void Update(float dt)
     {
-        camera.position.x -= dt * 50.0f;
-        camera.position.y -= dt * 20.0f;
+        //camera.position.y -= dt * 20.0f;
+        //camera.position.x -= dt * 50.0f;
 
         defaultShader.Use();
+
+        //Upload texture to shader
+        defaultShader.uploadTexture("TEX_SAMPLER", 0);
+        glActiveTexture(GL_TEXTURE0);
+        testTexture.Bind();
+
         defaultShader.UploadMat4f("uProjection", camera.getProjectionMatrix());
         defaultShader.UploadMat4f("uView", camera.getViewMatrix());
         defaultShader.UploadFloat("uTime", Time.getTime());

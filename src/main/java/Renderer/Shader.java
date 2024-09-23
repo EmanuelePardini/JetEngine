@@ -158,50 +158,97 @@ public class Shader
         glUniformMatrix4fv(varLocation, false, matBuffer);
     }
 
-    public  void UploadMat3f(String varName, Matrix3f mat3)
-    {
-
+    public void UploadMat3f(String varName, Matrix3f mat3) {
+        // Get the location of the 3x3 matrix uniform variable
         int varLocation = glGetUniformLocation(shaderProgramId, varName);
+
+        // Activate the shader program to use it
         Use();
 
+        // Create a FloatBuffer of size 9 (3x3 matrix has 9 elements)
+        FloatBuffer matBuffer = BufferUtils.createFloatBuffer(9);
 
-        FloatBuffer matBuffer = BufferUtils.createFloatBuffer(9); //care 3x3 matrix has 9 elements
+        // Load the matrix data into the buffer
         mat3.get(matBuffer);
+
+        // Upload the matrix data to the shader program
         glUniformMatrix3fv(varLocation, false, matBuffer);
     }
 
-    public void UploadVec4f(String varName, Vector4f vec)
-    {
+    public void UploadVec4f(String varName, Vector4f vec) {
+        // Get the location of the 4D vector uniform variable
         int varLocation = glGetUniformLocation(shaderProgramId, varName);
+
+        // Activate the shader program to use it
         Use();
+
+        // Upload the 4D vector (x, y, z, w) to the shader program
         glUniform4f(varLocation, vec.x, vec.y, vec.z, vec.w);
     }
 
-    public void UploadVec3f(String varName, Vector3f vec)
-    {
+    public void UploadVec3f(String varName, Vector3f vec) {
+        // Get the location of the 3D vector uniform variable
         int varLocation = glGetUniformLocation(shaderProgramId, varName);
+
+        // Activate the shader program to use it
         Use();
+
+        // Upload the 3D vector (x, y, z) to the shader program
         glUniform3f(varLocation, vec.x, vec.y, vec.z);
     }
 
-    public void UploadVec2f(String varName, Vector2f vec)
-    {
+    public void UploadVec2f(String varName, Vector2f vec) {
+        // Get the location of the 2D vector uniform variable
         int varLocation = glGetUniformLocation(shaderProgramId, varName);
+
+        // Activate the shader program to use it
         Use();
+
+        // Upload the 2D vector (x, y) to the shader program
         glUniform2f(varLocation, vec.x, vec.y);
     }
 
-    public  void UploadFloat(String varName, float val)
-    {
-        int varLocation = glGetUniformLocation(shaderProgramId,varName);
+    public void UploadFloat(String varName, float val) {
+        // Get the location of the float uniform variable
+        int varLocation = glGetUniformLocation(shaderProgramId, varName);
+
+        // Activate the shader program to use it
         Use();
+
+        // Upload the float value to the shader program
         glUniform1f(varLocation, val);
     }
 
-    public void UploadInt(String varName, int val)
-    {
-        int varLocation = glGetUniformLocation(shaderProgramId,varName);
+    public void UploadInt(String varName, int val) {
+        // Get the location of the integer uniform variable
+        int varLocation = glGetUniformLocation(shaderProgramId, varName);
+
+        // Activate the shader program to use it
         Use();
+
+        // Upload the integer value to the shader program
         glUniform1i(varLocation, val);
+    }
+
+    public void uploadTexture(String varName, int slot)
+    {
+        /*
+         * Retrieves the location (ID) of the uniform variable "varName" in the specified shader program.
+         * "shaderProgramId" is the ID of the compiled shader program.
+         * "varName" is the name of the uniform variable in the shader.
+         * glGetUniformLocation returns an integer that represents the location of the uniform variable in the shader.
+         */
+        int varLocation = glGetUniformLocation(shaderProgramId, varName);
+
+        Use();
+
+        /*
+         * Sets the uniform variable at the given location (varLocation) to the integer value of "slot".
+         * glUniform1i sets a single integer uniform (1i stands for 1 integer) at the location "varLocation".
+         * The "slot" typically refers to a texture unit or binding point that will be passed to the shader.
+         * For example, this could be used to tell the shader which texture unit to sample from.
+         */
+        glUniform1i(varLocation, slot);
+
     }
 }
