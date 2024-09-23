@@ -59,10 +59,12 @@ public class Window
             case 0:
                 currentScene = new LevelEditorScene();
                 currentScene.Init();
+                currentScene.Start();
                 break;
             case 1:
                 currentScene = new LevelScene();
                 currentScene.Init();
+                currentScene.Start();
                 break;
             default:
                 assert false : "Unknown scene'" + newScene + "'";
@@ -110,16 +112,6 @@ public class Window
         }
 
 
-
-        /*In Java :: è un operatore di riferimento al metodo, e può essere considerato una scorciatoia
-          per una Lambda expression. In c++ è un operatore di risoluzione dell'ambito, e può essere usato tra le altre cose
-          per implementare metodi fuori dalla dichiarazione di una classe
-          eg. void MyClass::myMethod() { implementazione fuori dalla classe }
-
-          Una Lambda expression è una funzione anonima, cioè senza nome, usata per scrivere codice in modo
-          più conciso o funzionale. Ad esempio (x, y) -> x + y, che somma i valori x ed y. Ti lascio un esempio in main.
-          Se vuoi rivederle insieme son felice che non le ho capite bene...
-         */
 
         //Bind mouse delegates for mouse events
         glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback); //Lambda to call delegates (forwards your position to the function)

@@ -3,6 +3,8 @@ package gameengine.Engine;
 
 import Renderer.Shader;
 import Renderer.Texture;
+import gameengine.Components.FontRenderer;
+import gameengine.Components.SpriteRenderer;
 import gameengine.Util.Time;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
@@ -42,6 +44,7 @@ public class LevelEditorScene extends Scene
 
     private Shader defaultShader;
     private Texture testTexture;
+    GameObject testObj; //TODO: Eventually remove all the tests if aren't needed
 
     public LevelEditorScene()
     {
@@ -51,10 +54,12 @@ public class LevelEditorScene extends Scene
     @Override
     public void Init()
     {
-        this.camera = new Camera(new Vector2f());
+        this.testObj = new GameObject("test object");
+        this.testObj.AddComponent(new SpriteRenderer());
+        this.testObj.AddComponent(new FontRenderer());
+        this.AddGameObjectToScene(this.testObj);
 
-        camera.position.y -=  100.0f;
-        camera.position.x -=  100.0f;
+        this.camera = new Camera(new Vector2f(-200, -300));
 
         defaultShader = new Shader("assets/shaders/default.glsl");
 
@@ -118,7 +123,7 @@ public class LevelEditorScene extends Scene
     }
 
     @Override
-    public void Update(float dt)
+    public void Update(float DeltaTime)
     {
         //camera.position.y -= dt * 20.0f;
         //camera.position.x -= dt * 50.0f;
@@ -150,6 +155,12 @@ public class LevelEditorScene extends Scene
         glBindVertexArray(0);
         
         defaultShader.Detach();
+
+
+        for(GameObject go : this.gameObjects)
+        {
+            go.Update(DeltaTime);
+        }
     }
 
 }
