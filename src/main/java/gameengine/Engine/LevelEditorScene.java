@@ -1,5 +1,6 @@
 package gameengine.Engine;
 import gameengine.Components.SpriteRenderer;
+import gameengine.Util.AssetPool;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 import org.lwjgl.BufferUtils;
@@ -45,6 +46,14 @@ public class LevelEditorScene extends Scene
                 this.AddGameObjectToScene(go);
             }
         }
+
+        LoadResources();
+    }
+
+    private void LoadResources()
+    {
+        AssetPool.getShader("assets/shaders/default.glsl");
+
     }
 
     @Override

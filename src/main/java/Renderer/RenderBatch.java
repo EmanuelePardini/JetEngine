@@ -2,6 +2,7 @@ package Renderer;
 
 import gameengine.Components.SpriteRenderer;
 import gameengine.Engine.Window;
+import gameengine.Util.AssetPool;
 import org.joml.Vector4f;
 
 import static org.lwjgl.opengl.ARBVertexArrayObject.glBindVertexArray;
@@ -36,8 +37,8 @@ public class RenderBatch
 
     public RenderBatch(int maxBatchSize)
     {
-        shader = new Shader("Assets/Shaders/default.glsl");
-        shader.Compile();
+        //this way you only you reference it (after creating it in LevelEditor)
+        shader = AssetPool.getShader("assets/shaders/default.glsl");
         this.sprites = new SpriteRenderer[maxBatchSize];
         this.maxBatchSize = maxBatchSize;
 
