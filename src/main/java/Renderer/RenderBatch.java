@@ -3,7 +3,11 @@ package Renderer;
 import gameengine.Components.SpriteRenderer;
 import gameengine.Engine.Window;
 import gameengine.Util.AssetPool;
+import org.joml.Vector2f;
 import org.joml.Vector4f;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.lwjgl.opengl.ARBVertexArrayObject.glBindVertexArray;
 import static org.lwjgl.opengl.ARBVertexArrayObject.glGenVertexArrays;
@@ -16,21 +20,27 @@ public class RenderBatch
 {
     //Vertex
     //======
-    //Pos                           Color
-    //float, float, float           float,float,float,float
+    //Pos                           Color                           Tex coords         Tex ID
+    //float, float                  float,float,float,float         float, float       float
     private final int POS_SIZE = 2;
     private final int COLOR_SIZE = 4;
+    private final int TEXT_COORDS_SIZE = 2;
+    private final int TEXT_ID_SIZE = 1;
 
     private final int POS_OFFSET = 0;
     private final int COLOR_OFFSET = POS_OFFSET + POS_SIZE * Float.BYTES;
-    private final int VERTEX_SIZE = 6;
+    private final int TEX_COORD_OFFSET = COLOR_OFFSET + COLOR_SIZE * Float.BYTES;
+    private final int TEX_ID_OFFSET = TEX_COORD_OFFSET + TEXT_COORDS_SIZE * Float.BYTES;
+    private final int VERTEX_SIZE = 9;
     private final int  VERTEX_SIZE_BYTES = VERTEX_SIZE * Float.BYTES;
 
     private SpriteRenderer[] sprites;
     private int numSprites;
     private boolean hasRoom;
     private float[] vertices;
+    private int[] texSlots = {0,1,2,3,4,5,6,7};
 
+    private List<Texture> textures;
     private int vaoID, vboID;
     private int maxBatchSize;
     private Shader shader;
@@ -47,6 +57,7 @@ public class RenderBatch
 
         this.numSprites = 0;
         this.hasRoom = true;
+        this.textures = new ArrayList<>();
     }
 
     public void Start()
@@ -72,6 +83,12 @@ public class RenderBatch
 
         glVertexAttribPointer(1, COLOR_SIZE, GL_FLOAT, false, VERTEX_SIZE_BYTES, COLOR_OFFSET);
         glEnableVertexAttribArray(1);
+
+        glVertexAttribPointer(2, TEXT_COORDS_SIZE, GL_FLOAT, false, VERTEX_SIZE_BYTES, TEX_COORD_OFFSET);
+        glEnableVertexAttribArray(2);
+
+        glVertexAttribPointer(3, TEXT_ID_SIZE, GL_FLOAT, false, VERTEX_SIZE_BYTES, TEX_ID_OFFSET);
+        glEnableVertexAttribArray(3);
     }
 
     public void AddSprite(SpriteRenderer spr)
@@ -80,6 +97,14 @@ public class RenderBatch
        int index = this.numSprites;
        this.sprites[index] = spr;
        this.numSprites++;
+
+       if(spr.GetTexture() != null)
+       {
+           if(!textures.contains(spr.GetTexture()))
+           {
+               textures.add(spr.GetTexture());
+           }
+       }
 
        //Add properties to local vertices array
         LoadVertexProperties(index);
@@ -101,6 +126,13 @@ public class RenderBatch
         shader.UploadMat4f("uProjection", Window.GetScene().camera().GetProjectionMatrix());
         shader.UploadMat4f("uView", Window.GetScene().camera().GetViewMatrix());
 
+        for (int i = 0; i< textures.size(); i++)
+        {
+            glActiveTexture(GL_TEXTURE0 + i + 1);
+            textures.get(i).Bind();
+        }
+        shader.UploadIntArray("uTextures", texSlots);
+
         glBindVertexArray(vaoID);
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
@@ -110,6 +142,12 @@ public class RenderBatch
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
         glBindVertexArray(0);
+
+        for (int i = 0; i< textures.size(); i++)
+        {
+            textures.get(i).Unbind();
+        }
+
         shader.Detach();
     }
 
@@ -121,6 +159,22 @@ public class RenderBatch
         int offset = index * 4 * VERTEX_SIZE;
 
         Vector4f color = sprite.GetColor();
+        Vector2f[] texCoords = sprite.GetTextCoords();
+
+        int texID = 0;
+        //Loop through texture until we find the one that matches, then assign its position in the array as the ID (skip 0 to use colors)
+        if(sprite.GetTexture() != null)
+        {
+            for(int i = 0; i < textures.size(); i++)
+            {
+                if(textures.get(i) == sprite.GetTexture())
+                {
+                    texID = i + 1;
+                    break;
+                }
+            }
+        }
+
 
         //Add vertice with the appropriate properties
         float xAdd = 1.f;
@@ -144,6 +198,13 @@ public class RenderBatch
             vertices[offset +3] = color.y;
             vertices[offset +4] = color.z;
             vertices[offset +5] = color.w;
+
+            //Load texture coordinates
+            vertices[offset +6] = texCoords[i].x;
+            vertices[offset +7] = texCoords[i].y;
+
+            //Load texture ID
+            vertices[offset +8] = texID;
 
             offset += VERTEX_SIZE;
         }

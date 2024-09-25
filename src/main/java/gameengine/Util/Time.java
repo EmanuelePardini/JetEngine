@@ -7,4 +7,6 @@ public class Time
 
     //before getting, converts nanoseconds to seconds multiplying by 1E-9
     public static float getTime(){ return (float) ((System.nanoTime() - timeStarted) * 1E-9);}
+
+    //could be buggy, in case use glfwGetTime();
 }

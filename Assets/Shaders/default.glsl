@@ -9,6 +9,8 @@ layout (location=0) in vec3 aPos;
 // Input layout specifies that `aColor` is the second vertex attribute (location = 1)
 // and represents the color of the vertex as a 4-component vector (vec4).
 layout (location=1) in vec4 aColor;
+layout (location=2) in vec2 aTexCoords;
+layout (location=3) in float aTexID;
 
 
 //can be in fragment or vertex. They don't change when obj changes (layout needs to be respecified)
@@ -18,6 +20,8 @@ uniform mat4 uView;
 // This is an output variable that will pass the color information from the vertex
 // shader to the fragment shader.
 out vec4 fColor;
+out vec2 fTexCoords;
+out float fTexID;
 
 
 void main()
@@ -25,6 +29,8 @@ void main()
     // The color provided as input (`aColor`) is passed directly to the output variable `fColor`,
     // which will be sent to the fragment shader.
     fColor = aColor;
+    fTexCoords = aTexCoords;
+    fTexID = aTexID;
 
     // The position of the vertex is transformed into a 4-component vector (vec4) 
     // by adding a 1.0 in the fourth component (w). This is necessary because OpenGL 
@@ -38,21 +44,30 @@ void main()
 
 // The fragment shader receives the interpolated color from the vertex shader through `fColor`.
 in vec4 fColor;
+in vec2 fTexCoords;
+in float fTexID;
+
+uniform sampler2D uTextures[8];
 
 // Declare an output variable `color` that will hold the final color value for the fragment.
 out vec4 color;
 
 void main()
 {
-    //rand number generator based on 2D input
-    //float noise = fract(sin(dot(fColor.xy, vec2(12.9898,78.233))) * 43758.5453);
-
     // Assign the input color `fColor` to the output variable `color`.
     // This value will be used to color the corresponding fragment on the screen.
 
-    color = fColor;
-    //* noise;
-    //* sin(uTime);
+    if(fTexID>0)
+    {
+        int id = int(fTexID);
+        color = fColor * texture(uTextures[id], fTexCoords);
+        //color = vec4(fTexCoords, 0,1); //(x,y,0,1)
+    }
+    else
+    {
+        color = fColor;
+    }
+
 }
 
 /*
