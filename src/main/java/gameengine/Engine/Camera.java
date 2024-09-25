@@ -33,7 +33,7 @@ public class Camera
         //OpenGL function to define ortographic view parameters
     }
 
-    public Matrix4f getViewMatrix()
+    public Matrix4f GetViewMatrix()
     {
         Vector3f cameraFront = new Vector3f(0.0f, 0.0f, -1.0f);
         Vector3f cameraUp = new Vector3f(0.0f, 1.0f, 0.0f);
@@ -44,5 +44,5 @@ public class Camera
         return  viewMatrix;
     }
 
-    public Matrix4f getProjectionMatrix() { return this.projectionMatrix; }
+    public Matrix4f GetProjectionMatrix() { return this.projectionMatrix; }
 }

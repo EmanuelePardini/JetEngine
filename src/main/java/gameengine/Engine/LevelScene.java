@@ -6,7 +6,7 @@ public class LevelScene extends Scene
     {
         //check level scene correctly initialized, change screen to green
         System.out.println("Inside level scene");
-        Window.get().g = 1;
+        Window.Get().g = 1;
     }
 
     @Override

@@ -9,8 +9,8 @@ import gameengine.Engine.Window;
 public class Main {
     public static void main(String[] args){
         Window window;
-        window = Window.get();
-        window.run();
+        window = Window.Get();
+        window.Run();
 
     }
 }

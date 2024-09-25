@@ -44,15 +44,20 @@ public class Window
     }
 
     //Singleton
-    public static Window get()
+    public static Window Get()
     {
         if (Window.window == null) Window.window = new Window();
 
         return Window.window;
     }
 
+    public static Scene GetScene()
+    {
+        return Get().currentScene;
+    }
+
     //Changes scene dynamically
-    public static void changeScene(int newScene)
+    public static void ChangeScene(int newScene)
     {
         switch (newScene)
         {
@@ -71,12 +76,12 @@ public class Window
         }
     }
 
-    public void run()
+    public void Run()
     {
         System.out.println("Hello LWJGL " + Version.getVersion() + "!");
 
-        init();
-        loop();
+        Init();
+        Loop();
 
         //Free the memory
         glfwFreeCallbacks(glfwWindow);
@@ -87,7 +92,7 @@ public class Window
         glfwSetErrorCallback(null).free(); //May cause a nullptr exception
     }
 
-    public void init()
+    public void Init()
     {
         //Setup error callback
         GLFWErrorCallback.createPrint(System.err).set();
@@ -114,12 +119,12 @@ public class Window
 
 
         //Bind mouse delegates for mouse events
-        glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback); //Lambda to call delegates (forwards your position to the function)
-        glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
-        glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
+        glfwSetCursorPosCallback(glfwWindow, MouseListener::MousePosCallback); //Lambda to call delegates (forwards your position to the function)
+        glfwSetMouseButtonCallback(glfwWindow, MouseListener::MouseButtonCallback);
+        glfwSetScrollCallback(glfwWindow, MouseListener::MouseScrollCallback);
 
         //Bind key delegate
-        glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
+        glfwSetKeyCallback(glfwWindow, KeyListener::KeyCallback);
 
 
         //Make the OpenGL context current
@@ -136,10 +141,10 @@ public class Window
         bindings available for use*/
         GL.createCapabilities();
 
-        Window.changeScene(0);
+        Window.ChangeScene(0);
     }
 
-    public void loop()
+    public void Loop()
     {
         //Initialize frame time
         float beginFrameTime = Time.getTime();

@@ -20,7 +20,7 @@ public class KeyListener
         return KeyListener.instance;
     }
 
-    public static void keyCallback(long window, int key, int scancode, int action, int mods)
+    public static void KeyCallback(long window, int key, int scancode, int action, int mods)
     {
         //Check if key was pressed
         if (action == GLFW_PRESS)
@@ -32,7 +32,7 @@ public class KeyListener
         }
     }
 
-    public static boolean isKeyPressed(int keyCode)
+    public static boolean IsKeyPressed(int keyCode)
     {
         return get().keyPressed[keyCode];
     }

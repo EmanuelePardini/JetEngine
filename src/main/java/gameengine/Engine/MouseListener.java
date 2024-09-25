@@ -36,7 +36,7 @@ public class MouseListener
         return MouseListener.instance;
     }
 
-    public static void mousePosCallback(long window, double xpos, double ypos)
+    public static void MousePosCallback(long window, double xpos, double ypos)
     {
         //save last x and y pos
         get().lastX = get().xPos;
@@ -50,7 +50,7 @@ public class MouseListener
         get().isDragging = get().mouseButtonPressed[0] || get().mouseButtonPressed[1] || get().mouseButtonPressed[2];
     }
 
-    public static void mouseButtonCallback(long window, int button, int action, int mods)
+    public static void MouseButtonCallback(long window, int button, int action, int mods)
     {
         //Check if mouse was pressed
         if (action == GLFW_PRESS)
@@ -70,13 +70,13 @@ public class MouseListener
         }
     }
 
-    public static void mouseScrollCallback(long window, double xOffset, double yOffset)
+    public static void MouseScrollCallback(long window, double xOffset, double yOffset)
     {
         get().scrollX = xOffset;
         get().scrollY = yOffset;
     }
 
-    public static void endFrame()
+    public static void EndFrame()
     {
         get().scrollX = 0;
         get().scrollY = 0;
@@ -86,42 +86,42 @@ public class MouseListener
 
     //GETTERS Region
     // <editor-fold>
-    public static float getX()
+    public static float GetX()
     {
         return (float) get().xPos;
     }
 
-    public static float getY()
+    public static float GetY()
     {
         return (float) get().yPos;
     }
 
-    public static float getDx()
+    public static float GetDx()
     {
         return (float) (get().lastX - get().xPos);
     }
 
-    public static float getDy()
+    public static float GetDy()
     {
         return (float) (get().lastY - get().yPos);
     }
 
-    public static float getScrollX()
+    public static float GetScrollX()
     {
         return (float) get().scrollX;
     }
 
-    public static float getScrollY()
+    public static float GetScrollY()
     {
         return (float) get().scrollY;
     }
 
-    public static boolean isDragging()
+    public static boolean IsDragging()
     {
         return get().isDragging;
     }
 
-    public static boolean mouseButtonDown(int button)
+    public static boolean MouseButtonDown(int button)
     {
         if (button < get().mouseButtonPressed.length)
         {

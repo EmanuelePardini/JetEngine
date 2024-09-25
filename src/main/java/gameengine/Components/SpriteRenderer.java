@@ -1,22 +1,30 @@
 package gameengine.Components;
 import gameengine.Engine.Component;
+import org.joml.Vector2f;
+import org.joml.Vector4f;
 
 public class SpriteRenderer extends Component
 {
-    private boolean firstTime = true;
+    Vector4f color;
+
+    public SpriteRenderer(Vector4f color)
+    {
+        this.color = color;
+    }
 
     @Override
     public void Start()
     {
-        System.out.println("Starting Component");
+
     }
     @Override
     public void Update(float DeltaTime)
     {
-        if(firstTime)
-        {
-            System.out.println("Updating Component");
-            firstTime = false;
-        }
+
+    }
+
+    public Vector4f GetColor()
+    {
+        return this.color;
     }
 }
