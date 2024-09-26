@@ -14,6 +14,7 @@ module org.example.gameengine {
     requires org.joml;
     requires java.desktop;
     requires org.lwjgl.stb;
+    requires annotations;
 
     opens gameengine to javafx.fxml;
     exports gameengine;

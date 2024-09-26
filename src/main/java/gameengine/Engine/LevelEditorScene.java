@@ -15,7 +15,11 @@ public class LevelEditorScene extends Scene
     private Spritesheet sprites;
 
     //That's another of my test
-    private String[] SpriteSheetsPath = {"assets/images/spritesheet.png"};
+    private String[] SpritesPath = {
+            "assets/images/spritesheet.png",
+            "assets/images/blendImage1.png",
+            "assets/images/blendImage2.png"
+    };
 
     public LevelEditorScene()
     {
@@ -29,16 +33,16 @@ public class LevelEditorScene extends Scene
 
         this.camera = new Camera(new Vector2f(-250.f, 0));
 
-        sprites = AssetPool.GetSpritesheet(SpriteSheetsPath[0]);
+        sprites = AssetPool.GetSpritesheet(SpritesPath[0]);
 
-        obj1 = new GameObject("Object 1", new Transform(new Vector2f(100,100),
-                                         new Vector2f(256,256)));
-        obj1.AddComponent(new SpriteRenderer(sprites.GetSprite(3)));
+        obj1 = new GameObject("Object 1", new Transform(new Vector2f(200,100),
+                                         new Vector2f(256,256)), -1);
+        obj1.AddComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture(SpritesPath[1]))));
         this.AddGameObjectToScene(obj1);
 
         GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(400,100),
-                new Vector2f(256,256)));
-        obj2.AddComponent(new SpriteRenderer(sprites.GetSprite(20)));
+                new Vector2f(256,256)), 2);
+        obj2.AddComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture(SpritesPath[2]))));
         this.AddGameObjectToScene(obj2);
 
     }
@@ -47,19 +51,26 @@ public class LevelEditorScene extends Scene
     {
         AssetPool.getShader("assets/shaders/default.glsl");
 
-        AssetPool.AddSpritesheet(SpriteSheetsPath[0],
-                new Spritesheet(AssetPool.getTexture(SpriteSheetsPath[0]),
-                        16,16, 25, 0));
+        AssetPool.AddSpritesheet(SpritesPath[0],
+                new Spritesheet(AssetPool.getTexture(SpritesPath[0]),
+                        16,16, 26, 0));
     }
 
-
+    /*ANIMATION TEST(Dirty flag pattern Video)
+    Feel free to remove that
     private int spriteIndex = 0;
     private float spriteFlipTime = 0.2f;
     private float spriteFlipTimeLeft = 0.0f;
+    */
+
     @Override
     public void Update(float DeltaTime)
     { //Monitor constantly performances
         System.out.println("FPS: " + (1.0 / DeltaTime));
+
+
+        /*ANIMATION TEST(Dirty flag pattern Video)
+        Feel free to remove that
 
         spriteFlipTimeLeft -= DeltaTime;
         if(spriteFlipTimeLeft <= 0)
@@ -74,6 +85,8 @@ public class LevelEditorScene extends Scene
         }
 
         obj1.transform.position.x += 10* DeltaTime;
+
+        */
 
         MoveCamera(DeltaTime); //Move Camera test
 

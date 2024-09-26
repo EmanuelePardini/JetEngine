@@ -3,6 +3,7 @@ package Renderer;
 import gameengine.Components.SpriteRenderer;
 import gameengine.Engine.Window;
 import gameengine.Util.AssetPool;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 import org.lwjgl.opengl.GL15;
@@ -17,7 +18,7 @@ import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
 import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 import static org.lwjgl.opengl.GL20C.glDisableVertexAttribArray;
 
-public class RenderBatch
+public class RenderBatch implements Comparable<RenderBatch>
 {
     //Vertex
     //======
@@ -45,9 +46,11 @@ public class RenderBatch
     private int vaoID, vboID;
     private int maxBatchSize;
     private Shader shader;
+    private int zIndex;
 
-    public RenderBatch(int maxBatchSize)
+    public RenderBatch(int maxBatchSize, int zIndex)
     {
+        this.zIndex = zIndex;
         //this way you only you reference it (after creating it in LevelEditor)
         shader = AssetPool.getShader("assets/shaders/default.glsl");
         this.sprites = new SpriteRenderer[maxBatchSize];
@@ -133,19 +136,20 @@ public class RenderBatch
 
 
         //GABE METHOD: If the flag is clean do not re-buffer
-        /*
         if(rebufferData)
         {
             glBindBuffer(GL_ARRAY_BUFFER, vboID);
             glBufferSubData(GL_ARRAY_BUFFER,0,vertices);
         }
-        */
 
         //MY TEST: If the flag is clean do not re-render
-        if(!rebufferData) return;
-        
-        glBindBuffer(GL_ARRAY_BUFFER, vboID);
-        glBufferSubData(GL_ARRAY_BUFFER,0,vertices);
+        //     Do not use this is Buggy, but i want to understand why we need to keep rendering
+        // if(!rebufferData) return;
+        //
+        // glBindBuffer(GL_ARRAY_BUFFER, vboID);
+        // glBufferSubData(GL_ARRAY_BUFFER,0,vertices);
+        //
+
 
         // der
         shader.Use();
@@ -282,5 +286,13 @@ public class RenderBatch
     public boolean HasTexture(Texture tex)
     {
         return this.textures.contains(tex);
+    }
+
+    public int ZIndex() {return zIndex;}
+
+    @Override //By inheritance from Comparable(In Java Standard Libraries)
+    public int compareTo(RenderBatch o)
+    {
+        return Integer.compare(this.zIndex, o.ZIndex());
     }
 }

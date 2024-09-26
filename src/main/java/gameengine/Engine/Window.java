@@ -37,10 +37,10 @@ public class Window
 
         this.title = "JetEngine";
 
-        this.r = 0;
-        this.g = 0;
-        this.b = 0;
-        this.a = 0;
+        this.r = 1;
+        this.g = 1;
+        this.b = 1;
+        this.a = 1;
     }
 
     //Singleton
@@ -140,6 +140,8 @@ public class Window
         creates the GLCapabilities instance and makes the OpenGL
         bindings available for use*/
         GL.createCapabilities();
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
         Window.ChangeScene(0);
     }

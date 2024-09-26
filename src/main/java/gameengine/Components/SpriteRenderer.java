@@ -24,6 +24,7 @@ public class SpriteRenderer extends Component
         this.sprite = sprite;
         //set to white
         this.color = new Vector4f(1,1,1,1);
+        this.isDirty = true;
     }
 
     @Override

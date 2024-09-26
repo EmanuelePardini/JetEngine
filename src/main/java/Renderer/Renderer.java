@@ -4,6 +4,8 @@ import gameengine.Components.SpriteRenderer;
 import gameengine.Engine.GameObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Renderer
@@ -27,8 +29,9 @@ private List<RenderBatch> batches;
     {
         boolean added = false;
         for(RenderBatch batch : batches)
-        {
-            if(batch.HasRoom())
+        {   //Check if the batch has more space and Add to this batch only if has the same ZIndex
+            //That means by now we will divide the Batches per zIndex groups
+            if(batch.HasRoom() && batch.ZIndex() == sprite.gameObject.ZIndex())
             {
                 Texture tex = sprite.GetTexture();
                 //check to avoid missing textures
@@ -43,11 +46,13 @@ private List<RenderBatch> batches;
 
         if(!added)
         {
-            RenderBatch newBatch = new RenderBatch((MAX_BATCH_SIZE));
+            RenderBatch newBatch = new RenderBatch(MAX_BATCH_SIZE, sprite.gameObject.ZIndex());
             newBatch.Start();
 
             batches.add(newBatch);
             newBatch.AddSprite(sprite);
+            //That orders the batches by ZIndex using Compare standard Java Library
+            Collections.sort(batches);
         }
     }
 
