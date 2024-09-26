@@ -36,6 +36,7 @@ public class Spritesheet
                             new Vector2f(leftX,topY)
                     };
 
+            //Create dinamically our sprite by spritesheet scraping
             Sprite sprite = new Sprite(this.texture, textCoords);
             this.sprites.add(sprite);
 

@@ -51,8 +51,10 @@ public class AssetPool
     public static void AddSpritesheet(String resourceName, Spritesheet spritesheet)
     {
         File file = new File(resourceName);
+        //If we do not have it
         if(!AssetPool.Spritesheets.containsKey(file.getAbsolutePath()))
         {
+            //Then add it to the Map
             AssetPool.Spritesheets.put(file.getAbsolutePath(), spritesheet);
         }
     }
@@ -60,8 +62,10 @@ public class AssetPool
     public static Spritesheet GetSpritesheet (String resourceName)
     {
         File file = new File(resourceName);
+        //If we do not have it
         if(!AssetPool.Spritesheets.containsKey(file.getAbsolutePath()))
         {
+            //Trigger an error
             assert false : "Error: Tried to access spritesheet '" + resourceName + "' and is has not been added to the asset pool.";
         }
         return AssetPool.Spritesheets.getOrDefault(file.getAbsolutePath(), null);

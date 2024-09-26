@@ -22,10 +22,10 @@ public class RenderBatch
     //======
     //Pos                           Color                           Tex coords         Tex ID
     //float, float                  float,float,float,float         float, float       float
-    private final int POS_SIZE = 2;
-    private final int COLOR_SIZE = 4;
-    private final int TEXT_COORDS_SIZE = 2;
-    private final int TEXT_ID_SIZE = 1;
+    private final int POS_SIZE = 2;//XY
+    private final int COLOR_SIZE = 4; //RGBA
+    private final int TEXT_COORDS_SIZE = 2; //UV
+    private final int TEXT_ID_SIZE = 1; //ID
 
     private final int POS_OFFSET = 0;
     private final int COLOR_OFFSET = POS_OFFSET + POS_SIZE * Float.BYTES;
@@ -121,7 +121,7 @@ public class RenderBatch
         glBindBuffer(GL_ARRAY_BUFFER, vboID);
         glBufferSubData(GL_ARRAY_BUFFER, 0, vertices);
 
-        //Use shader
+        // der
         shader.Use();
         shader.UploadMat4f("uProjection", Window.GetScene().camera().GetProjectionMatrix());
         shader.UploadMat4f("uView", Window.GetScene().camera().GetViewMatrix());
@@ -138,6 +138,7 @@ public class RenderBatch
         glEnableVertexAttribArray(1);
 
         glDrawElements(GL_TRIANGLES, this.numSprites * 6, GL_UNSIGNED_INT, 0);
+        System.out.println("New Drawcall, Batch size: " + numSprites);
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
@@ -152,10 +153,10 @@ public class RenderBatch
     }
 
     private void LoadVertexProperties(int index)
-    {
+    { //We take sprite to load
         SpriteRenderer sprite = this.sprites[index];
 
-        //Find offset within array(4 vertices per sprite)
+        //Prepare offset so we can find it later for properties assignment
         int offset = index * 4 * VERTEX_SIZE;
 
         Vector4f color = sprite.GetColor();
@@ -169,6 +170,7 @@ public class RenderBatch
             {
                 if(textures.get(i) == sprite.GetTexture())
                 {
+                    //For all the texture in the sprite assign new Id
                     texID = i + 1;
                     break;
                 }
@@ -180,6 +182,7 @@ public class RenderBatch
         float xAdd = 1.f;
         float yAdd = 1.f;
 
+        //Assign properties to vertices
         for(int i = 0; i < 4; i++)
         {
             if(i==1)
@@ -218,6 +221,7 @@ public class RenderBatch
         {
             LoadElementIndices(elements, i);
         }
+        System.out.println("You rendered: " + elements.length / 3 + " triangles");
         return elements;
     }
 
@@ -235,6 +239,7 @@ public class RenderBatch
         elements[offsetArrayIndex + 3] = offset; //offset + 0
         elements[offsetArrayIndex + 4] = offset + 2;
         elements[offsetArrayIndex + 5] = offset + 1;
+
     }
 
     public boolean HasRoom()
@@ -242,11 +247,12 @@ public class RenderBatch
         return hasRoom;
     }
 
+    //Set a texture limit to avoid missing texture load
     public boolean HasTextureRoom()
     {
         return this.textures.size() < 8;
     }
-
+    //8 tex for lower performant pc, but we can check our machine limits(maybe 32)
     public boolean HasTexture(Texture tex)
     {
         return this.textures.contains(tex);

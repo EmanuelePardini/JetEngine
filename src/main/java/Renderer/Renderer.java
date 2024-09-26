@@ -31,6 +31,7 @@ private List<RenderBatch> batches;
             if(batch.HasRoom())
             {
                 Texture tex = sprite.GetTexture();
+                //check to avoid missing textures
                 if(tex == null || (batch.HasTexture(tex) || batch.HasTextureRoom()))
                 {
                     batch.AddSprite(sprite);
