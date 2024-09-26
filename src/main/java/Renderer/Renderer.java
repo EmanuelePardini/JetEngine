@@ -30,9 +30,13 @@ private List<RenderBatch> batches;
         {
             if(batch.HasRoom())
             {
-                batch.AddSprite(sprite);
-                added = true;
-                break;
+                Texture tex = sprite.GetTexture();
+                if(tex == null || (batch.HasTexture(tex) || batch.HasTextureRoom()))
+                {
+                    batch.AddSprite(sprite);
+                    added = true;
+                    break;
+                }
             }
         }
 
