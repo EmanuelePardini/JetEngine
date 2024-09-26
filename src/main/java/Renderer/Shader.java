@@ -1,259 +1,200 @@
-package Renderer;
+package Renderer; // Declare the package for the renderer component
 
-import org.joml.*;
-import org.lwjgl.BufferUtils;
+import org.joml.*; // Import JOML for matrix and vector types
+import org.lwjgl.BufferUtils; // Import for buffer utilities
+import java.io.IOException; // Import for handling IO exceptions
+import java.nio.FloatBuffer; // Import for using FloatBuffer
+import java.nio.file.Files; // Import for file operations
+import java.nio.file.Paths; // Import for file path handling
+import static org.lwjgl.opengl.GL11.GL_FALSE; // Import for OpenGL false constant
+import static org.lwjgl.opengl.GL20.*; // Import for OpenGL 2.0 functions
+import static org.lwjgl.opengl.GL20.glGetProgramInfoLog; // Import for getting program info logs
 
-import javax.print.DocFlavor;
-import java.io.IOException;
-import java.nio.FloatBuffer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+// Shader class to handle the compilation, linking, and usage of shaders
+public class Shader {
+    private int shaderProgramId; // ID for the shader program created by linking vertex and fragment shaders
+    private boolean beingUsed = false; // Flag to check if the shader is currently in use
 
-import static org.lwjgl.opengl.GL11.GL_FALSE;
-import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL20.glGetProgramInfoLog;
+    private String vertexSource; // Source code for the vertex shader
+    private String fragmentSource; // Source code for the fragment shader
+    private String filepath; // Path to the shader source file
 
-public class Shader
-{
+    // Constructor to initialize the shader by reading the source file
+    public Shader(String filepath) {
+        this.filepath = filepath; // Set the file path for the shader source
 
-    private int shaderProgramId;
-    private boolean beingUsed = false;
-
-    private String vertexSource;
-    private String fragmentSource;
-    private String filepath;
-
-    public Shader(String filepath)
-    {
-        this.filepath = filepath;
-
-        try
-        {
+        try {
+            // Read the entire shader source file into a string
             String source = new String(Files.readAllBytes(Paths.get(filepath)));
-            String[] splitString = source.split("(#type)( )+([a-zA-Z]+)"); //RegEx: Regular Expressions
+            // Split the source by the #type directive to separate vertex and fragment shaders
+            String[] splitString = source.split("(#type)( )+([a-zA-Z]+)");
 
-            //Find the first pattern after #type 'pattern'
-            int index = source.indexOf("#type") + 6;
-            int eol = source.indexOf("\r\n", index);
-            String firstPattern = source.substring(index, eol).trim();
+            // Find the first pattern after #type 'pattern'
+            int index = source.indexOf("#type") + 6; // Move index past '#type ' keyword
+            int eol = source.indexOf("\r\n", index); // Find the end of the line
+            String firstPattern = source.substring(index, eol).trim(); // Get the shader type
 
-            //Find the second pattern after #type 'pattern'
-            index = source.indexOf("#type", eol) + 6;
-            eol = source.indexOf("\r\n", index);
-            String secondPattern = source.substring(index, eol).trim();
+            // Find the second pattern after #type 'pattern'
+            index = source.indexOf("#type", eol) + 6; // Move index past the second '#type ' keyword
+            eol = source.indexOf("\r\n", index); // Find the end of the line
+            String secondPattern = source.substring(index, eol).trim(); // Get the shader type
 
-            if(firstPattern.equals("vertex"))
-            {
+            // Assign the appropriate shader source based on the identified patterns
+            if (firstPattern.equals("vertex")) {
                 vertexSource = splitString[1];
-            }
-            else if(firstPattern.equals("fragment"))
-            {
+            } else if (firstPattern.equals("fragment")) {
                 fragmentSource = splitString[1];
-            }
-            else
-            {
+            } else {
                 throw new IOException("Unexpected token '" + firstPattern + " ' in ' " + filepath + " '");
             }
 
-            if(secondPattern.equals("vertex"))
-            {
+            if (secondPattern.equals("vertex")) {
                 vertexSource = splitString[2];
-            }
-            else if(secondPattern.equals("fragment"))
-            {
+            } else if (secondPattern.equals("fragment")) {
                 fragmentSource = splitString[2];
-            }
-            else
-            {
+            } else {
                 throw new IOException("Unexpected token '" + secondPattern + " ' in ' " + filepath + " '");
             }
+        } catch (IOException e) {
+            e.printStackTrace(); // Print the stack trace for debugging
+            assert false : "Error: Could not open file for shader: ' " + filepath + " '"; // Ensure shader source was loaded correctly
         }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-            assert false : "Error: Could not open file for shader: ' " + filepath + " '";
-        }
-
     }
 
-    public void Compile()
-    {
-        int vertexId, fragmentId;
-        //Compile and Link Shaders
-        //Load and compile the Vertex Shaders
-        vertexId = glCreateShader(GL_VERTEX_SHADER);
-        //Pass the shader source to the GPU
-        glShaderSource(vertexId, vertexSource);
-        glCompileShader(vertexId);
-        //Check for compilation errors
+    // Compiles and links the shaders
+    public void Compile() {
+        int vertexId, fragmentId; // IDs for the vertex and fragment shaders
+
+        // Load and compile the Vertex Shader
+        vertexId = glCreateShader(GL_VERTEX_SHADER); // Create a vertex shader object
+        glShaderSource(vertexId, vertexSource); // Pass the vertex shader source code
+        glCompileShader(vertexId); // Compile the vertex shader
+        // Check for compilation errors
         int success = glGetShaderi(vertexId, GL_COMPILE_STATUS);
-        if(success == GL_FALSE)
-        {
+        if (success == GL_FALSE) {
             int len = glGetShaderi(vertexId, GL_INFO_LOG_LENGTH);
-            System.out.println("Error: Vertex shader compilation failed at" + filepath);
-            System.out.println(glGetShaderInfoLog(vertexId, len));
-            assert false : ""; //This will stop the program
+            System.out.println("Error: Vertex shader compilation failed at " + filepath);
+            System.out.println(glGetShaderInfoLog(vertexId, len)); // Print shader compilation errors
+            assert false : ""; // Stop execution if compilation fails
         }
 
-        //Load and compile the Fragment Shaders
-        fragmentId = glCreateShader(GL_FRAGMENT_SHADER);
-        //Pass the shader source to the GPU
-        glShaderSource(fragmentId, fragmentSource);
-        glCompileShader(fragmentId);
-        //Check for compilation errors
+        // Load and compile the Fragment Shader
+        fragmentId = glCreateShader(GL_FRAGMENT_SHADER); // Create a fragment shader object
+        glShaderSource(fragmentId, fragmentSource); // Pass the fragment shader source code
+        glCompileShader(fragmentId); // Compile the fragment shader
+        // Check for compilation errors
         success = glGetShaderi(fragmentId, GL_COMPILE_STATUS);
-        if(success == GL_FALSE)
-        {
+        if (success == GL_FALSE) {
             int len = glGetShaderi(fragmentId, GL_INFO_LOG_LENGTH);
             System.out.println("Error: Fragment shader compilation failed at " + filepath);
-            System.out.println(glGetShaderInfoLog(fragmentId, len));
-            assert false : ""; //This will stop the program
+            System.out.println(glGetShaderInfoLog(fragmentId, len)); // Print shader compilation errors
+            assert false : ""; // Stop execution if compilation fails
         }
 
-        //Link Shaders
-        shaderProgramId = glCreateProgram();
-        glAttachShader(shaderProgramId, vertexId);
-        glAttachShader(shaderProgramId, fragmentId);
-        glLinkProgram(shaderProgramId);
+        // Link Shaders into a Shader Program
+        shaderProgramId = glCreateProgram(); // Create a shader program
+        glAttachShader(shaderProgramId, vertexId); // Attach the vertex shader
+        glAttachShader(shaderProgramId, fragmentId); // Attach the fragment shader
+        glLinkProgram(shaderProgramId); // Link the shaders into a single program
 
-        //Check for linking errors
+        // Check for linking errors
         success = glGetProgrami(shaderProgramId, GL_LINK_STATUS);
-        if(success == GL_FALSE)
-        {
+        if (success == GL_FALSE) {
             int len = glGetProgrami(shaderProgramId, GL_INFO_LOG_LENGTH);
-            System.out.println("Error: Linking shader compilation failed at" + filepath);
-            System.out.println(glGetProgramInfoLog(shaderProgramId, len));
-            assert false : ""; //This will stop the program
+            System.out.println("Error: Linking shader compilation failed at " + filepath);
+            System.out.println(glGetProgramInfoLog(shaderProgramId, len)); // Print program linking errors
+            assert false : ""; // Stop execution if linking fails
         }
     }
 
-    public void Use()
-    {
-        if(!beingUsed)
-        {
-            //Bind Shader Program
-            glUseProgram(shaderProgramId);
-            beingUsed = true;
+    // Activate the shader program for use
+    public void Use() {
+        if (!beingUsed) { // Only use if not already in use
+            glUseProgram(shaderProgramId); // Bind the shader program
+            beingUsed = true; // Set the flag indicating the shader is in use
         }
-
     }
 
-    public void Detach()
-    {
-        glUseProgram(0);
-        beingUsed = false;
+    // Detach the currently used shader program
+    public void Detach() {
+        glUseProgram(0); // Unbind the shader program
+        beingUsed = false; // Reset the flag
     }
 
-    public  void UploadMat4f(String varName, Matrix4f mat4)
-    {
-        //bind var you are searching with shader you are searching in
-        int varLocation = glGetUniformLocation(shaderProgramId, varName);
-        Use();
+    // Upload a 4x4 matrix to the shader
+    public void UploadMat4f(String varName, Matrix4f mat4) {
+        int varLocation = glGetUniformLocation(shaderProgramId, varName); // Get the location of the variable in the shader
+        Use(); // Ensure the shader is being used
 
-        //we need to flatten matrix, in a 16 element array, so we create a buffer and pass it the matrix [1,1,1,1...]
-        FloatBuffer matBuffer = BufferUtils.createFloatBuffer(16);
-        mat4.get(matBuffer);
-        glUniformMatrix4fv(varLocation, false, matBuffer);
+        // Create a buffer and pass the matrix data
+        FloatBuffer matBuffer = BufferUtils.createFloatBuffer(16); // Create a FloatBuffer of size 16
+        mat4.get(matBuffer); // Load matrix data into the buffer
+        glUniformMatrix4fv(varLocation, false, matBuffer); // Upload the matrix to the shader
     }
 
+    // Upload a 3x3 matrix to the shader
     public void UploadMat3f(String varName, Matrix3f mat3) {
-        // Get the location of the 3x3 matrix uniform variable
-        int varLocation = glGetUniformLocation(shaderProgramId, varName);
+        int varLocation = glGetUniformLocation(shaderProgramId, varName); // Get the location of the variable in the shader
+        Use(); // Ensure the shader is being used
 
-        // Activate the shader program to use it
-        Use();
-
-        // Create a FloatBuffer of size 9 (3x3 matrix has 9 elements)
-        FloatBuffer matBuffer = BufferUtils.createFloatBuffer(9);
-
-        // Load the matrix data into the buffer
-        mat3.get(matBuffer);
-
-        // Upload the matrix data to the shader program
-        glUniformMatrix3fv(varLocation, false, matBuffer);
+        FloatBuffer matBuffer = BufferUtils.createFloatBuffer(9); // Create a FloatBuffer of size 9
+        mat3.get(matBuffer); // Load matrix data into the buffer
+        glUniformMatrix3fv(varLocation, false, matBuffer); // Upload the matrix to the shader
     }
 
+    // Upload a 4D vector to the shader
     public void UploadVec4f(String varName, Vector4f vec) {
-        // Get the location of the 4D vector uniform variable
-        int varLocation = glGetUniformLocation(shaderProgramId, varName);
+        int varLocation = glGetUniformLocation(shaderProgramId, varName); // Get the location of the variable in the shader
+        Use(); // Ensure the shader is being used
 
-        // Activate the shader program to use it
-        Use();
-
-        // Upload the 4D vector (x, y, z, w) to the shader program
-        glUniform4f(varLocation, vec.x, vec.y, vec.z, vec.w);
+        glUniform4f(varLocation, vec.x, vec.y, vec.z, vec.w); // Upload the vector to the shader
     }
 
+    // Upload a 3D vector to the shader
     public void UploadVec3f(String varName, Vector3f vec) {
-        // Get the location of the 3D vector uniform variable
-        int varLocation = glGetUniformLocation(shaderProgramId, varName);
+        int varLocation = glGetUniformLocation(shaderProgramId, varName); // Get the location of the variable in the shader
+        Use(); // Ensure the shader is being used
 
-        // Activate the shader program to use it
-        Use();
-
-        // Upload the 3D vector (x, y, z) to the shader program
-        glUniform3f(varLocation, vec.x, vec.y, vec.z);
+        glUniform3f(varLocation, vec.x, vec.y, vec.z); // Upload the vector to the shader
     }
 
+    // Upload a 2D vector to the shader
     public void UploadVec2f(String varName, Vector2f vec) {
-        // Get the location of the 2D vector uniform variable
-        int varLocation = glGetUniformLocation(shaderProgramId, varName);
+        int varLocation = glGetUniformLocation(shaderProgramId, varName); // Get the location of the variable in the shader
+        Use(); // Ensure the shader is being used
 
-        // Activate the shader program to use it
-        Use();
-
-        // Upload the 2D vector (x, y) to the shader program
-        glUniform2f(varLocation, vec.x, vec.y);
+        glUniform2f(varLocation, vec.x, vec.y); // Upload the vector to the shader
     }
 
+    // Upload a float to the shader
     public void UploadFloat(String varName, float val) {
-        // Get the location of the float uniform variable
-        int varLocation = glGetUniformLocation(shaderProgramId, varName);
+        int varLocation = glGetUniformLocation(shaderProgramId, varName); // Get the location of the variable in the shader
+        Use(); // Ensure the shader is being used
 
-        // Activate the shader program to use it
-        Use();
-
-        // Upload the float value to the shader program
-        glUniform1f(varLocation, val);
+        glUniform1f(varLocation, val); // Upload the float to the shader
     }
 
+    // Upload an integer to the shader
     public void UploadInt(String varName, int val) {
-        // Get the location of the integer uniform variable
-        int varLocation = glGetUniformLocation(shaderProgramId, varName);
+        int varLocation = glGetUniformLocation(shaderProgramId, varName); // Get the location of the variable in the shader
+        Use(); // Ensure the shader is being used
 
-        // Activate the shader program to use it
-        Use();
-
-        // Upload the integer value to the shader program
-        glUniform1i(varLocation, val);
+        glUniform1i(varLocation, val); // Upload the integer to the shader
     }
 
-    public void uploadTexture(String varName, int slot)
-    {
-        /*
-         * Retrieves the location (ID) of the uniform variable "varName" in the specified shader program.
-         * "shaderProgramId" is the ID of the compiled shader program.
-         * "varName" is the name of the uniform variable in the shader.
-         * glGetUniformLocation returns an integer that represents the location of the uniform variable in the shader.
-         */
-        int varLocation = glGetUniformLocation(shaderProgramId, varName);
+    // Upload a texture to the shader
+    public void uploadTexture(String varName, int slot) {
+        int varLocation = glGetUniformLocation(shaderProgramId, varName); // Get the location of the uniform variable in the shader
+        Use(); // Ensure the shader is being used
 
-        Use();
-
-        /*
-         * Sets the uniform variable at the given location (varLocation) to the integer value of "slot".
-         * glUniform1i sets a single integer uniform (1i stands for 1 integer) at the location "varLocation".
-         * The "slot" typically refers to a texture unit or binding point that will be passed to the shader.
-         * For example, this could be used to tell the shader which texture unit to sample from.
-         */
-        glUniform1i(varLocation, slot);
-
+        glUniform1i(varLocation, slot); // Set the texture unit
     }
 
-    public void UploadIntArray(String varName, int[] array)
-    {
-        int varLocation = glGetUniformLocation(shaderProgramId, varName);
-        Use();
-        glUniform1iv(varLocation, array);
+    // Upload an integer array to the shader
+    public void UploadIntArray(String varName, int[] array) {
+        int varLocation = glGetUniformLocation(shaderProgramId, varName); // Get the location of the variable in the shader
+        Use(); // Ensure the shader is being used
+
+        glUniform1iv(varLocation, array); // Upload the integer array to the shader
     }
 }
