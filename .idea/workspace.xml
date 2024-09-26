@@ -7,9 +7,10 @@
     <list default="true" id="be5a7dae-daae-4114-a210-103589ae3a55" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/RenderBatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Renderer/RenderBatch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Renderer/Renderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/SpriteRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/SpriteRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/Spritesheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/Spritesheet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Util/AssetPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Util/AssetPool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelEditorScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelEditorScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Transform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Transform.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

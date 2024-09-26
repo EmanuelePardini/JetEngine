@@ -5,6 +5,7 @@ import gameengine.Engine.Window;
 import gameengine.Util.AssetPool;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
+import org.lwjgl.opengl.GL15;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,9 +118,34 @@ public class RenderBatch
 
     public void Render()
     {
-        //For now, rebuffer all data every frame
+        boolean rebufferData = false;
+
+        for(int i = 0; i < numSprites; i++)
+        {
+            SpriteRenderer spr = sprites[i];
+            if (spr.IsDirty())
+            {
+                LoadVertexProperties(i);
+                spr.SetClean();
+                rebufferData = true;
+            }
+        }
+
+
+        //GABE METHOD: If the flag is clean do not re-buffer
+        /*
+        if(rebufferData)
+        {
+            glBindBuffer(GL_ARRAY_BUFFER, vboID);
+            glBufferSubData(GL_ARRAY_BUFFER,0,vertices);
+        }
+        */
+
+        //MY TEST: If the flag is clean do not re-render
+        if(!rebufferData) return;
+        
         glBindBuffer(GL_ARRAY_BUFFER, vboID);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, vertices);
+        glBufferSubData(GL_ARRAY_BUFFER,0,vertices);
 
         // der
         shader.Use();
