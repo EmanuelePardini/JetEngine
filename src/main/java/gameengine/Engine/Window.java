@@ -110,7 +110,7 @@ public class Window
         glfwDefaultWindowHints();
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-        glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+        glfwWindowHint(GLFW_MAXIMIZED, GLFW_FALSE);
 
         //Create the window
         glfwWindow = glfwCreateWindow(this.width, this.height, this.title, NULL, NULL);
@@ -119,19 +119,18 @@ public class Window
             throw new IllegalStateException("Failed to create the GLFW window");
         }
 
-
-
         //Bind mouse delegates for mouse events
         glfwSetCursorPosCallback(glfwWindow, MouseListener::MousePosCallback); //Lambda to call delegates (forwards your position to the function)
         glfwSetMouseButtonCallback(glfwWindow, MouseListener::MouseButtonCallback);
         glfwSetScrollCallback(glfwWindow, MouseListener::MouseScrollCallback);
         glfwSetKeyCallback(glfwWindow, KeyListener::KeyCallback);
-        glfwSetWindowSizeCallback(glfwWindow, (w, newWidth, newHeight) ->{
-            Window.SetWidth(newWidth);
-            Window.SetHeight(newHeight);
-        });
+        glfwSetWindowSizeCallback(glfwWindow, (w, newWidth, newHeight) ->{Window.SetWidth(newWidth);
+            Window.SetHeight(newHeight);});
 
-        glfwSetWindowSize(glfwWindow, GetWidth(), GetHeight());
+        //to fix mouse bug
+        glfwSetWindowSize(glfwWindow, 1280, 720);
+
+
 
         //Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindow);
@@ -158,7 +157,7 @@ public class Window
     public void Loop()
     {
         //Initialize frame time
-        float beginFrameTime = Time.getTime();
+        float beginFrameTime = (float)glfwGetTime();
         float endFrameTime;
 
         float DeltaTime = -1.0f;
