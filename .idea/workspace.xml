@@ -5,17 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be5a7dae-daae-4114-a210-103589ae3a55" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/libs/imgui-binding-1.76-0.14.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/imgui-lwjgl3-1.76-0.14.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/libimgui-java.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/libimgui-java64.dylib" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libs/libimgui-java64.so" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/ImGuiLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelEditorScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelEditorScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/imgui-app-1.87.5-all.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/imgui-app-1.87.5-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/imgui-app-1.87.5-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/imgui-app-1.87.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/imgui-binding-1.76-0.14.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/imgui-binding-1.87.5-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/imgui-binding-1.87.5-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/imgui-binding-1.87.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/imgui-java64.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/imgui-lwjgl3-1.76-0.14.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/imgui-lwjgl3-1.87.5-javadoc.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/imgui-lwjgl3-1.87.5-sources.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/imgui-lwjgl3-1.87.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/libimgui-java.so" beforeDir="false" afterPath="$PROJECT_DIR$/libs/libimgui-java.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/libimgui-java64.dylib" beforeDir="false" afterPath="$PROJECT_DIR$/libs/libimgui-java64.dylib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/libimgui-java64.so" beforeDir="false" afterPath="$PROJECT_DIR$/libs/libimgui-java64.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/ImGuiLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/ImGuiLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,6 +81,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Build JetEngine.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.JetEngine [:Main.main()].executor&quot;: &quot;Run&quot;,
@@ -79,7 +89,7 @@
     &quot;Gradle.JetEngine [build].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.JetEngine.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;test&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Dependencies&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
@@ -93,6 +103,8 @@
       <recent name="gameengine.Engine" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programmazione\Java\JetEngine\src\main\java" />
+      <recent name="D:\Programmazione\Java\JetEngine\src\main\java\gameengine" />
       <recent name="D:\Programmazione\Java\JetEngine\libs" />
       <recent name="D:\Programmazione\Java\JetEngine\Assets\Images" />
       <recent name="D:\Jet Engine\JetEngine\Assets\Images" />
@@ -100,7 +112,7 @@
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="gameengine.Main" />
       <module name="gameengine.main" />

@@ -1,4 +1,4 @@
-module org.example.gameengine {
+module gameengine {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -15,8 +15,9 @@ module org.example.gameengine {
     requires java.desktop;
     requires org.lwjgl.stb;
     requires annotations;
-    requires imgui.binding;
     requires imgui.lwjgl3;
+    requires imgui.binding;
+
 
     opens gameengine to javafx.fxml;
     exports gameengine;

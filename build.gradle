@@ -1,12 +1,12 @@
 plugins {
   id 'java'
   id 'application'
-  id 'org.javamodularity.moduleplugin' version '1.8.12'
-  id 'org.openjfx.javafxplugin' version '0.0.13'
-  id 'org.beryx.jlink' version '2.25.0'
+  id 'org.javamodularity.moduleplugin' version '1.8.15'
+  id 'org.openjfx.javafxplugin' version '0.1.0'
+  id 'org.beryx.jlink' version '3.0.1'
 }
 
-group 'org.example'
+group 'gameengine'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -14,26 +14,36 @@ repositories {
 }
 
 ext {
-  lwjglVersion = '3.2.3'
-  imguiVersion = '1.76-0.9'
+  lwjglVersion = '3.3.3'
+  imguiVersion = '1.81.0'
   junitVersion = '5.10.2'
 }
 
-sourceCompatibility = '17'
-targetCompatibility = '17'
+java {
+  sourceCompatibility = '17'
+  targetCompatibility = '17'
+}
 
 tasks.withType(JavaCompile) {
   options.encoding = 'UTF-8'
+  destinationDirectory.set(layout.buildDirectory.dir("classes/java/main"))
 }
 
+tasks.withType(JavaExec) {
+  jvmArgs = [
+          "-Djava.library.path=${projectDir}/libs"
+  ]
+}
+
+
 application {
-  mainModule = 'org.example.gameengine'
-  mainClass = 'org.example.gameengine.Main'
+  mainModule = 'gameengine'
+  mainClass = 'gameengine.Main'
 }
 
 javafx {
   version = '17.0.6'
-  modules = ['javafx.controls', 'javafx.fxml', 'javafx.web', 'javafx.swing', 'javafx.media']
+  modules = ['javafx.controls', 'javafx.fxml', 'javafx.web', 'javafx.swing' , 'javafx.media']
 }
 
 dependencies {
@@ -46,12 +56,10 @@ dependencies {
   }
   implementation('org.kordamp.ikonli:ikonli-javafx:12.3.1')
   implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
-
   implementation('com.github.almasb:fxgl:17.3') {
     exclude(group: 'org.openjfx')
     exclude(group: 'org.jetbrains.kotlin')
   }
-
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
@@ -61,7 +69,6 @@ test {
 }
 
 jlink {
-  //imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
   options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
   launcher {
     name = 'app'
@@ -72,36 +79,28 @@ jlinkZip {
   group = 'distribution'
 }
 
-project.ext.lwjglVersion = "3.3.3"
-project.ext.lwjglNatives = "native-windows"
-project.ext.jomlVersion = "1.10.7"
-project.ext.imguiVersion = "1.76-0.9"
+project.ext.lwjglNatives = "native-windows" // Aggiorna come necessario
+project.ext.jomlVersion = "1.10.7" // Assicurati di usare una versione recente
 
-project.ext.lwjglVersion = "3.3.3"
-project.ext.lwjglNatives = "native-windows"
-project.ext.jomlVersion = "1.10.7"
-project.ext.imguiVersion = "1.76-0.9"
+def osName = System.getProperty("os.name").toLowerCase()
+def osArch = System.getProperty("os.arch").toLowerCase()
 
-import org.gradle.internal.os.OperatingSystem
-
-switch (OperatingSystem.current()) {
-  case OperatingSystem.LINUX:
-    project.ext.lwjglNatives = "natives-linux"
-    def osArch = System.getProperty("os.arch")
-    if (osArch.startsWith("arm") || osArch.startsWith("aarch64")) {
-      project.ext.lwjglNatives += osArch.contains("64") || osArch.startsWith("armv8") ? "-arm64" : "-arm32"
-    } else if  (osArch.startsWith("ppc")) {
-      project.ext.lwjglNatives += "-ppc64le"
-    } else if  (osArch.startsWith("riscv")) {
-      project.ext.lwjglNatives += "-riscv64"
-    }
-    break
-  case OperatingSystem.WINDOWS:
-    def osArch = System.getProperty("os.arch")
-    project.ext.lwjglNatives = osArch.contains("64")
-            ? "natives-windows${osArch.startsWith("aarch64") ? "-arm64" : ""}"
-            : "natives-windows-x86"
-    break
+if (osName.contains("linux")) {
+  project.ext.lwjglNatives = "natives-linux"
+  if (osArch.contains("arm")) {
+    project.ext.lwjglNatives += osArch.contains("64") ? "-arm64" : "-arm32"
+  } else if (osArch.startsWith("ppc")) {
+    project.ext.lwjglNatives += "-ppc64le"
+  } else if (osArch.startsWith("riscv")) {
+    project.ext.lwjglNatives += "-riscv64"
+  }
+} else if (osName.contains("windows")) {
+  project.ext.lwjglNatives = osArch.contains("64") ? "natives-windows" : "natives-windows-x86"
+  if (osArch.contains("aarch64")) {
+    project.ext.lwjglNatives += "-arm64"
+  }
+} else if (osName.contains("mac")) {
+  project.ext.lwjglNatives = osArch.contains("64") ? "natives-macos" : "natives-macos-x86"
 }
 
 repositories {
@@ -110,9 +109,11 @@ repositories {
 }
 
 dependencies {
-  implementation files('libs/imgui-binding-1.76-0.14.jar')
-  implementation files('libs/imgui-lwjgl3-1.76-0.14.jar')
+  // Include ImGui dependencies
+  implementation files('libs/imgui-lwjgl3-1.81.0.jar')
+  implementation files('libs/imgui-binding-1.81.0.jar')
 
+  // LWJGL dependencies
   implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
 
   ['', '-opengl', '-glfw'].each {
