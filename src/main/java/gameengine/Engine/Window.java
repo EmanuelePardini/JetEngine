@@ -125,10 +125,13 @@ public class Window
         glfwSetCursorPosCallback(glfwWindow, MouseListener::MousePosCallback); //Lambda to call delegates (forwards your position to the function)
         glfwSetMouseButtonCallback(glfwWindow, MouseListener::MouseButtonCallback);
         glfwSetScrollCallback(glfwWindow, MouseListener::MouseScrollCallback);
-
-        //Bind key delegate
         glfwSetKeyCallback(glfwWindow, KeyListener::KeyCallback);
+        glfwSetWindowSizeCallback(glfwWindow, (w, newWidth, newHeight) ->{
+            Window.SetWidth(newWidth);
+            Window.SetHeight(newHeight);
+        });
 
+        glfwSetWindowSize(glfwWindow, GetWidth(), GetHeight());
 
         //Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindow);
@@ -179,7 +182,7 @@ public class Window
             glfwSwapBuffers(glfwWindow);
 
             //calculating dt, and updating time vars
-            endFrameTime = Time.getTime();
+            endFrameTime = (float)glfwGetTime();
             DeltaTime = endFrameTime - beginFrameTime;
             beginFrameTime = endFrameTime;
         }
