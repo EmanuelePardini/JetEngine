@@ -175,7 +175,7 @@ public class Window
             if (DeltaTime >= 0) currentScene.Update(DeltaTime);
 
             //Update ImGui
-            this.imGuiLayer.Update(DeltaTime);
+            this.imGuiLayer.Update(DeltaTime, currentScene);
 
             //swaps back buffer with front buffer
             glfwSwapBuffers(glfwWindow);

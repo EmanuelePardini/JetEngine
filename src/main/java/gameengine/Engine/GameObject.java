@@ -81,5 +81,13 @@ public class GameObject
         }
     }
 
+    public void ImGUI()
+    {
+        for(Component c : components)
+        {
+            c.ImGUI();
+        }
+    }
+
     public int ZIndex() {return zIndex;}
 }

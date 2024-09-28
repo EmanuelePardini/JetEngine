@@ -3,6 +3,7 @@ import gameengine.Components.Sprite;
 import gameengine.Components.SpriteRenderer;
 import gameengine.Components.Spritesheet;
 import gameengine.Util.AssetPool;
+import imgui.ImGui;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
@@ -37,13 +38,15 @@ public class LevelEditorScene extends Scene
 
         obj1 = new GameObject("Object 1", new Transform(new Vector2f(200,100),
                                          new Vector2f(256,256)), -1);
-        obj1.AddComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture(SpritesPath[1]))));
+        obj1.AddComponent(new SpriteRenderer(new Vector4f(1,0,0,1)));
         this.AddGameObjectToScene(obj1);
 
         GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(400,100),
                 new Vector2f(256,256)), 2);
         obj2.AddComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture(SpritesPath[2]))));
         this.AddGameObjectToScene(obj2);
+
+        this.activeGameObject = obj1;
 
     }
 
@@ -95,6 +98,14 @@ public class LevelEditorScene extends Scene
         }
 
         this.renderer.Render();
+    }
+
+    @Override
+    public void ImGUI()
+    {
+        ImGui.begin("Test window");
+        ImGui.text("Some random text");
+        ImGui.end();
     }
 
     //That's one of my tests Giovanni, if you want to remove you can

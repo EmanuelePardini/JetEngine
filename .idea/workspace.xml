@@ -6,6 +6,38 @@
   <component name="ChangeListManager">
     <list default="true" id="be5a7dae-daae-4114-a210-103589ae3a55" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid12192.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid13476.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid13972.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid15924.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid16248.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid16616.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid16704.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid17376.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid17404.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid17608.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid19108.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid19232.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid22068.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid22356.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid23440.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid23840.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid23980.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid2848.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid3632.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid3740.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid4020.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid4908.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid8936.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid9040.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid9052.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hs_err_pid9748.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/SpriteRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/SpriteRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/ImGuiLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/ImGuiLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelEditorScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelEditorScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Scene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

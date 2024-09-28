@@ -2,6 +2,7 @@ package gameengine.Components;
 import Renderer.Texture;
 import gameengine.Engine.Component;
 import gameengine.Engine.Transform;
+import imgui.ImGui;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
@@ -17,6 +18,7 @@ public class SpriteRenderer extends Component
     {
         this.color = color;
         this.sprite = new Sprite(null);
+        this.isDirty = true;
     }
 
     public SpriteRenderer(Sprite sprite)
@@ -32,6 +34,7 @@ public class SpriteRenderer extends Component
     {
         this.lastTransform = gameObject.transform.Copy();
     }
+
     @Override
     public void Update(float DeltaTime)
     {
@@ -40,6 +43,19 @@ public class SpriteRenderer extends Component
             this.gameObject.transform.Copy(this.lastTransform);
             this.isDirty = true;
         }
+    }
+
+    @Override
+    public void ImGUI()
+    {
+        float[] imColor = {color.x, color.y, color.z, color.w};
+
+        if(ImGui.colorPicker4("Color Picker: ", imColor))
+        {
+            this.color.set(imColor[0],imColor[1],imColor[2],imColor[3]);
+            this.isDirty = true;
+        }
+
     }
 
     public Vector4f GetColor() {return this.color;}
@@ -54,7 +70,7 @@ public class SpriteRenderer extends Component
     }
 
     public void SetSprite(Sprite sprite)
-    { //I know what you're thinking but it's a sprite bro
+    { //I know what you're thinking, but it's a sprite bro
         //We don't have to check if it's equal because we change sprite
         //in leveleditor and if we change we will not set an equal sprite
         this.sprite = sprite;
@@ -71,4 +87,5 @@ public class SpriteRenderer extends Component
     }
 
     public void SetClean(){this.isDirty = false;}
+
 }
