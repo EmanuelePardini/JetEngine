@@ -5,6 +5,8 @@ import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
+import java.nio.IntBuffer;
+
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11C.*;
@@ -18,6 +20,7 @@ public class Window
     int height;
     String title;
     private long glfwWindow; //Number where the window is memorized in the memory space
+    private ImGuiLayer imGuiLayer;
 
     //Colors
     public float r;
@@ -143,6 +146,9 @@ public class Window
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
+        this.imGuiLayer = new ImGuiLayer(glfwWindow);
+        this.imGuiLayer.InitImGui();
+
         Window.ChangeScene(0);
     }
 
@@ -152,7 +158,7 @@ public class Window
         float beginFrameTime = Time.getTime();
         float endFrameTime;
 
-        float dt = -1.0f;
+        float DeltaTime = -1.0f;
 
         while (!glfwWindowShouldClose(glfwWindow))
         {
@@ -164,15 +170,34 @@ public class Window
             //clears buffer, meaning it fills it in this case
             glClear(GL_COLOR_BUFFER_BIT);
 
-            if (dt >= 0) currentScene.Update(dt);
+            if (DeltaTime >= 0) currentScene.Update(DeltaTime);
+
+            //Update ImGui
+            this.imGuiLayer.Update(DeltaTime);
 
             //swaps back buffer with front buffer
             glfwSwapBuffers(glfwWindow);
 
             //calculating dt, and updating time vars
             endFrameTime = Time.getTime();
-            dt = endFrameTime - beginFrameTime;
+            DeltaTime = endFrameTime - beginFrameTime;
             beginFrameTime = endFrameTime;
         }
+    }
+
+    public static int GetWidth() {
+        return Get().width;
+    }
+
+    public static int GetHeight() {
+        return Get().height;
+    }
+
+    public static void SetWidth(int newWidth) {
+        Get().width = newWidth;
+    }
+
+    public static void SetHeight(int newHeight) {
+        Get().height = newHeight;
     }
 }

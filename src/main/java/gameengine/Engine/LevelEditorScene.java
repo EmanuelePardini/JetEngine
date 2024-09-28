@@ -68,7 +68,6 @@ public class LevelEditorScene extends Scene
     { //Monitor constantly performances
         System.out.println("FPS: " + (1.0 / DeltaTime));
 
-
         /*ANIMATION TEST(Dirty flag pattern Video)
         Feel free to remove that
 

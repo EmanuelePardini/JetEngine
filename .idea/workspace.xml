@@ -5,15 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be5a7dae-daae-4114-a210-103589ae3a55" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Images/blendImage1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Images/blendImage2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/imgui-binding-1.76-0.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/imgui-lwjgl3-1.76-0.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/libimgui-java.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/libimgui-java64.dylib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/libimgui-java64.so" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/ImGuiLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/RenderBatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Renderer/RenderBatch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Renderer/Renderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/SpriteRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/SpriteRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelEditorScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelEditorScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,24 +93,25 @@
       <recent name="gameengine.Engine" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programmazione\Java\JetEngine\libs" />
       <recent name="D:\Programmazione\Java\JetEngine\Assets\Images" />
       <recent name="D:\Jet Engine\JetEngine\Assets\Images" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.gameengine.Main">
-    <configuration default="true" type="Application" factoryName="Application">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="Main" />
+      <option name="MAIN_CLASS_NAME" value="gameengine.Main" />
       <module name="gameengine.main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="gameengine.Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="corretto-21" />
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="gameengine.Main" />
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="gameengine.main" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -150,7 +153,7 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.gameengine.Main" />
+      <item itemvalue="Application.Main" />
       <item itemvalue="Gradle.JetEngine [build]" />
     </list>
   </component>

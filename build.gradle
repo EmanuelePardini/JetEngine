@@ -14,6 +14,8 @@ repositories {
 }
 
 ext {
+  lwjglVersion = '3.2.3'
+  imguiVersion = '1.76-0.9'
   junitVersion = '5.10.2'
 }
 
@@ -31,7 +33,7 @@ application {
 
 javafx {
   version = '17.0.6'
-  modules = ['javafx.controls', 'javafx.fxml', 'javafx.web', 'javafx.swing' , 'javafx.media']
+  modules = ['javafx.controls', 'javafx.fxml', 'javafx.web', 'javafx.swing', 'javafx.media']
 }
 
 dependencies {
@@ -55,10 +57,11 @@ dependencies {
 }
 
 test {
-useJUnitPlatform()}
+  useJUnitPlatform()
+}
 
 jlink {
-  imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
+  //imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
   options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
   launcher {
     name = 'app'
@@ -68,10 +71,18 @@ jlink {
 jlinkZip {
   group = 'distribution'
 }
-import org.gradle.internal.os.OperatingSystem
 
 project.ext.lwjglVersion = "3.3.3"
+project.ext.lwjglNatives = "native-windows"
 project.ext.jomlVersion = "1.10.7"
+project.ext.imguiVersion = "1.76-0.9"
+
+project.ext.lwjglVersion = "3.3.3"
+project.ext.lwjglNatives = "native-windows"
+project.ext.jomlVersion = "1.10.7"
+project.ext.imguiVersion = "1.76-0.9"
+
+import org.gradle.internal.os.OperatingSystem
 
 switch (OperatingSystem.current()) {
   case OperatingSystem.LINUX:
@@ -95,10 +106,21 @@ switch (OperatingSystem.current()) {
 
 repositories {
   mavenCentral()
+  maven { url 'https://jitpack.io' }
 }
 
 dependencies {
+  implementation files('libs/imgui-binding-1.76-0.14.jar')
+  implementation files('libs/imgui-lwjgl3-1.76-0.14.jar')
+
   implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
+
+  ['', '-opengl', '-glfw'].each {
+    implementation "org.lwjgl:lwjgl$it:$lwjglVersion"
+    runtimeOnly "org.lwjgl:lwjgl$it::natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl$it::natives-windows-x86"
+    runtimeOnly "org.lwjgl:lwjgl$it::natives-linux"
+  }
 
   implementation "org.lwjgl:lwjgl"
   implementation "org.lwjgl:lwjgl-assimp"
