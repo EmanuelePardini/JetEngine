@@ -15,8 +15,8 @@ module gameengine {
     requires java.desktop;
     requires org.lwjgl.stb;
     requires annotations;
-    requires imgui.lwjgl3;
     requires imgui.binding;
+    requires imgui.lwjgl3;
 
 
     opens gameengine to javafx.fxml;

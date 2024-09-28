@@ -168,7 +168,7 @@ public class RenderBatch implements Comparable<RenderBatch>
         glEnableVertexAttribArray(1);
 
         glDrawElements(GL_TRIANGLES, this.numSprites * 6, GL_UNSIGNED_INT, 0);
-        System.out.println("New Drawcall, Batch size: " + numSprites);
+        //System.out.println("New Drawcall, Batch size: " + numSprites);
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);

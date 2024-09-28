@@ -110,8 +110,8 @@ repositories {
 
 dependencies {
   // Include ImGui dependencies
-  implementation files('libs/imgui-lwjgl3-1.81.0.jar')
-  implementation files('libs/imgui-binding-1.81.0.jar')
+  implementation files('libs/imgui-binding-1.76-0.14.jar')
+  implementation files('libs/imgui-lwjgl3-1.76-0.14.jar')
 
   // LWJGL dependencies
   implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")

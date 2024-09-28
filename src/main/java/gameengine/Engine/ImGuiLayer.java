@@ -222,7 +222,7 @@ public class ImGuiLayer
 
         // Any Dear ImGui code SHOULD go between ImGui.newFrame()/ImGui.render() methods
         ImGui.newFrame();
-        //exampleUi.render();
+
         ImGui.showDemoWindow();
         ImGui.render();
         endFrame();
@@ -263,9 +263,9 @@ public class ImGuiLayer
     private void endFrame() {
         // After Dear ImGui prepared a draw data, we use it in the LWJGL3 renderer.
         // At that moment ImGui will be rendered to the current OpenGL context.
-        imGuiGl3.renderDrawData(ImGui.getDrawData());
-        glfwSwapBuffers(glfwWindow);
-        glfwPollEvents();
+        imGuiGl3.render(ImGui.getDrawData());
+        //glfwSwapBuffers(glfwWindow);
+        //glfwPollEvents();
     }
 
     // If you want to clean a room after yourself - do it by yourself
