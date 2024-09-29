@@ -42,7 +42,8 @@ public class AssetPool
         }
         else
         {
-            Texture texture = new Texture(resourceName);
+            Texture texture = new Texture();
+            texture.Init(resourceName);
             AssetPool.Textures.put(file.getAbsolutePath(), texture);
             return texture;
         }

@@ -8,26 +8,28 @@ import org.joml.Vector4f;
 
 public class SpriteRenderer extends Component
 {
-    private Vector4f color;
-    private Sprite sprite;
+    private Vector4f color = new Vector4f(1,1,1,1);
+    private Sprite sprite = new Sprite();
 
-    private Transform lastTransform;
-    private boolean isDirty = false;
+    //transient variables get ignored in serialization
+    private transient Transform lastTransform;
+    private transient boolean isDirty = false;
 
-    public SpriteRenderer(Vector4f color)
-    {
-        this.color = color;
-        this.sprite = new Sprite(null);
-        this.isDirty = true;
-    }
-
-    public SpriteRenderer(Sprite sprite)
-    {
-        this.sprite = sprite;
-        //set to white
-        this.color = new Vector4f(1,1,1,1);
-        this.isDirty = true;
-    }
+    //GSON does not support constructors that take in variables.
+//    public SpriteRenderer(Vector4f color)
+//    {
+//        this.color = color;
+//        this.sprite = new Sprite(null);
+//        this.isDirty = true;
+//    }
+//
+//    public SpriteRenderer(Sprite sprite)
+//    {
+//        this.sprite = sprite;
+//        //set to white
+//        this.color = new Vector4f(1,1,1,1);
+//        this.isDirty = true;
+//    }
 
     @Override
     public void Start()

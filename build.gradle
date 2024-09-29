@@ -109,6 +109,10 @@ repositories {
 }
 
 dependencies {
+
+  //GSON
+  implementation 'com.google.code.gson:gson:2.11.0'
+
   // Include ImGui dependencies
   implementation files('libs/imgui-binding-1.76-0.14.jar')
   implementation files('libs/imgui-lwjgl3-1.76-0.14.jar')

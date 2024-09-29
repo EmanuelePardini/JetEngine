@@ -17,6 +17,7 @@ module gameengine {
     requires annotations;
     requires imgui.binding;
     requires imgui.lwjgl3;
+    requires com.google.gson;
 
 
     opens gameengine to javafx.fxml;

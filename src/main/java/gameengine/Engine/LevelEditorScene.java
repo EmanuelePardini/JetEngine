@@ -1,4 +1,6 @@
 package gameengine.Engine;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import gameengine.Components.Sprite;
 import gameengine.Components.SpriteRenderer;
 import gameengine.Components.Spritesheet;
@@ -38,15 +40,44 @@ public class LevelEditorScene extends Scene
 
         obj1 = new GameObject("Object 1", new Transform(new Vector2f(200,100),
                                          new Vector2f(256,256)), -1);
-        obj1.AddComponent(new SpriteRenderer(new Vector4f(1,0,0,1)));
+
+        //temp solution for current setup, will be later edited via editor
+        SpriteRenderer obj1Sprite = new SpriteRenderer();
+        obj1Sprite.SetColor(new Vector4f(1,0,0,1));
+
+        obj1.AddComponent(obj1Sprite);
         this.AddGameObjectToScene(obj1);
 
         GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(400,100),
                 new Vector2f(256,256)), 2);
-        obj2.AddComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture(SpritesPath[2]))));
+
+        SpriteRenderer obj2SpriteRenderer = new SpriteRenderer();
+        Sprite obj2Sprite = new Sprite();
+
+        obj2Sprite.SetTexture(AssetPool.getTexture("assets/images/blendImage2.png"));
+        obj2SpriteRenderer.SetSprite(obj2Sprite);
+
+        obj2.AddComponent(obj2SpriteRenderer);
         this.AddGameObjectToScene(obj2);
 
         this.activeGameObject = obj1;
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+        System.out.println("----- OBJ2 SPRITE RENDERER -----");
+        System.out.println(gson.toJson(obj2SpriteRenderer));
+        System.out.println("----- OBJ1 -----");
+        System.out.println(gson.toJson(obj1));
+
+        String serialized = gson.toJson(new Vector2f(1,0.5f));
+        Vector2f vec = gson.fromJson(serialized,Vector2f.class);
+        System.out.println("----- A FOOKING VECTOR FROM A STRING -----");
+        System.out.println(vec);
+
+        //hits limit when you try to recover a game object from json. Will require next video (tries to invoke abstract class component)
+//        String serializeFail = gson.toJson(obj1);
+//        GameObject obj = gson.fromJson(serializeFail, GameObject.class);
+//        System.out.println(obj);
 
     }
 
@@ -69,7 +100,7 @@ public class LevelEditorScene extends Scene
     @Override
     public void Update(float DeltaTime)
     { //Monitor constantly performances
-        System.out.println("FPS: " + (1.0 / DeltaTime));
+        //System.out.println("FPS: " + (1.0 / DeltaTime));
 
         /*ANIMATION TEST(Dirty flag pattern Video)
         Feel free to remove that

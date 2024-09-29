@@ -37,7 +37,9 @@ public class Spritesheet
                     };
 
             //Create dinamically our sprite by spritesheet scraping
-            Sprite sprite = new Sprite(this.texture, textCoords);
+            Sprite sprite = new Sprite();
+            sprite.SetTexture(this.texture);
+            sprite.SetTexCoords(textCoords);
             this.sprites.add(sprite);
 
             currentX += spriteWitdth + spacing;
