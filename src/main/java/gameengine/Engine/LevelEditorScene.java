@@ -33,8 +33,12 @@ public class LevelEditorScene extends Scene
     public void Init()
     {
         LoadResources();
-
         this.camera = new Camera(new Vector2f(-250.f, 0));
+
+        if(levelLoaded)
+        {
+            return;
+        }
 
         sprites = AssetPool.GetSpritesheet(SpritesPath[0]);
 
@@ -62,11 +66,15 @@ public class LevelEditorScene extends Scene
 
         this.activeGameObject = obj1;
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = new GsonBuilder().setPrettyPrinting()
+                    .registerTypeAdapter(Component.class, new ComponentDeserializer())
+                    .registerTypeAdapter(GameObject.class, new GameObjectDeserializer()) //needed to keep components on gameobject
+                    .create();
 
+        //Examples of serialization
         System.out.println("----- OBJ2 SPRITE RENDERER -----");
         System.out.println(gson.toJson(obj2SpriteRenderer));
-        System.out.println("----- OBJ1 -----");
+        System.out.println("----- OBJ1 SERIALIZED VALUES-----");
         System.out.println(gson.toJson(obj1));
 
         String serialized = gson.toJson(new Vector2f(1,0.5f));
@@ -74,10 +82,11 @@ public class LevelEditorScene extends Scene
         System.out.println("----- A FOOKING VECTOR FROM A STRING -----");
         System.out.println(vec);
 
-        //hits limit when you try to recover a game object from json. Will require next video (tries to invoke abstract class component)
-//        String serializeFail = gson.toJson(obj1);
-//        GameObject obj = gson.fromJson(serializeFail, GameObject.class);
-//        System.out.println(obj);
+        String serialized2 = gson.toJson(obj1);
+        System.out.println("----- PRINTING OBJECT ONCE DESERIALIZED-----");
+        GameObject obj = gson.fromJson(serialized2, GameObject.class);
+        System.out.println(obj);
+
 
     }
 

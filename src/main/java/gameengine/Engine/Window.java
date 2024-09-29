@@ -162,6 +162,8 @@ public class Window
 
         float DeltaTime = -1.0f;
 
+        //currentScene.Load();
+
         while (!glfwWindowShouldClose(glfwWindow))
         {
             //Poll input events
@@ -185,6 +187,8 @@ public class Window
             DeltaTime = endFrameTime - beginFrameTime;
             beginFrameTime = endFrameTime;
         }
+
+        //currentScene.SaveExit();
     }
 
     public static int GetWidth() {
