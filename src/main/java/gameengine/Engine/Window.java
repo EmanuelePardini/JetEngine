@@ -66,17 +66,17 @@ public class Window
         {
             case 0:
                 currentScene = new LevelEditorScene();
-                currentScene.Init();
-                currentScene.Start();
                 break;
             case 1:
                 currentScene = new LevelScene();
-                currentScene.Init();
-                currentScene.Start();
                 break;
             default:
                 assert false : "Unknown scene'" + newScene + "'";
         }
+
+        currentScene.Load();
+        currentScene.Init();
+        currentScene.Start();
     }
 
     public void Run()
@@ -162,8 +162,6 @@ public class Window
 
         float DeltaTime = -1.0f;
 
-        //currentScene.Load();
-
         while (!glfwWindowShouldClose(glfwWindow))
         {
             //Poll input events
@@ -188,7 +186,7 @@ public class Window
             beginFrameTime = endFrameTime;
         }
 
-        //currentScene.SaveExit();
+        currentScene.SaveExit();
     }
 
     public static int GetWidth() {

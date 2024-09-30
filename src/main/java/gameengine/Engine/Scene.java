@@ -85,6 +85,7 @@ public abstract class Scene
     public void SaveExit()
     {
         Gson gson = new GsonBuilder().setPrettyPrinting()
+                //It reference the custom class to use it
                 .registerTypeAdapter(Component.class, new ComponentDeserializer())
                 .registerTypeAdapter(GameObject.class, new GameObjectDeserializer()) //needed to keep components on gameobject
                 .create();

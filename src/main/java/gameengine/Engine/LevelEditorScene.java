@@ -1,6 +1,7 @@
 package gameengine.Engine;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import gameengine.Components.RigidBody;
 import gameengine.Components.Sprite;
 import gameengine.Components.SpriteRenderer;
 import gameengine.Components.Spritesheet;
@@ -37,6 +38,7 @@ public class LevelEditorScene extends Scene
 
         if(levelLoaded)
         {
+            this.activeGameObject = gameObjects.get(0); //It will get the zeroth gameobject
             return;
         }
 
@@ -50,6 +52,7 @@ public class LevelEditorScene extends Scene
         obj1Sprite.SetColor(new Vector4f(1,0,0,1));
 
         obj1.AddComponent(obj1Sprite);
+        obj1.AddComponent(new RigidBody());
         this.AddGameObjectToScene(obj1);
 
         GameObject obj2 = new GameObject("Object 2", new Transform(new Vector2f(400,100),
@@ -65,29 +68,6 @@ public class LevelEditorScene extends Scene
         this.AddGameObjectToScene(obj2);
 
         this.activeGameObject = obj1;
-
-        Gson gson = new GsonBuilder().setPrettyPrinting()
-                    .registerTypeAdapter(Component.class, new ComponentDeserializer())
-                    .registerTypeAdapter(GameObject.class, new GameObjectDeserializer()) //needed to keep components on gameobject
-                    .create();
-
-        //Examples of serialization
-        System.out.println("----- OBJ2 SPRITE RENDERER -----");
-        System.out.println(gson.toJson(obj2SpriteRenderer));
-        System.out.println("----- OBJ1 SERIALIZED VALUES-----");
-        System.out.println(gson.toJson(obj1));
-
-        String serialized = gson.toJson(new Vector2f(1,0.5f));
-        Vector2f vec = gson.fromJson(serialized,Vector2f.class);
-        System.out.println("----- A FOOKING VECTOR FROM A STRING -----");
-        System.out.println(vec);
-
-        String serialized2 = gson.toJson(obj1);
-        System.out.println("----- PRINTING OBJECT ONCE DESERIALIZED-----");
-        GameObject obj = gson.fromJson(serialized2, GameObject.class);
-        System.out.println(obj);
-
-
     }
 
     private void LoadResources()
@@ -97,38 +77,18 @@ public class LevelEditorScene extends Scene
         AssetPool.AddSpritesheet(SpritesPath[0],
                 new Spritesheet(AssetPool.getTexture(SpritesPath[0]),
                         16,16, 26, 0));
+
+        //TODO: Fix and review asset pool
+        AssetPool.getTexture("assets/images/blendImage2.png");
     }
 
-    /*ANIMATION TEST(Dirty flag pattern Video)
-    Feel free to remove that
-    private int spriteIndex = 0;
-    private float spriteFlipTime = 0.2f;
-    private float spriteFlipTimeLeft = 0.0f;
-    */
 
     @Override
     public void Update(float DeltaTime)
     { //Monitor constantly performances
-        //System.out.println("FPS: " + (1.0 / DeltaTime));
+        // System.out.println("FPS: " + (1.0 / DeltaTime));
 
-        /*ANIMATION TEST(Dirty flag pattern Video)
-        Feel free to remove that
 
-        spriteFlipTimeLeft -= DeltaTime;
-        if(spriteFlipTimeLeft <= 0)
-        {
-            spriteFlipTimeLeft = spriteFlipTime;
-            spriteIndex++;
-            if(spriteIndex > 4)
-            {
-                spriteIndex = 0;
-            }
-            obj1.GetComponent(SpriteRenderer.class).SetSprite(sprites.GetSprite(spriteIndex));
-        }
-
-        obj1.transform.position.x += 10* DeltaTime;
-
-        */
 
         MoveCamera(DeltaTime); //Move Camera test
 

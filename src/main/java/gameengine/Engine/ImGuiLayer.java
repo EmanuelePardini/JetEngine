@@ -209,7 +209,7 @@ public class ImGuiLayer
 
         currentScene.SceneImGUI();
 
-        ImGui.showDemoWindow();
+       // ImGui.showDemoWindow();
         ImGui.render();
 
         endFrame();

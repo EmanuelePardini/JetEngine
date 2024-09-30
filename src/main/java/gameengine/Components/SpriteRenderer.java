@@ -13,7 +13,7 @@ public class SpriteRenderer extends Component
 
     //transient variables get ignored in serialization
     private transient Transform lastTransform;
-    private transient boolean isDirty = false;
+    private transient boolean isDirty = true;
 
     //GSON does not support constructors that take in variables.
 //    public SpriteRenderer(Vector4f color)
@@ -72,7 +72,7 @@ public class SpriteRenderer extends Component
     }
 
     public void SetSprite(Sprite sprite)
-    { //I know what you're thinking, but it's a sprite bro
+    {
         //We don't have to check if it's equal because we change sprite
         //in leveleditor and if we change we will not set an equal sprite
         this.sprite = sprite;

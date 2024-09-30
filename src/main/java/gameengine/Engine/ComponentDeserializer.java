@@ -7,7 +7,6 @@ import java.lang.reflect.Type;
 public class ComponentDeserializer implements JsonSerializer<Component>, JsonDeserializer<Component>
 {
 
-    //TODO: rileggere bene queste due funzioni
     @Override
     public Component deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
     {
