@@ -95,6 +95,9 @@ public class Texture
     }
 
     public int GetWitdh() { return this.width;}
+
     public int GetHeight() { return this.height;}
+
+    public int GetTexId() {return texID;}
 
 }

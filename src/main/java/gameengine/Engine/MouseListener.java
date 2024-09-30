@@ -1,5 +1,7 @@
 package gameengine.Engine;
 
+import org.joml.Vector4f;
+
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
@@ -91,9 +93,39 @@ public class MouseListener
         return (float) get().xPos;
     }
 
+    public static float GetOrthoX()
+    {
+        float currentX = GetX();
+        currentX = (currentX /(float)Window.GetWidth()) * 2.0f - 1.0f;
+        Vector4f tmp = new Vector4f(currentX, 0,0,1);
+
+        Camera cameraRef = Window.GetScene().camera();
+        tmp.mul(cameraRef.GetInverseProjection()).mul(cameraRef.GetInverseView());
+        currentX = tmp.x;
+
+        //System.out.println(currentX);
+
+        return currentX;
+    }
+
     public static float GetY()
     {
         return (float) get().yPos;
+    }
+
+    public static float GetOrthoY()
+    {
+        float currentY = GetY();
+        currentY = (currentY /(float)Window.GetWidth()) * 2.0f - 1.0f;
+        Vector4f tmp = new Vector4f(currentY, 0,0,1);
+
+        Camera cameraRef = Window.GetScene().camera();
+        tmp.mul(cameraRef.GetInverseProjection()).mul(cameraRef.GetInverseView());
+        currentY = tmp.x;
+
+        //System.out.println(currentY);
+
+        return currentY;
     }
 
     public static float GetDx()

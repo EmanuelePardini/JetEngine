@@ -115,6 +115,7 @@ public abstract class Scene
         {
             //read file into string
             inFile = new String(Files.readAllBytes(Paths.get("level.txt"))); //files that are too large can get truncated, fix later
+            //When first created will throw a "No File exception", don't worry it's ok for now
         }
         catch (IOException e)
         {

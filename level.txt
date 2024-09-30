@@ -1,17 +1,19 @@
 [
   {
-    "name": "Object 1",
+    "name": "Obj0",
     "components": [
       {
         "type": "gameengine.Components.SpriteRenderer",
         "properties": {
           "color": {
-            "x": 0.08627451,
-            "y": 0.74509805,
-            "z": 0.0,
+            "x": 0.16666669,
+            "y": 0.050387606,
+            "z": 0.050387606,
             "w": 1.0
           },
           "sprite": {
+            "width": 0.0,
+            "height": 0.0,
             "textCoords": [
               {
                 "x": 1.0,
@@ -36,7 +38,7 @@
       {
         "type": "gameengine.Components.RigidBody",
         "properties": {
-          "colliderType": 10,
+          "colliderType": 0,
           "friction": 0.8,
           "velocity": {
             "x": 0.0,
@@ -49,34 +51,30 @@
     "transform": {
       "position": {
         "x": 200.0,
-        "y": 100.0
+        "y": 200.0
       },
       "scale": {
         "x": 256.0,
         "y": 256.0
       }
     },
-    "zIndex": -1
+    "zIndex": 0
   },
   {
-    "name": "Object 2",
+    "name": "Obj1",
     "components": [
       {
         "type": "gameengine.Components.SpriteRenderer",
         "properties": {
           "color": {
             "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
+            "y": 0.0,
+            "z": 0.0,
             "w": 1.0
           },
           "sprite": {
-            "texture": {
-              "filePath": "assets/images/blendImage2.png",
-              "texID": 3,
-              "width": 256,
-              "height": 256
-            },
+            "width": 0.0,
+            "height": 0.0,
             "textCoords": [
               {
                 "x": 1.0,
@@ -97,18 +95,30 @@
             ]
           }
         }
+      },
+      {
+        "type": "gameengine.Components.RigidBody",
+        "properties": {
+          "colliderType": 0,
+          "friction": 0.8,
+          "velocity": {
+            "x": 0.0,
+            "y": 0.5,
+            "z": 0.0
+          }
+        }
       }
     ],
     "transform": {
       "position": {
         "x": 400.0,
-        "y": 100.0
+        "y": 400.0
       },
       "scale": {
         "x": 256.0,
         "y": 256.0
       }
     },
-    "zIndex": 2
+    "zIndex": 1
   }
 ]

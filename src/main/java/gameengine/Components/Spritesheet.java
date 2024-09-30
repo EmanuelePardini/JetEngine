@@ -39,7 +39,10 @@ public class Spritesheet
             //Create dinamically our sprite by spritesheet scraping
             Sprite sprite = new Sprite();
             sprite.SetTexture(this.texture);
-            sprite.SetTexCoords(textCoords);
+            sprite.SetTextCoords(textCoords);
+            sprite.SetWidth(spriteWitdth);
+            sprite.SetHeight(spriteHeight);
+
             this.sprites.add(sprite);
 
             currentX += spriteWitdth + spacing;
@@ -53,4 +56,5 @@ public class Spritesheet
 
     public Sprite GetSprite(int index) {return this.sprites.get(index); }
 
+    public int size() {return sprites.size();}
 }

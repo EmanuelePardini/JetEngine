@@ -6,7 +6,7 @@ import org.joml.Vector3f;
 
 public class Camera
 {
-    private Matrix4f projectionMatrix, viewMatrix;
+    private Matrix4f projectionMatrix, viewMatrix, inverseProjection, inverseView;
     public Vector2f position;
 
     public Camera(Vector2f position)
@@ -14,6 +14,8 @@ public class Camera
         this.position = position;
         this.projectionMatrix = new Matrix4f();
         this.viewMatrix = new Matrix4f();
+        this.inverseProjection = new Matrix4f();
+        this.inverseView = new Matrix4f();
         adjustProjection();
     }
     //When the windows change it will adjust ortographic projection
@@ -31,6 +33,8 @@ public class Camera
                 0.0f, //Max near, i want to see things unless they are this near
                 100.0f); //I want to see things unless they are this far
         //OpenGL function to define ortographic view parameters
+
+        projectionMatrix.invert(inverseProjection);
     }
 
     public Matrix4f GetViewMatrix()
@@ -41,8 +45,15 @@ public class Camera
         viewMatrix = viewMatrix.lookAt(new Vector3f(position.x, position.y, 20.0f), //Where is the camera located in world space
                                                     cameraFront.add(position.x, position.y, 0.0f), //Where is the center of the camera front
                                                     cameraUp);
+
+        this.viewMatrix.invert(inverseView);
+
         return  viewMatrix;
     }
 
     public Matrix4f GetProjectionMatrix() { return this.projectionMatrix; }
+
+    public Matrix4f GetInverseProjection(){return this.inverseProjection;}
+
+    public Matrix4f GetInverseView(){return this.inverseView;}
 }
