@@ -16,7 +16,7 @@ public class MouseListener
     private double lastY;
     private double lastX;
 
-    private boolean mouseButtonPressed[] = new boolean[3];
+    private boolean mouseButtonPressed[] = new boolean[9];
     private boolean isDragging;
 
     private MouseListener()
@@ -96,14 +96,19 @@ public class MouseListener
     public static float GetOrthoX()
     {
         float currentX = GetX();
+
+        //System.out.println("Init X: " + currentX);
+
         currentX = (currentX /(float)Window.GetWidth()) * 2.0f - 1.0f;
         Vector4f tmp = new Vector4f(currentX, 0,0,1);
+
+        //System.out.println("X NV: " + currentX);
 
         Camera cameraRef = Window.GetScene().camera();
         tmp.mul(cameraRef.GetInverseProjection()).mul(cameraRef.GetInverseView());
         currentX = tmp.x;
 
-        //System.out.println(currentX);
+        //System.out.println("X: " + currentX);
 
         return currentX;
     }
@@ -115,15 +120,20 @@ public class MouseListener
 
     public static float GetOrthoY()
     {
-        float currentY = GetY();
-        currentY = (currentY /(float)Window.GetWidth()) * 2.0f - 1.0f;
-        Vector4f tmp = new Vector4f(currentY, 0,0,1);
+        float currentY = Window.GetHeight() - GetY();
+
+        //System.out.println("InitY: " + currentY);
+
+        currentY = (currentY / (float)Window.GetHeight()) * 2.0f - 1.0f;
+        Vector4f tmp = new Vector4f(0, currentY,0,1);
+
+        //System.out.println("Y NV: " + currentY);
 
         Camera cameraRef = Window.GetScene().camera();
         tmp.mul(cameraRef.GetInverseProjection()).mul(cameraRef.GetInverseView());
-        currentY = tmp.x;
+        currentY = tmp.y;
 
-        //System.out.println(currentY);
+        //System.out.println("Y: " + currentY);
 
         return currentY;
     }
@@ -158,7 +168,8 @@ public class MouseListener
         if (button < get().mouseButtonPressed.length)
         {
             return get().mouseButtonPressed[button];
-        } else
+        }
+        else
         {
             return false;
         }

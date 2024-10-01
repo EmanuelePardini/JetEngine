@@ -1,11 +1,12 @@
 package gameengine.Engine;
 
-import gameengine.Util.Time;
+import gameengine.Scenes.LevelEditorScene;
+import gameengine.Scenes.LevelScene;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 
-import java.nio.IntBuffer;
+import java.awt.*;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
@@ -35,8 +36,10 @@ public class Window
 
     private Window()
     {
-        this.width = 1920;
-        this.height = 1080;
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        //I changed that to take directly the screen of users to solve some bugs
+        this.width = screenSize.width;
+        this.height = screenSize.height;
 
         this.title = "JetEngine";
 
@@ -128,9 +131,8 @@ public class Window
             Window.SetHeight(newHeight);});
 
         //to fix mouse bug
-        glfwSetWindowSize(glfwWindow, 1280, 720);
-
-
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        glfwSetWindowSize(glfwWindow, screenSize.width, screenSize.height);
 
         //Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindow);
@@ -156,6 +158,9 @@ public class Window
 
     public void Loop()
     {
+        System.out.println("WinX: " + width);
+        System.out.println("WinY: " + height);
+
         //Initialize frame time
         float beginFrameTime = (float)glfwGetTime();
         float endFrameTime;

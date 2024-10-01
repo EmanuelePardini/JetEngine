@@ -1,7 +1,7 @@
-package gameengine.Engine;
+package gameengine.Components;
 
+import gameengine.Engine.GameObject;
 import imgui.ImGui;
-import imgui.type.ImInt;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
@@ -10,6 +10,11 @@ import java.lang.reflect.Modifier;
 
 public abstract class Component
 {
+    //This is not associated with any specific object, that takes the Id Count in general(static)
+    private static int ID_COUNTER = 0;
+    //This is the unique Id
+    private int uid = -1;
+
     //what happens is that serializations tries to render gameobject,
     // gameobject has components and components have gameobject, and so we get stack overflow.
     // Fix with transient (transient variables are ignored in serialization)
@@ -36,7 +41,7 @@ public abstract class Component
                 if(isTransient) continue; //If is transient we don't want to expose the field
 
                 //It temporarily changes the accessibility of the field
-                if(isPrivate) field.setAccessible(true);//TODO: Recheck here
+                if(isPrivate) field.setAccessible(true);
 
                 CastField(field); //Reformatted the code, that field cast part is a little huge
 
@@ -105,5 +110,15 @@ public abstract class Component
             }
         }
     }
+
+    public void GenerateId()
+    {
+        if(this.uid == -1)
+            this.uid = ID_COUNTER++;
+    }
+
+    public int GetUid(){return uid;}
+
+    public static void Init(int maxId){ID_COUNTER = maxId;}
 }
 

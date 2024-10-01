@@ -1,6 +1,5 @@
 package gameengine.Components;
 
-import gameengine.Engine.Component;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 

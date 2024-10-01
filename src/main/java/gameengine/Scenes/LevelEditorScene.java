@@ -1,17 +1,11 @@
-package gameengine.Engine;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import gameengine.Components.RigidBody;
-import gameengine.Components.Sprite;
-import gameengine.Components.SpriteRenderer;
-import gameengine.Components.Spritesheet;
+package gameengine.Scenes;
+import gameengine.Components.*;
+import gameengine.Engine.*;
 import gameengine.Util.AssetPool;
 import imgui.ImGui;
 import imgui.ImVec2;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
-
-import static org.lwjgl.glfw.GLFW.*;
 
 
 public class LevelEditorScene extends Scene
@@ -26,6 +20,8 @@ public class LevelEditorScene extends Scene
             "assets/images/blendImage2.png"
     };
 
+    MouseControls mouseControls = new MouseControls();
+
     public LevelEditorScene()
     {
 
@@ -39,17 +35,24 @@ public class LevelEditorScene extends Scene
 
         sprites = AssetPool.GetSpritesheet(SpritesPath[1]);
 
-        if(levelLoaded)
+        if (levelLoaded)
         {
             this.activeGameObject = gameObjects.get(0); //It will get the zeroth gameobject
         }
+        else
+        {
+            AddTestObj();
+            AddTestObj();
+        }
+    }
+        /* TODO: Check if still needed
         else
         {
             AddTestObj(); //MY OBJECT CREATION REFORMATTED
             AddTestObj();
         }
 
-        /* GABE OBJECT CREATION
+         GABE OBJECT CREATION
 
                 //OBJ1
         GameObject obj1 = new GameObject("Object 1",
@@ -78,18 +81,19 @@ public class LevelEditorScene extends Scene
         this.AddGameObjectToScene(obj2);
 
         this.activeGameObject = obj1;
-         */
+
     }
+*/
 
-
+    //MY OBJECT CREATION REFORMATTED(Only for Test purpose)
     public void AddTestObj()
     {
         float newX = gameObjects.isEmpty() ? 200 : gameObjects.get(gameObjects.size()-1).transform.position.x + 200;
         float newY = gameObjects.isEmpty() ? 200 : gameObjects.get(gameObjects.size()-1).transform.position.y + 200;
 
-        GameObject obj = new GameObject("Obj" + gameObjects.size(),
+        GameObject obj = new GameObject("Obj",
                 new Transform(new Vector2f(newX, newY),
-                new Vector2f(256,256)), gameObjects.size());
+                        new Vector2f(256,256)), -1);
 
         //temp solution for current setup, will be later edited via editor
         SpriteRenderer obj1Sprite = new SpriteRenderer();
@@ -119,6 +123,8 @@ public class LevelEditorScene extends Scene
     public void Update(float DeltaTime)
     { //Monitor constantly performances
         // System.out.println("FPS: " + (1.0 / DeltaTime));
+
+        mouseControls.Update(DeltaTime);
 
         for(GameObject go : this.gameObjects)
         {
@@ -159,7 +165,11 @@ public class LevelEditorScene extends Scene
             ImGui.pushID(i); //Create ImGui ID to assign to the button just created
             if(ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[0].x, texCoords[0].y, texCoords[2].x, texCoords[2].y))
             {
-                System.out.println("Button " + i + " clicked");
+                //System.out.println("Button " + i + " clicked");
+                GameObject object = Prefabs.GenerateSpriteObject(sprite, spriteWidth, spriteHeight);
+
+                //Attach this to the mouse cursor
+                mouseControls.PickUpObject(object);
             }
             ImGui.popID(); //Drop the ImGui Id after assignment
 
@@ -168,7 +178,7 @@ public class LevelEditorScene extends Scene
             float lastButtonX2 = lastButtonPos.x; //get the x of the button right low angle
             float nextButtonX2 = lastButtonX2 + itemSpacing.x + spriteWidth;
 
-            if(i + 1 < sprites.size() && nextButtonX2 < windowX2) //Check if it exceed the window
+            if(i + 1 < sprites.size() && nextButtonX2 < windowX2) //Check if it exceeds the window
                 ImGui.sameLine(); //If the button doesn't exceed keep it on the same line
         }
         ImGui.end();

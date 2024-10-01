@@ -1,6 +1,5 @@
 package gameengine.Components;
 import Renderer.Texture;
-import gameengine.Engine.Component;
 import gameengine.Engine.Transform;
 import imgui.ImGui;
 import org.joml.Vector2f;

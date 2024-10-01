@@ -1,4 +1,4 @@
-package gameengine.Engine;
+package gameengine.Components;
 
 import com.google.gson.*;
 

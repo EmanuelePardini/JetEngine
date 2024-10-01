@@ -1,10 +1,17 @@
 package gameengine.Engine;
 
+import gameengine.Components.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameObject
 {
+    //This is not associated with any specific object, that takes the Id Count in general(static)
+    private static int ID_COUNTER = 0;
+    //This is the unique Id
+    private int uid = -1;
+
     private String name;
     private List<Component> components;
     public Transform transform;
@@ -24,6 +31,7 @@ public class GameObject
         components = new ArrayList<>();
         this.transform = transform;
         this.zIndex = zIndex;
+        this.uid = ID_COUNTER++; //TODO: Recheck, it potentially cause problems in the future in the constructor
     }
 
     public <T extends  Component> T GetComponent(Class<T> componentClass)
@@ -60,6 +68,7 @@ public class GameObject
 
     public void AddComponent(Component c)
     {
+        c.GenerateId();
         this.components.add(c);
 
         c.gameObject = this; //Reference the Component Owner
@@ -90,4 +99,10 @@ public class GameObject
     }
 
     public int ZIndex() {return zIndex;}
+
+    public int GetUid(){return uid;}
+
+    public static void Init(int maxId){ID_COUNTER = maxId;}
+
+    public List<Component> GetAllComponents(){return this.components;}
 }

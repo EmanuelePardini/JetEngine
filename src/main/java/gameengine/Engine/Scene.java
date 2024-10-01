@@ -3,6 +3,8 @@ package gameengine.Engine;
 import Renderer.Renderer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import gameengine.Components.Component;
+import gameengine.Components.ComponentDeserializer;
 import imgui.ImGui;
 
 import java.io.FileWriter;
@@ -81,7 +83,6 @@ public abstract class Scene
     }
 
     //Serialize gameobject
-    //TODO: bugfixing tutorial#21
     public void SaveExit()
     {
         Gson gson = new GsonBuilder().setPrettyPrinting()
@@ -124,11 +125,32 @@ public abstract class Scene
 
         if(!inFile.equals(""))
         {
+            int maxGoId = -1;
+            int maxCompId = -1;
+
             GameObject[] objs = gson.fromJson(inFile, GameObject[].class);
             for(int i = 0; i<objs.length; i++)
             {
                 AddGameObjectToScene(objs[i]);
+
+                for(Component c : objs[i].GetAllComponents())
+                {
+                    //Align the Components count with Id
+                    if(c.GetUid() > maxCompId)
+                        maxCompId = c.GetUid();
+                }
+
+                //Align  the GameObject count with Id
+                if(objs[i].GetUid() > maxGoId)
+                    maxGoId = objs[i].GetUid();
             }
+
+            maxGoId++; //Make sure is higher by one than the real max to avoid duplicates
+            maxCompId++; //Make sure is higher by one than the real max to avoid duplicates
+            System.out.println("objs: " + maxGoId);
+            System.out.println("comps: " + maxCompId);
+            GameObject.Init(maxGoId);
+            Component.Init(maxCompId);
             this.levelLoaded = true;
         }
     }

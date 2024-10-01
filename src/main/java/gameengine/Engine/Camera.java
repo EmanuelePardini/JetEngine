@@ -27,9 +27,9 @@ public class Camera
             if you multiply this by it you will obtain itself
          */
         projectionMatrix.ortho(0.0f, //left side of the screen(start)
-                    32.0f * 40.0f, //right side of the screen
+                    Window.GetWidth(),  //or 32.0f * 40.0f //right side of the screen
                      0.0f,
-                32.0f * 21.0f,
+                Window.GetHeight(), //or 32.0f * 21.0f
                 0.0f, //Max near, i want to see things unless they are this near
                 100.0f); //I want to see things unless they are this far
         //OpenGL function to define ortographic view parameters
@@ -42,13 +42,13 @@ public class Camera
         Vector3f cameraFront = new Vector3f(0.0f, 0.0f, -1.0f);
         Vector3f cameraUp = new Vector3f(0.0f, 1.0f, 0.0f);
         this.viewMatrix.identity();
-        viewMatrix = viewMatrix.lookAt(new Vector3f(position.x, position.y, 20.0f), //Where is the camera located in world space
+        viewMatrix.lookAt(new Vector3f(position.x, position.y, 20.0f), //Where is the camera located in world space
                                                     cameraFront.add(position.x, position.y, 0.0f), //Where is the center of the camera front
                                                     cameraUp);
 
         this.viewMatrix.invert(inverseView);
 
-        return  viewMatrix;
+        return viewMatrix;
     }
 
     public Matrix4f GetProjectionMatrix() { return this.projectionMatrix; }

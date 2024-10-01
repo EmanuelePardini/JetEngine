@@ -4,7 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be5a7dae-daae-4114-a210-103589ae3a55" name="Changes" comment="" />
+    <list default="true" id="be5a7dae-daae-4114-a210-103589ae3a55" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Renderer/DebugDraw.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Renderer/Line2D.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/MouseControls.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Prefabs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/FontRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/FontRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/RigidBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/RigidBody.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/SpriteRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/SpriteRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/ComponentDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/ComponentDeserializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/GameObjectDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/GameObjectDeserializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelEditorScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Scenes/LevelEditorScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/LevelScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Scenes/LevelScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/MouseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/MouseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Main.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,11 +102,11 @@
       <recent name="gameengine.Engine" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programmazione\Java\JetEngine\Assets\Images\spritesheets" />
+      <recent name="D:\Programmazione\Java\JetEngine\Assets\Images" />
       <recent name="D:\Programmazione\Java\JetEngine\src\main\java" />
       <recent name="D:\Programmazione\Java\JetEngine\src\main\java\gameengine" />
       <recent name="D:\Programmazione\Java\JetEngine\libs" />
-      <recent name="D:\Programmazione\Java\JetEngine\Assets\Images" />
-      <recent name="D:\Jet Engine\JetEngine\Assets\Images" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">

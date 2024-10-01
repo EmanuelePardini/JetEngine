@@ -1,6 +1,7 @@
 package gameengine.Engine;
 
 import com.google.gson.*;
+import gameengine.Components.Component;
 
 import java.lang.reflect.Type;
 
