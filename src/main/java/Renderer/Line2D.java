@@ -25,17 +25,17 @@ public class Line2D
         return  this.lifetime;
     }
 
-    public Vector3f getColor()
+    public Vector3f GetColor()
     {
         return color;
     }
 
-    public Vector2f getTo()
+    public Vector2f GetTo()
     {
         return to;
     }
 
-    public Vector2f getFrom()
+    public Vector2f GetFrom()
     {
         return from;
     }

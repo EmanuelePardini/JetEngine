@@ -1,5 +1,6 @@
 package gameengine.Engine;
 
+import Renderer.DebugDraw;
 import gameengine.Scenes.LevelEditorScene;
 import gameengine.Scenes.LevelScene;
 import org.lwjgl.Version;
@@ -172,12 +173,18 @@ public class Window
             //Poll input events
             glfwPollEvents();
 
+            DebugDraw.BeginFrame();
+
             //choose color buffer color
             glClearColor(r, g, b, a);
             //clears buffer, meaning it fills it in this case
             glClear(GL_COLOR_BUFFER_BIT);
 
-            if (DeltaTime >= 0) currentScene.Update(DeltaTime);
+            if (DeltaTime >= 0)
+            {
+                DebugDraw.Draw();
+                currentScene.Update(DeltaTime);
+            }
 
             //Update ImGui
             this.imGuiLayer.Update(DeltaTime, currentScene);

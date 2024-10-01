@@ -1,10 +1,13 @@
 package gameengine.Scenes;
+import Renderer.DebugDraw;
 import gameengine.Components.*;
 import gameengine.Engine.*;
 import gameengine.Util.AssetPool;
 import imgui.ImGui;
 import imgui.ImVec2;
+import kotlin.random.URandomKt;
 import org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.joml.Vector4f;
 
 
@@ -35,6 +38,8 @@ public class LevelEditorScene extends Scene
 
         sprites = AssetPool.GetSpritesheet(SpritesPath[1]);
 
+        //DebugDraw.AddLine2D(new Vector2f(0,0), new Vector2f(1400,1400), new Vector3f(1,0,0), 120);
+
         if (levelLoaded)
         {
             this.activeGameObject = gameObjects.get(0); //It will get the zeroth gameobject
@@ -44,6 +49,8 @@ public class LevelEditorScene extends Scene
             AddTestObj();
             AddTestObj();
         }
+
+
     }
         /* TODO: Check if still needed
         else
@@ -119,10 +126,22 @@ public class LevelEditorScene extends Scene
     }
 
 
+    //You can remove, made only for testing
+    float t = 0.0f;
+    private void TestDebugLines()
+    {
+        float x = ((float)Math.sin(t) * 200.f) + 600.f;
+        float y = ((float)Math.cos(t) * 200.f) + 400.f;
+        t += 0.05f;
+        DebugDraw.AddLine2D(new Vector2f(Window.GetWidth() / 2, Window.GetHeight() / 2), new Vector2f(x, y), new Vector3f(0,0,1), 10);
+    }
+
     @Override
     public void Update(float DeltaTime)
     { //Monitor constantly performances
         // System.out.println("FPS: " + (1.0 / DeltaTime));
+
+        TestDebugLines();
 
         mouseControls.Update(DeltaTime);
 
