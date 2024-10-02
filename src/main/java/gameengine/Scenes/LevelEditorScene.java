@@ -138,6 +138,9 @@ public class LevelEditorScene extends Scene
 //        DebugDraw.AddLine2D(new Vector2f(Window.GetWidth() / 2, Window.GetHeight() / 2), new Vector2f(x, y), new Vector3f(0,0,1), 10);
 //    }
 
+    float x = 0.0f;
+    float y = 0.0f;
+    float angle = 0.0f;
     @Override
     public void Update(float DeltaTime)
     {
@@ -145,6 +148,11 @@ public class LevelEditorScene extends Scene
         // System.out.println("FPS: " + (1.0 / DeltaTime));
 
         //TestDebugLines();
+        DebugDraw.AddBox2D(new Vector2f(800,500), new Vector2f(64,32), angle, new Vector3f(0,1,0),1);
+        DebugDraw.AddCircle2D(new Vector2f(x,y), 64, new Vector3f(0,1,0),1);
+        x += 50f * DeltaTime;
+        y += 50f * DeltaTime;
+        angle += 40 * DeltaTime;
 
         //mouseControls.Update(DeltaTime);
         levelEditorStuff.Update(DeltaTime);
