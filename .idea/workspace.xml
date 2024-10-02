@@ -5,8 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be5a7dae-daae-4114-a210-103589ae3a55" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/DebugDraw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Renderer/DebugDraw.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/GridLines.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Util/Settings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/Line2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Renderer/Line2D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/MouseControls.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/MouseControls.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/ImGuiLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/ImGuiLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Scenes/LevelEditorScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Scenes/LevelEditorScene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +81,7 @@
     &quot;Gradle.JetEngine [build].executor&quot;: &quot;Run&quot;,
     &quot;Gradle.JetEngine.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;test&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Dependencies&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,

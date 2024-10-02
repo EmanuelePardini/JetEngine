@@ -98,7 +98,7 @@ public class ImGuiLayer
             io.setKeyAlt(io.getKeysDown(GLFW_KEY_LEFT_ALT) || io.getKeysDown(GLFW_KEY_RIGHT_ALT));
             io.setKeySuper(io.getKeysDown(GLFW_KEY_LEFT_SUPER) || io.getKeysDown(GLFW_KEY_RIGHT_SUPER));
 
-            if(io.getWantCaptureKeyboard())
+            if(!io.getWantCaptureKeyboard())
                 KeyListener.KeyCallback(w, key, scancode, action, mods);
         });
 

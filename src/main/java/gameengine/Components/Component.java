@@ -10,13 +10,13 @@ import java.lang.reflect.Modifier;
 
 public abstract class Component
 {
-    //This is not associated with any specific object, that takes the Id Count in general(static)
+    //This is not associated with any specific object, that takes the ID Count in general(static)
     private static int ID_COUNTER = 0;
-    //This is the unique Id
+    //This is the unique ID
     private int uid = -1;
 
-    //what happens is that serializations tries to render gameobject,
-    // gameobject has components and components have gameobject, and so we get stack overflow.
+    //what happens is that serializations tries to render game object,
+    // game object has components and components have game object, and so we get stack overflow.
     // Fix with transient (transient variables are ignored in serialization)
     public transient GameObject gameObject; //Reference to the Component Owner
 
@@ -66,7 +66,7 @@ public abstract class Component
             int val = (int)value;
             int[] imInt = {val};
             if(ImGui.dragInt(name + ": ", imInt))
-            { //It make a field in the ImGui with the field we just made
+            { //It makes a field in the ImGui with the field we just made
                 field.set(this, imInt[0]);
             }
         }

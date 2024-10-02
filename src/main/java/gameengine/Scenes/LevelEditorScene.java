@@ -23,7 +23,7 @@ public class LevelEditorScene extends Scene
             "assets/images/blendImage2.png"
     };
 
-    MouseControls mouseControls = new MouseControls();
+    GameObject levelEditorStuff = new GameObject("LevelEditor", new Transform(new Vector2f()), 0); //for testing editor comps
 
     public LevelEditorScene()
     {
@@ -33,12 +33,14 @@ public class LevelEditorScene extends Scene
     @Override
     public void Init()
     {
+        levelEditorStuff.AddComponent(new MouseControls());
+        levelEditorStuff.AddComponent(new GridLines());
+
         LoadResources();
         this.camera = new Camera(new Vector2f(-250.f, 0));
 
         sprites = AssetPool.GetSpritesheet(SpritesPath[1]);
 
-        //DebugDraw.AddLine2D(new Vector2f(0,0), new Vector2f(1400,1400), new Vector3f(1,0,0), 120);
 
         if (levelLoaded)
         {
@@ -46,8 +48,8 @@ public class LevelEditorScene extends Scene
         }
         else
         {
-            AddTestObj();
-            AddTestObj();
+            //AddTestObj();
+            //AddTestObj();
         }
 
 
@@ -127,23 +129,25 @@ public class LevelEditorScene extends Scene
 
 
     //You can remove, made only for testing
-    float t = 0.0f;
-    private void TestDebugLines()
-    {
-        float x = ((float)Math.sin(t) * 200.f) + 600.f;
-        float y = ((float)Math.cos(t) * 200.f) + 400.f;
-        t += 0.05f;
-        DebugDraw.AddLine2D(new Vector2f(Window.GetWidth() / 2, Window.GetHeight() / 2), new Vector2f(x, y), new Vector3f(0,0,1), 10);
-    }
+//    float t = 0.0f;
+//    private void TestDebugLines()
+//    {
+//        float x = ((float)Math.sin(t) * 200.f) + 600.f;
+//        float y = ((float)Math.cos(t) * 200.f) + 400.f;
+//        t += 0.05f;
+//        DebugDraw.AddLine2D(new Vector2f(Window.GetWidth() / 2, Window.GetHeight() / 2), new Vector2f(x, y), new Vector3f(0,0,1), 10);
+//    }
 
     @Override
     public void Update(float DeltaTime)
-    { //Monitor constantly performances
+    {
+        //Monitor constantly performances
         // System.out.println("FPS: " + (1.0 / DeltaTime));
 
-        TestDebugLines();
+        //TestDebugLines();
 
-        mouseControls.Update(DeltaTime);
+        //mouseControls.Update(DeltaTime);
+        levelEditorStuff.Update(DeltaTime);
 
         for(GameObject go : this.gameObjects)
         {
@@ -175,22 +179,22 @@ public class LevelEditorScene extends Scene
         { //For any sprite create a button in the BlocksList ImGui
             Sprite sprite = sprites.GetSprite(i);
 
-            float spriteWidth = sprite.GetWidth() * 4;
-            float spriteHeight = sprite.GetHeight() * 4;
+            float spriteWidth = sprite.GetWidth() * 2;
+            float spriteHeight = sprite.GetHeight() * 2;
             int id = sprite.GetTexId();
             Vector2f[] texCoords = sprite.GetTextCoords();
 
             //That is necessarily because ImGui uses his own IdSystem
             ImGui.pushID(i); //Create ImGui ID to assign to the button just created
-            if(ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[0].x, texCoords[0].y, texCoords[2].x, texCoords[2].y))
+            if(ImGui.imageButton(id, spriteWidth, spriteHeight, texCoords[2].x, texCoords[0].y, texCoords[0].x, texCoords[2].y))
             {
                 //System.out.println("Button " + i + " clicked");
                 GameObject object = Prefabs.GenerateSpriteObject(sprite, spriteWidth, spriteHeight);
 
                 //Attach this to the mouse cursor
-                mouseControls.PickUpObject(object);
+                levelEditorStuff.GetComponent(MouseControls.class).PickUpObject(object);
             }
-            ImGui.popID(); //Drop the ImGui Id after assignment
+            ImGui.popID(); //Drop the ImGui ID after assignment
 
             ImGui.getItemRectMax(lastButtonPos); //It returns the coords of the right low angle
 

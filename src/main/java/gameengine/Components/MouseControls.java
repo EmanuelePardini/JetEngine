@@ -3,6 +3,7 @@ package gameengine.Components;
 import gameengine.Engine.GameObject;
 import gameengine.Engine.MouseListener;
 import gameengine.Engine.Window;
+import gameengine.Util.Settings;
 
 import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_LEFT;
 
@@ -27,8 +28,11 @@ public class MouseControls extends Component
     {
         if(holdingObject != null)
         { //Keep it attached to the mouse cursor for the placement period
-            holdingObject.transform.position.x = MouseListener.GetOrthoX() - 16;
-            holdingObject.transform.position.y = MouseListener.GetOrthoY() - 16;
+            holdingObject.transform.position.x = MouseListener.GetOrthoX();
+            holdingObject.transform.position.y = MouseListener.GetOrthoY();
+            //snap position
+            holdingObject.transform.position.x = (int)(holdingObject.transform.position.x / Settings.GRID_WIDTH) * Settings.GRID_WIDTH;
+            holdingObject.transform.position.y = (int)(holdingObject.transform.position.y / Settings.GRID_HEIGHT) * Settings.GRID_HEIGHT;
 
             //System.out.println("ObjX: " + holdingObject.transform.position.x);
             //System.out.println("ObjY: " + holdingObject.transform.position.y);

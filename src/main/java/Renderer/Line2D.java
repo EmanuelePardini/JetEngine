@@ -22,7 +22,7 @@ public class Line2D
     public float BeginFrame()
     {
         this.lifetime--;
-        return  this.lifetime;
+        return this.lifetime;
     }
 
     public Vector3f GetColor()

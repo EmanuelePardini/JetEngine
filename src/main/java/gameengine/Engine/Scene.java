@@ -135,20 +135,20 @@ public abstract class Scene
 
                 for(Component c : objs[i].GetAllComponents())
                 {
-                    //Align the Components count with Id
+                    //Align the Components count with ID
                     if(c.GetUid() > maxCompId)
                         maxCompId = c.GetUid();
                 }
 
-                //Align  the GameObject count with Id
+                //Align  the GameObject count with ID
                 if(objs[i].GetUid() > maxGoId)
                     maxGoId = objs[i].GetUid();
             }
 
             maxGoId++; //Make sure is higher by one than the real max to avoid duplicates
             maxCompId++; //Make sure is higher by one than the real max to avoid duplicates
-            System.out.println("objs: " + maxGoId);
-            System.out.println("comps: " + maxCompId);
+//            System.out.println("objs: " + maxGoId);
+//            System.out.println("comps: " + maxCompId);
             GameObject.Init(maxGoId);
             Component.Init(maxCompId);
             this.levelLoaded = true;

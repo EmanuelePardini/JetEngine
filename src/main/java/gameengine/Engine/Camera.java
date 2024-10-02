@@ -8,6 +8,7 @@ public class Camera
 {
     private Matrix4f projectionMatrix, viewMatrix, inverseProjection, inverseView;
     public Vector2f position;
+    private Vector2f projectionSize = new Vector2f(Window.GetWidth(), Window.GetHeight());
 
     public Camera(Vector2f position)
     {
@@ -27,10 +28,10 @@ public class Camera
             if you multiply this by it you will obtain itself
          */
         projectionMatrix.ortho(0.0f, //left side of the screen(start)
-                    Window.GetWidth(),  //or 32.0f * 40.0f //right side of the screen
+                   projectionSize.x,  //or 32.0f * 40.0f //right side of the screen
                      0.0f,
-                Window.GetHeight(), //or 32.0f * 21.0f
-                0.0f, //Max near, i want to see things unless they are this near
+                projectionSize.y, //or 32.0f * 21.0f
+                0.0f, //Max near, I want to see things unless they are this near
                 100.0f); //I want to see things unless they are this far
         //OpenGL function to define ortographic view parameters
 
@@ -56,4 +57,6 @@ public class Camera
     public Matrix4f GetInverseProjection(){return this.inverseProjection;}
 
     public Matrix4f GetInverseView(){return this.inverseView;}
+
+    public Vector2f GetProjectionSize() {return this.projectionSize;}
 }
