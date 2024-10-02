@@ -187,6 +187,16 @@ public class DebugDraw
     //==========================
     //Add Circle2D Methods
     //==========================
+    public static void AddCircle2D(Vector2f center, float radius)
+    {
+        AddCircle2D(center, radius, new Vector3f(0,1,0), 1);
+    }
+
+    public static void AddCircle2D(Vector2f center, float radius, Vector3f color)
+    {
+        AddCircle2D(center, radius, color, 1);
+    }
+    
     public static void AddCircle2D(Vector2f center, float radius, Vector3f color, int lifetime)
     {
         Vector2f[] points = new Vector2f[16];
