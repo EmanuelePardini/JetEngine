@@ -43,7 +43,12 @@ public class AssetPool
         else
         {
             Texture texture = new Texture();
-            texture.Init(resourceName);
+
+            //If the texture is generated we don't need to Init
+            //That was a test, for now leave it like that
+            //TODO: Wait Gabe to review this - if(texture.GetFilepath().equals("Generated"))
+                texture.Init(resourceName);
+
             AssetPool.Textures.put(file.getAbsolutePath(), texture);
             return texture;
         }

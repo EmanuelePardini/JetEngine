@@ -197,8 +197,9 @@ public class RenderBatch implements Comparable<RenderBatch>
         if(sprite.GetTexture() != null)
         {
             for(int i = 0; i < textures.size(); i++)
-            {
-                if(textures.get(i) == sprite.GetTexture())
+            { //== caused a bug because it check the memory address of the tex,
+                // i used equals by overriding the method in the Texture class
+                if(textures.get(i).equals(sprite.GetTexture()))
                 {
                     //For all the texture in the sprite assign new Id
                     texID = i + 1;

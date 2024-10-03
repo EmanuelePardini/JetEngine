@@ -1,6 +1,7 @@
 package gameengine.Engine;
 
 import Renderer.DebugDraw;
+import Renderer.Framebuffer;
 import gameengine.Scenes.LevelEditorScene;
 import gameengine.Scenes.LevelScene;
 import org.lwjgl.Version;
@@ -18,11 +19,14 @@ public class Window
 {
 
     //Resolution and info
+    int screenWidth;
+    int screenHeight;
     int width;
     int height;
     String title;
     private long glfwWindow; //Number where the window is memorized in the memory space
     private ImGuiLayer imGuiLayer;
+    private Framebuffer framebuffer;
 
     //Colors
     public float r;
@@ -39,8 +43,10 @@ public class Window
     {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         //I changed that to take directly the screen of users to solve some bugs
-        this.width = screenSize.width;
-        this.height = screenSize.height;
+        this.screenWidth = screenSize.width;
+        this.screenHeight = screenSize.height;
+        this.width = this.screenWidth;
+        this.height = this.screenHeight;
 
         this.title = "JetEngine";
 
@@ -132,8 +138,7 @@ public class Window
             Window.SetHeight(newHeight);});
 
         //to fix mouse bug
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        glfwSetWindowSize(glfwWindow, screenSize.width, screenSize.height);
+        glfwSetWindowSize(glfwWindow, screenWidth, screenHeight);
 
         //Make the OpenGL context current
         glfwMakeContextCurrent(glfwWindow);
@@ -153,6 +158,8 @@ public class Window
 
         this.imGuiLayer = new ImGuiLayer(glfwWindow);
         this.imGuiLayer.InitImGui();
+        //This override our GameObject textures
+        //this.framebuffer = new Framebuffer(screenWidth, screenHeight);
 
         Window.ChangeScene(0);
     }
@@ -180,11 +187,15 @@ public class Window
             //clears buffer, meaning it fills it in this case
             glClear(GL_COLOR_BUFFER_BIT);
 
+            //This will be bound when we are drawing all our scene data
+            //Calling the framebuffer here override the scene to render
+            //this.framebuffer.Bind();
             if (DeltaTime >= 0)
             {
                 DebugDraw.Draw();
                 currentScene.Update(DeltaTime);
             }
+            //this.framebuffer.Unbind();
 
             //Update ImGui
             this.imGuiLayer.Update(DeltaTime, currentScene);

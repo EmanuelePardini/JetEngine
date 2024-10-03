@@ -55,45 +55,6 @@ public class LevelEditorScene extends Scene
 
 
     }
-        /* TODO: Check if still needed
-        else
-        {
-            AddTestObj(); //MY OBJECT CREATION REFORMATTED
-            AddTestObj();
-        }
-
-         GABE OBJECT CREATION
-
-                //OBJ1
-        GameObject obj1 = new GameObject("Object 1",
-                new Transform(new Vector2f(200,100),
-                        new Vector2f(256,256)), -1);
-
-        //temp solution for current setup, will be later edited via editor
-        SpriteRenderer obj1Sprite = new SpriteRenderer();
-        obj1Sprite.SetColor(new Vector4f(1,0,0,1));
-
-        obj1.AddComponent(obj1Sprite);
-        obj1.AddComponent(new RigidBody());
-        this.AddGameObjectToScene(obj1);
-
-
-        //OBJ 2
-        GameObject obj2 = new GameObject("Object 2",
-                new Transform(new Vector2f(400,100),
-                        new Vector2f(256,256)), 2);
-
-        SpriteRenderer obj2Sprite = new SpriteRenderer();
-        obj2Sprite.SetColor(new Vector4f(0,0,1,0.5f));
-
-        obj2.AddComponent(obj2Sprite);
-        obj2.AddComponent(new RigidBody());
-        this.AddGameObjectToScene(obj2);
-
-        this.activeGameObject = obj1;
-
-    }
-*/
 
     //MY OBJECT CREATION REFORMATTED(Only for Test purpose)
     public void AddTestObj()
