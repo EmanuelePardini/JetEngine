@@ -160,8 +160,10 @@ public class DebugDraw
 
     public static void AddBox2D(Vector2f center, Vector2f dimensions,float rotation, Vector3f color, int lifetime)
     {
+        //Take the center and subtract half the size to take the bottom
        Vector2f min = new Vector2f(center).sub(new Vector2f(dimensions).mul(0.5f)); //multiply to get the half sizes
-       Vector2f max = new Vector2f(center).add(new Vector2f(dimensions).mul(0.5f));
+       //Take the center and add half the side to take the top
+        Vector2f max = new Vector2f(center).add(new Vector2f(dimensions).mul(0.5f));
 
        Vector2f[] vertices =
         {
@@ -170,14 +172,14 @@ public class DebugDraw
         };
 
        if(rotation != 0.0f)
-       {
+       { //Rotate all vertices
            for (Vector2f vert : vertices)
            {
                //had to copy and paste entire class from GitHub cuz the animal never made it in this series...
                JMath.rotate(vert, rotation, center);
            }
        }
-
+        //Draw the lines
        AddLine2D(vertices[0], vertices[1], color, lifetime);
        AddLine2D(vertices[0], vertices[3], color, lifetime);
        AddLine2D(vertices[1], vertices[2], color, lifetime);

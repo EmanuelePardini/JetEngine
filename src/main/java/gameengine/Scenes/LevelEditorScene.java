@@ -23,6 +23,7 @@ public class LevelEditorScene extends Scene
             "assets/images/blendImage2.png"
     };
 
+    //This is a Temporarily GameObject to hold all the Level Editor Rules
     GameObject levelEditorStuff = new GameObject("LevelEditor", new Transform(new Vector2f()), 0); //for testing editor comps
 
     public LevelEditorScene()
