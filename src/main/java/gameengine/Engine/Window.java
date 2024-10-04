@@ -159,7 +159,8 @@ public class Window
         this.imGuiLayer = new ImGuiLayer(glfwWindow);
         this.imGuiLayer.InitImGui();
         //This override our GameObject textures
-        //this.framebuffer = new Framebuffer(screenWidth, screenHeight);
+        this.framebuffer = new Framebuffer(screenWidth, screenHeight);
+        glViewport(0,0, screenWidth, screenHeight); //Specs viewport transformation
 
         Window.ChangeScene(0);
     }
@@ -182,6 +183,9 @@ public class Window
 
             DebugDraw.BeginFrame();
 
+
+            this.framebuffer.Bind();
+
             //choose color buffer color
             glClearColor(r, g, b, a);
             //clears buffer, meaning it fills it in this case
@@ -189,13 +193,12 @@ public class Window
 
             //This will be bound when we are drawing all our scene data
             //Calling the framebuffer here override the scene to render
-            //this.framebuffer.Bind();
             if (DeltaTime >= 0)
             {
                 DebugDraw.Draw();
                 currentScene.Update(DeltaTime);
             }
-            //this.framebuffer.Unbind();
+            this.framebuffer.Unbind();
 
             //Update ImGui
             this.imGuiLayer.Update(DeltaTime, currentScene);
@@ -212,19 +215,14 @@ public class Window
         currentScene.SaveExit();
     }
 
-    public static int GetWidth() {
-        return Get().width;
-    }
+    public static int GetWidth() {return Get().width;}
 
-    public static int GetHeight() {
-        return Get().height;
-    }
+    public static int GetHeight() {return Get().height;}
 
-    public static void SetWidth(int newWidth) {
-        Get().width = newWidth;
-    }
+    public static void SetWidth(int newWidth) {Get().width = newWidth;}
 
-    public static void SetHeight(int newHeight) {
-        Get().height = newHeight;
-    }
+    public static void SetHeight(int newHeight) {Get().height = newHeight;}
+
+    public static Framebuffer GetFrameBuffer(){return Get().framebuffer;}
+    public static float GetTargetAspectRatio(){return (float)Get().screenWidth / (float)Get().screenHeight;} //Is the same to do 16/9
 }

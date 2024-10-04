@@ -1,5 +1,6 @@
 package gameengine.Engine;
 
+import gameengine.Editor.Viewport;
 import imgui.*;
 import imgui.callback.ImStrConsumer;
 import imgui.callback.ImStrSupplier;
@@ -181,7 +182,6 @@ public class ImGuiLayer
         imGuiGl3.init("#version 330 core");
     }
 
-
     public void Update(float DeltaTime, Scene currentScene)
     {
         startFrame(DeltaTime);
@@ -191,6 +191,7 @@ public class ImGuiLayer
         SetupDockspace(); //Setup the Dockspace
         currentScene.SceneImGUI();
         ImGui.showDemoWindow();
+        Viewport.ImGui(); //Setup the ViewPort ImGui
         ImGui.end(); //This End the setup of the dockspace, check SetupDockspace() for the ImGui.begin()
         ImGui.render();
 

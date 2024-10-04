@@ -33,6 +33,9 @@ public class Texture
         texID = glGenTextures();
         glBindTexture(GL_TEXTURE_2D, texID);
 
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
         //It only allocate the space
         //We don't want to give any data because we are generating it and we don't have any data
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0,
