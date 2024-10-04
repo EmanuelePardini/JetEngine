@@ -3,11 +3,9 @@ package gameengine.Engine;
 import imgui.*;
 import imgui.callback.ImStrConsumer;
 import imgui.callback.ImStrSupplier;
-import imgui.flag.ImGuiBackendFlags;
-import imgui.flag.ImGuiConfigFlags;
-import imgui.flag.ImGuiKey;
-import imgui.flag.ImGuiMouseCursor;
+import imgui.flag.*;
 import imgui.gl3.ImGuiImplGl3;
+import imgui.type.ImBoolean;
 
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -41,6 +39,7 @@ public class ImGuiLayer
 
         io.setIniFilename("imgui.ini"); // - if null it does not save windows position, otherwise coords save in .ini file
         io.setConfigFlags(ImGuiConfigFlags.NavEnableKeyboard); // Navigation with keyboard
+        io.setConfigFlags(ImGuiConfigFlags.DockingEnable); //Enable Docking
         io.setBackendFlags(ImGuiBackendFlags.HasMouseCursors); // Mouse cursors to display while resizing windows etc.
         io.setBackendPlatformName("imgui_java_impl_glfw");
 
@@ -183,40 +182,16 @@ public class ImGuiLayer
     }
 
 
-    // Main application loop
-    /*
-    private void loop() {
-        double time = 0; // to track our frame delta value
-
-        // Run the rendering loop until the user has attempted to close the window
-        while (!glfwWindowShouldClose(glfwWindow)) {
-            // Count frame delta value
-            final double currentTime = glfwGetTime();
-            final double deltaTime = (time > 0) ? (currentTime - time) : 1f / 60f;
-            time = currentTime;
-
-            startFrame((float) deltaTime);
-
-            // Any Dear ImGui code SHOULD go between ImGui.newFrame()/ImGui.render() methods
-            ImGui.newFrame();
-            //exampleUi.render();
-            ImGui.render();
-
-            endFrame();
-        }
-    }
-    */
-
     public void Update(float DeltaTime, Scene currentScene)
     {
         startFrame(DeltaTime);
 
         // Any Dear ImGui code SHOULD go between ImGui.newFrame()/ImGui.render() methods
         ImGui.newFrame();
-
+        SetupDockspace(); //Setup the Dockspace
         currentScene.SceneImGUI();
-
-       // ImGui.showDemoWindow();
+        ImGui.showDemoWindow();
+        ImGui.end(); //This End the setup of the dockspace, check SetupDockspace() for the ImGui.begin()
         ImGui.render();
 
         endFrame();
@@ -268,4 +243,28 @@ public class ImGuiLayer
         ImGui.destroyContext();
     }
 
+    private void SetupDockspace()
+    {
+        //Setup some Dockspace params
+        int windowFlags = ImGuiWindowFlags.MenuBar; // | ImGuiWindowFlags.NoDocking;
+        //Set the Docking start always on the top left of the screen
+        ImGui.setNextWindowPos(0.0f, 0.0f, ImGuiCond.Always);
+        ImGui.setNextWindowSize(Window.GetWidth(), Window.GetHeight());
+
+        ImGui.pushStyleVar(ImGuiStyleVar.WindowRounding, 0.0f);
+        //Setup the style attaching to the border
+        ImGui.pushStyleVar(ImGuiStyleVar.WindowBorderSize, 0.0f);
+        windowFlags |= ImGuiWindowFlags.NoTitleBar | ImGuiWindowFlags.NoCollapse |
+                ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove |
+                ImGuiWindowFlags.NoBringToFrontOnFocus | ImGuiWindowFlags.NoNavFocus;
+
+        //Create Dockspace Window
+        //ImGui Begin require also to end the ImGui Window creation
+        ImGui.begin("Dockspace Demo", new ImBoolean(true), windowFlags);
+        ImGui.popStyleVar(2);
+
+        ImGui.dockSpace(ImGui.getID("Dockspace")); //It hash this to some string and set the dockspace based on this hash id
+
+
+    }
 }

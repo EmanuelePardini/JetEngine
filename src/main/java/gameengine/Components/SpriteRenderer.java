@@ -89,4 +89,8 @@ public class SpriteRenderer extends Component
 
     public void SetClean(){this.isDirty = false;}
 
+    public void SetTexture(Texture texture)
+    {
+        this.sprite.SetTexture(texture);
+    }
 }

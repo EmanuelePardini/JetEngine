@@ -15,14 +15,6 @@ public class LevelEditorScene extends Scene
 {
     private Spritesheet sprites;
 
-    //That's another of my test
-    private String[] SpritesPath = {
-            "assets/images/spritesheets/spritesheet.png",
-            "assets/images/spritesheets/decorationsandblocks.png",
-            "assets/images/blendImage1.png",
-            "assets/images/blendImage2.png"
-    };
-
     //This is a Temporarily GameObject to hold all the Level Editor Rules
     GameObject levelEditorStuff = new GameObject("LevelEditor", new Transform(new Vector2f()), 0); //for testing editor comps
 
@@ -40,10 +32,10 @@ public class LevelEditorScene extends Scene
         LoadResources();
         this.camera = new Camera(new Vector2f(-250.f, 0));
 
-        sprites = AssetPool.GetSpritesheet(SpritesPath[1]);
+        sprites = AssetPool.GetSpritesheet("assets/images/spritesheets/decorationsandblocks.png");
 
 
-        if (levelLoaded)
+        if (levelLoaded && !gameObjects.isEmpty())
         {
             this.activeGameObject = gameObjects.get(0); //It will get the zeroth gameobject
         }
@@ -81,12 +73,23 @@ public class LevelEditorScene extends Scene
     {
         AssetPool.getShader("assets/shaders/default.glsl");
 
-        AssetPool.AddSpritesheet(SpritesPath[1],
-                new Spritesheet(AssetPool.getTexture(SpritesPath[1]),
+        AssetPool.AddSpritesheet("assets/images/spritesheets/decorationsandblocks.png",
+                new Spritesheet(AssetPool.GetTexture("assets/images/spritesheets/decorationsandblocks.png"),
                         16,16, 81, 0));
 
         //TODO: Fix and review asset pool
-        AssetPool.getTexture("assets/images/blendImage2.png");
+        AssetPool.GetTexture("assets/images/blendImage2.png");
+
+        //Go trought each gameobject and riassign the one texture the obj should have checking in the filepath
+        for(GameObject g : gameObjects)
+        {
+            if(g.GetComponent(SpriteRenderer.class) != null)
+            {
+                SpriteRenderer spr = g.GetComponent(SpriteRenderer.class);
+                if(spr.GetTexture() != null)
+                    spr.SetTexture(AssetPool.GetTexture(spr.GetTexture().GetFilepath()));
+            }
+        }
     }
 
 

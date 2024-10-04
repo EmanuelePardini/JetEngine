@@ -33,7 +33,7 @@ public class AssetPool
         }
     }
 
-    public static Texture getTexture(String resourceName)
+    public static Texture GetTexture(String resourceName)
     {
         File file = new File(resourceName);
         if(AssetPool.Textures.containsKey(file.getAbsolutePath()))
