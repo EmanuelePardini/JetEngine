@@ -1,5 +1,7 @@
 package gameengine.Engine;
 
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
 import org.joml.Vector4f;
 
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
@@ -18,6 +20,9 @@ public class MouseListener
 
     private boolean mouseButtonPressed[] = new boolean[9];
     private boolean isDragging;
+
+    private Vector2f viewportPos = new Vector2f();
+    private Vector2f viewportSize = new Vector2f();
 
     private MouseListener()
     {
@@ -86,56 +91,73 @@ public class MouseListener
         get().lastY = get().yPos;
     }
 
-    //GETTERS Region
+    //GETTERS and SETTERS Region
     // <editor-fold>
+
+    public static float GetOrthoX() {
+        // Calculate the current X position relative to the viewport position
+        float currentX = GetX() - get().GetViewportPos().x;
+
+        // Normalize the X coordinate to the range [-1, 1] for OpenGL
+        currentX = (currentX / get().GetViewportSize().x) * 2.0f - 1.0f;
+
+        // Create a Vector4f with the normalized X coordinate and Y = 0
+        Vector4f tmp = new Vector4f(currentX, 0, 0, 1);
+
+        // Transform the Vector4f using the view-projection matrix
+        tmp.mul(ViewProjection());
+
+        // Update currentX with the transformed X coordinate
+        currentX = tmp.x;
+
+        // Return the transformed X coordinate
+        return currentX;
+    }
+
+    public static float GetOrthoY() {
+        // Calculate the current Y position relative to the viewport position
+        float currentY = GetY() - get().GetViewportPos().y;
+
+        // Normalize the Y coordinate to the range [-1, 1] for OpenGL
+        currentY = -((currentY / get().GetViewportSize().y) * 2.0f - 1.0f);
+
+        // Create a Vector4f with the normalized Y coordinate and X = 0
+        Vector4f tmp = new Vector4f(0, currentY, 0, 1);
+
+        // Transform the Vector4f using the view-projection matrix
+        tmp.mul(ViewProjection());
+
+        // Update currentY with the transformed Y coordinate
+        currentY = tmp.y;
+
+        // Return the transformed Y coordinate
+        return currentY;
+    }
+
+    private static Matrix4f ViewProjection()
+    {
+        // Get the camera from the current scene
+        Camera camera = Window.GetScene().camera();
+
+        // Create a new Matrix4f to hold the view-projection matrix
+        Matrix4f viewProjection = new Matrix4f();
+
+        // Multiply the inverse view matrix by the inverse projection matrix
+        camera.GetInverseView().mul(camera.GetInverseProjection(), viewProjection);
+
+        return viewProjection;
+    }
+
+
+
     public static float GetX()
     {
         return (float) get().xPos;
     }
 
-    public static float GetOrthoX()
-    {
-        float currentX = GetX();
-
-        //System.out.println("Init X: " + currentX);
-
-        currentX = (currentX /(float)Window.GetWidth()) * 2.0f - 1.0f;
-        Vector4f tmp = new Vector4f(currentX, 0,0,1);
-
-        //System.out.println("X NV: " + currentX);
-
-        Camera cameraRef = Window.GetScene().camera();
-        tmp.mul(cameraRef.GetInverseProjection()).mul(cameraRef.GetInverseView());
-        currentX = tmp.x;
-
-        //System.out.println("X: " + currentX);
-
-        return currentX;
-    }
-
     public static float GetY()
     {
         return (float) get().yPos;
-    }
-
-    public static float GetOrthoY()
-    {
-        float currentY = Window.GetHeight() - GetY();
-
-        //System.out.println("InitY: " + currentY);
-
-        currentY = (currentY / (float)Window.GetHeight()) * 2.0f - 1.0f;
-        Vector4f tmp = new Vector4f(0, currentY,0,1);
-
-        //System.out.println("Y NV: " + currentY);
-
-        Camera cameraRef = Window.GetScene().camera();
-        tmp.mul(cameraRef.GetInverseProjection()).mul(cameraRef.GetInverseView());
-        currentY = tmp.y;
-
-        //System.out.println("Y: " + currentY);
-
-        return currentY;
     }
 
     public static float GetDx()
@@ -174,5 +196,14 @@ public class MouseListener
             return false;
         }
     }
+
+    public  Vector2f GetViewportSize() {return viewportSize;}
+
+    public static void SetViewportSize(Vector2f viewportSize) {get().viewportSize.set(viewportSize);}
+
+    public Vector2f GetViewportPos() {return viewportPos;}
+
+    public static void SetViewportPos(Vector2f viewportPos) {get().viewportPos.set(viewportPos);}
+
     // </editor-fold>
 }

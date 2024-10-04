@@ -9,6 +9,8 @@ import imgui.gl3.ImGuiImplGl3;
 import imgui.type.ImBoolean;
 
 
+import javax.swing.plaf.ViewportUI;
+
 import static org.lwjgl.glfw.GLFW.*;
 
 
@@ -119,12 +121,11 @@ public class ImGuiLayer
 
             io.setMouseDown(mouseDown);
 
-            if (!io.getWantCaptureMouse())
-            {
-                if(mouseDown[1]) ImGui.setWindowFocus(null);
+            if(!io.getWantCaptureMouse() && mouseDown[1]) ImGui.setWindowFocus(null);
 
+            if (!io.getWantCaptureMouse() || !Viewport.GetWantCaptureMouse())
                 MouseListener.MouseButtonCallback(w, button, action, mods);
-            }
+
 
         });
 
