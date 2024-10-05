@@ -126,7 +126,11 @@ public class LevelEditorScene extends Scene
         {
             go.Update(DeltaTime);
         }
+    }
 
+    @Override
+    public void Render()
+    {
         this.renderer.Render();
     }
 

@@ -24,6 +24,9 @@ public class MouseListener
     private Vector2f viewportPos = new Vector2f();
     private Vector2f viewportSize = new Vector2f();
 
+    private int screenWidth;
+    private int screenHeight;
+
     private MouseListener()
     {
         this.scrollX = 0;
@@ -93,6 +96,27 @@ public class MouseListener
 
     //GETTERS and SETTERS Region
     // <editor-fold>
+
+    public static float GetScreenX() {
+        // Calculate the current X position relative to the viewport position
+        float currentX = GetX() - get().GetViewportPos().x;
+
+        // Normalize the X coordinate to the range [-1, 1] for OpenGL
+        currentX = (currentX / get().GetViewportSize().x) * get().screenWidth;
+
+        // Return the transformed X coordinate
+        return currentX;
+    }
+    public static float GetScreenY() {
+        // Calculate the current Y position relative to the viewport position
+        float currentY = GetY() - get().GetViewportPos().y;
+
+        // Normalize the Y coordinate to the range [-1, 1] for OpenGL
+        currentY = get().screenHeight -((currentY / get().GetViewportSize().y) * get().screenHeight);
+
+        // Return the transformed Y coordinate
+        return currentY;
+    }
 
     public static float GetOrthoX() {
         // Calculate the current X position relative to the viewport position
@@ -200,6 +224,10 @@ public class MouseListener
     public  Vector2f GetViewportSize() {return viewportSize;}
 
     public static void SetViewportSize(Vector2f viewportSize) {get().viewportSize.set(viewportSize);}
+
+    public static void SetScreenWidth(int screenWidth) {get().screenWidth = screenWidth; }
+
+    public static void SetScreenHeight(int screenHeight) { get().screenHeight = screenHeight;}
 
     public Vector2f GetViewportPos() {return viewportPos;}
 

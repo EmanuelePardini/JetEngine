@@ -2,11 +2,16 @@ package gameengine.Engine;
 
 import Renderer.DebugDraw;
 import Renderer.Framebuffer;
+import Renderer.PickingTexture;
+import Renderer.Renderer;
 import gameengine.Scenes.LevelEditorScene;
 import gameengine.Scenes.LevelScene;
+import gameengine.Util.AssetPool;
+import org.joml.Vector2f;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
+import Renderer.Shader;
 
 import java.awt.*;
 
@@ -27,6 +32,7 @@ public class Window
     private long glfwWindow; //Number where the window is memorized in the memory space
     private ImGuiLayer imGuiLayer;
     private Framebuffer framebuffer;
+    private PickingTexture pickingTexture;
 
     //Colors
     public float r;
@@ -47,6 +53,8 @@ public class Window
         this.screenHeight = screenSize.height;
         this.width = this.screenWidth;
         this.height = this.screenHeight;
+        MouseListener.SetScreenWidth(screenWidth);
+        MouseListener.SetScreenHeight(screenHeight);
 
         this.title = "JetEngine";
 
@@ -158,8 +166,10 @@ public class Window
 
         this.imGuiLayer = new ImGuiLayer(glfwWindow);
         this.imGuiLayer.InitImGui();
+
         //This override our GameObject textures
         this.framebuffer = new Framebuffer(screenWidth, screenHeight);
+        this.pickingTexture = new PickingTexture(screenWidth,screenHeight);
         glViewport(0,0, screenWidth, screenHeight); //Specs viewport transformation
 
         Window.ChangeScene(0);
@@ -176,11 +186,37 @@ public class Window
 
         float DeltaTime = -1.0f;
 
+        Shader defaultShader = AssetPool.getShader("assets/shaders/default.glsl");
+        Shader pickingShader = AssetPool.getShader("assets/shaders/pickingShader.glsl");
+
         while (!glfwWindowShouldClose(glfwWindow))
         {
             //Poll input events
             glfwPollEvents();
 
+
+            // Render pass 1. Render to picking texture
+            glDisable(GL_BLEND);
+            pickingTexture.enableWriting();
+
+            glViewport(0, 0, screenWidth, screenHeight);
+            glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            Renderer.BindShader(pickingShader);
+            currentScene.Render();
+
+            //test
+            if (MouseListener.MouseButtonDown(GLFW_MOUSE_BUTTON_LEFT)) {
+                int x = (int)MouseListener.GetScreenX();
+                int y = (int)MouseListener.GetScreenY();
+                System.out.println(pickingTexture.readPixel(x, y));
+            }
+
+            pickingTexture.disableWriting();
+            glEnable(GL_BLEND);
+
+            // Render pass 2. Render actual game
             DebugDraw.BeginFrame();
 
 
@@ -196,7 +232,9 @@ public class Window
             if (DeltaTime >= 0)
             {
                 DebugDraw.Draw();
+                Renderer.BindShader(defaultShader);
                 currentScene.Update(DeltaTime);
+                currentScene.Render();
             }
             this.framebuffer.Unbind();
 

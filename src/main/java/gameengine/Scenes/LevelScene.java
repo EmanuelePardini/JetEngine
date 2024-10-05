@@ -17,4 +17,10 @@ public class LevelScene extends Scene
     {
 
     }
+
+    @Override
+    public void Render()
+    {
+
+    }
 }

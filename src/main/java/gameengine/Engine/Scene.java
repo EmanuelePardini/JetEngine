@@ -59,6 +59,7 @@ public abstract class Scene
     }
 
     public abstract void Update (float DeltaTime);
+    public abstract void Render();
 
     public Camera camera()
     {
