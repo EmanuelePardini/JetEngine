@@ -6,6 +6,7 @@ import Renderer.PickingTexture;
 import Renderer.Renderer;
 import gameengine.Scenes.LevelEditorScene;
 import gameengine.Scenes.LevelScene;
+import gameengine.Scenes.Scene;
 import gameengine.Util.AssetPool;
 import org.joml.Vector2f;
 import org.lwjgl.Version;
@@ -32,7 +33,9 @@ public class Window
     private long glfwWindow; //Number where the window is memorized in the memory space
     private ImGuiLayer imGuiLayer;
     private Framebuffer framebuffer;
-    private PickingTexture pickingTexture;
+
+    private PickingTexture pickingTexture; //Color Picking pattern(ID Buffer Picking)
+    //We color that invisible texture with the original id infos
 
     //Colors
     public float r;
@@ -164,13 +167,15 @@ public class Window
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
-        this.imGuiLayer = new ImGuiLayer(glfwWindow);
-        this.imGuiLayer.InitImGui();
+
 
         //This override our GameObject textures
         this.framebuffer = new Framebuffer(screenWidth, screenHeight);
-        this.pickingTexture = new PickingTexture(screenWidth,screenHeight);
+        this.pickingTexture = new PickingTexture(screenWidth,screenHeight); //Make sure it is miming the our editor scene
         glViewport(0,0, screenWidth, screenHeight); //Specs viewport transformation
+
+        this.imGuiLayer = new ImGuiLayer(glfwWindow, pickingTexture);
+        this.imGuiLayer.InitImGui();
 
         Window.ChangeScene(0);
     }
@@ -197,7 +202,7 @@ public class Window
 
             // Render pass 1. Render to picking texture
             glDisable(GL_BLEND);
-            pickingTexture.enableWriting();
+            pickingTexture.EnableWriting();
 
             glViewport(0, 0, screenWidth, screenHeight);
             glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -206,14 +211,12 @@ public class Window
             Renderer.BindShader(pickingShader);
             currentScene.Render();
 
-            //test
-            if (MouseListener.MouseButtonDown(GLFW_MOUSE_BUTTON_LEFT)) {
-                int x = (int)MouseListener.GetScreenX();
-                int y = (int)MouseListener.GetScreenY();
-                System.out.println(pickingTexture.readPixel(x, y));
-            }
 
-            pickingTexture.disableWriting();
+            //We don't want to update twice, so we split the render method by binding different shaders
+            Renderer.BindShader(pickingShader); //Select the shader to render
+            currentScene.Render(); //Render the bound shader
+
+            pickingTexture.DisableWriting();
             glEnable(GL_BLEND);
 
             // Render pass 2. Render actual game

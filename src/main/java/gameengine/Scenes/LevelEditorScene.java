@@ -33,8 +33,8 @@ public class LevelEditorScene extends Scene
         this.camera = new Camera(new Vector2f(-250.f, 0));
 
         sprites = AssetPool.GetSpritesheet("assets/images/spritesheets/decorationsandblocks.png");
-
-
+    }
+/*
         if (levelLoaded && !gameObjects.isEmpty())
         {
             this.activeGameObject = gameObjects.get(0); //It will get the zeroth gameobject
@@ -46,7 +46,6 @@ public class LevelEditorScene extends Scene
         }
 
 
-    }
 
     //MY OBJECT CREATION REFORMATTED(Only for Test purpose)
     public void AddTestObj()
@@ -68,6 +67,7 @@ public class LevelEditorScene extends Scene
 
         this.activeGameObject = obj;
     }
+*/
 
     private void LoadResources()
     {

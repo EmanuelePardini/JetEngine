@@ -27,8 +27,8 @@ public class RenderBatch implements Comparable<RenderBatch>
     private final int POS_SIZE = 2;//XY
     private final int COLOR_SIZE = 4; //RGBA
     private final int TEXT_COORDS_SIZE = 2; //UV
-    private final int TEXT_ID_SIZE = 1; //ID
-    private final int ENTITY_ID_SIZE = 1;
+    private final int TEXT_ID_SIZE = 1; //TEX ID
+    private final int ENTITY_ID_SIZE = 1; //GO ID, Entity is intended as gameobject id
 
     private final int POS_OFFSET = 0;
     private final int COLOR_OFFSET = POS_OFFSET + POS_SIZE * Float.BYTES;
@@ -95,7 +95,7 @@ public class RenderBatch implements Comparable<RenderBatch>
         glEnableVertexAttribArray(3);
 
         glVertexAttribPointer(4, ENTITY_ID_SIZE, GL_FLOAT, false, VERTEX_SIZE_BYTES, ENTITY_ID_OFFSET);
-        glEnableVertexAttribArray(4);
+        glEnableVertexAttribArray(4); //Attrib pointer for go
     }
 
     public void AddSprite(SpriteRenderer spr)
@@ -244,7 +244,7 @@ public class RenderBatch implements Comparable<RenderBatch>
             //Load texture ID
             vertices[offset +8] = texID;
 
-            //Load entity id
+            //Load entity id(Entity is intended as GameObject)
             vertices[offset +9] = sprite.gameObject.GetUid();
 
             offset += VERTEX_SIZE;

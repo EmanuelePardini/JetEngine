@@ -4,18 +4,21 @@ import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL30.GL_FRAMEBUFFER;
 
+//The main problem of this pattern is that we are not really separating leveleditor and level
 public class PickingTexture {
     private int pickingTextureId;
-    private int fbo;
-    private int depthTexture;
+    private int fbo; //Frame buffer id
+    private int depthTexture; //This is not really necessary for 2d
+
 
     public PickingTexture(int width, int height) {
-        if (!init(width, height)) {
+        if (!Init(width, height)) {
             assert false : "Error initializing picking texture";
         }
     }
 
-    public boolean init(int width, int height) {
+    //It draws another layer on the viewport where we can click to take the id of the contained textures by IDs
+    public boolean Init(int width, int height) {
         // Generate framebuffer
         fbo = glGenFramebuffers();
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
@@ -45,7 +48,8 @@ public class PickingTexture {
         glReadBuffer(GL_NONE);
         glDrawBuffer(GL_COLOR_ATTACHMENT0);
 
-        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        {
             assert false : "Error: Framebuffer is not complete";
             return false;
         }
@@ -56,21 +60,25 @@ public class PickingTexture {
         return true;
     }
 
-    public void enableWriting() {
-        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
+    // Enable rendering to the picking framebuffer (write mode).
+    public void EnableWriting() {
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo); // Bind the FBO for drawing.
     }
 
-    public void disableWriting() {
-        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+    // Disable rendering to the picking framebuffer (go back to default framebuffer).
+    public void DisableWriting() {
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // Bind the default framebuffer (window).
     }
 
-    public int readPixel(int x, int y) {
-        glBindFramebuffer(GL_READ_FRAMEBUFFER, fbo);
-        glReadBuffer(GL_COLOR_ATTACHMENT0);
+    // Read the pixel at the specified screen coordinates (x, y) from the picking texture.
+    public int ReadPixel(int x, int y) {
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, fbo); // Bind the picking FBO for reading.
+        glReadBuffer(GL_COLOR_ATTACHMENT0); // Set the read buffer to the color attachment.
 
+        // Allocate an array to hold the RGB values of the pixel.
         float pixels[] = new float[3];
-        glReadPixels(x, y, 1, 1, GL_RGB, GL_FLOAT, pixels);
+        glReadPixels(x, y, 1, 1, GL_RGB, GL_FLOAT, pixels); // Read the pixel color from the picking texture.
 
-        return (int)(pixels[0]) - 1;
+        return (int)(pixels[0]) - 1; //It contains the Object Id
     }
 }

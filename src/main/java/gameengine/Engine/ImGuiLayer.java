@@ -1,6 +1,9 @@
 package gameengine.Engine;
 
+import Renderer.PickingTexture;
+import gameengine.Editor.PropertiesWindow;
 import gameengine.Editor.Viewport;
+import gameengine.Scenes.Scene;
 import imgui.*;
 import imgui.callback.ImStrConsumer;
 import imgui.callback.ImStrSupplier;
@@ -24,9 +27,14 @@ public class ImGuiLayer
 
     // LWJGL3 renderer (SHOULD be initialized)
     private final ImGuiImplGl3 imGuiGl3 = new ImGuiImplGl3();
+    private Viewport viewport = new Viewport();
+    private PropertiesWindow propertiesWindow;
 
-    public ImGuiLayer(long glfwWindow) {
+    public ImGuiLayer(long glfwWindow, PickingTexture pickingTexture)
+    {
         this.glfwWindow = glfwWindow;
+        this.viewport = new Viewport();
+        this.propertiesWindow = new PropertiesWindow(pickingTexture);
     }
 
     // Initialize Dear ImGui.
@@ -123,10 +131,11 @@ public class ImGuiLayer
 
             if(!io.getWantCaptureMouse() && mouseDown[1]) ImGui.setWindowFocus(null);
 
-            if (!io.getWantCaptureMouse() || !Viewport.GetWantCaptureMouse())
+            if (viewport.GetWantCaptureMouse())
+            {
+                viewport.GetWantCaptureMouse();
                 MouseListener.MouseButtonCallback(w, button, action, mods);
-
-
+            }
         });
 
         glfwSetScrollCallback(glfwWindow, (w, xOffset, yOffset) -> {
@@ -190,9 +199,11 @@ public class ImGuiLayer
         // Any Dear ImGui code SHOULD go between ImGui.newFrame()/ImGui.render() methods
         ImGui.newFrame();
         SetupDockspace(); //Setup the Dockspace
-        currentScene.SceneImGUI();
+        currentScene.ImGUI();
+        propertiesWindow.ImGui();
+        propertiesWindow.Update(DeltaTime, currentScene);
         ImGui.showDemoWindow();
-        Viewport.ImGui(); //Setup the ViewPort ImGui
+        viewport.ImGui(); //Setup the ViewPort ImGui
         ImGui.end(); //This End the setup of the dockspace, check SetupDockspace() for the ImGui.begin()
         ImGui.render();
 

@@ -1,10 +1,13 @@
-package gameengine.Engine;
+package gameengine.Scenes;
 
 import Renderer.Renderer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import gameengine.Components.Component;
 import gameengine.Components.ComponentDeserializer;
+import gameengine.Engine.Camera;
+import gameengine.Engine.GameObject;
+import gameengine.Engine.GameObjectDeserializer;
 import imgui.ImGui;
 
 import java.io.FileWriter;
@@ -13,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class Scene
 {
@@ -20,7 +24,6 @@ public abstract class Scene
     protected Camera camera;
     private boolean isRunning = false;
     protected List<GameObject> gameObjects = new ArrayList<>();
-    protected  GameObject activeGameObject = null; //gameobject you are inspecting
     protected boolean levelLoaded = false; //checks if level has been loaded
 
     public Scene()
@@ -58,24 +61,20 @@ public abstract class Scene
         }
     }
 
+    public GameObject GetGameObject(int gameObjectId)
+    {
+        Optional<GameObject> result = this.gameObjects.stream()
+                .filter(gameObject -> gameObject.GetUid() == gameObjectId).findFirst();
+
+        return result.orElse(null);
+    }
+
     public abstract void Update (float DeltaTime);
     public abstract void Render();
 
     public Camera camera()
     {
         return this.camera;
-    }
-
-    public void SceneImGUI()
-    {
-        if(activeGameObject != null)
-        {
-            ImGui.begin("Inspector");
-            activeGameObject.ImGUI();
-            ImGui.end();
-        }
-
-        ImGUI();
     }
 
     public void ImGUI()

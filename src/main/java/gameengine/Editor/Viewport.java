@@ -12,9 +12,9 @@ public class Viewport
 {
     private static float leftX, rightX, topY, bottomY;
 
-    public static void ImGui()
+    public void ImGui()
     {   //Create the ImGui Window
-        ImGui.begin("Game Viewport", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollbar);
+        ImGui.begin("Game Viewport", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse);
 
         ImVec2 windowSize = GetLargestSizeForViewport();
         ImVec2 windowPos = GetCenteredPositionForViewport(windowSize);
@@ -22,11 +22,13 @@ public class Viewport
         ImGui.setCursorPos(windowPos.x, windowPos.y);
 
         ImVec2 topLeft = GetTopLeft();
+
         ImGui.getCursorScreenPos(topLeft);
-        leftX = windowPos.x;
-        topY = topLeft.y;
+
+        leftX = topLeft.x;
+        bottomY = topLeft.y;
         rightX = topLeft.x + windowSize.x;
-        bottomY = topLeft.y - windowSize.y;
+        topY = topLeft.y + windowSize.y;
 
         int textureId = Window.GetFrameBuffer().GetTextureId();
         ImGui.image(textureId, windowSize.x, windowSize.y,0,1,1,0);
@@ -37,10 +39,13 @@ public class Viewport
         ImGui.end();
     }
 
-    public static boolean GetWantCaptureMouse()
+    public boolean GetWantCaptureMouse()
     {
-        return MouseListener.GetX() >= leftX && MouseListener.GetX() <= rightX
-                && MouseListener.GetY() <= topY && MouseListener.GetY() >= bottomY;
+       System.out.println("Capturing: " + leftX + "|" +rightX+ "|" +bottomY+ "|" +topY);
+        System.out.println("Viewport: " +MouseListener.GetX() +"|" + MouseListener.GetY());
+
+        return MouseListener.GetX() >= leftX && MouseListener.GetX() <= rightX &&
+                MouseListener.GetY() >= bottomY && MouseListener.GetY() <= topY;
     }
 
     private static ImVec2 GetLargestSizeForViewport()
@@ -77,8 +82,8 @@ public class Viewport
         float viewportX = (windowSize.x / 2.f) - (aspectSize.x / 2.f);
         float viewportY = (windowSize.y / 2.f) - (aspectSize.y / 2.f);
 
-        return new ImVec2(viewportX, //+ ImGui.getCursorPosX(), //ADD IN CASE YOU HAVE A EMPTY WHITE BAR AT THE TOP OF THE VIEWPORT
-                viewportY ); //+ ImGui.getCursorPosY()); //ADD IN CASE YOU HAVE A EMPTY WHITE BAR AT THE TOP OF THE VIEWPORT
+        return new ImVec2(viewportX + ImGui.getCursorPosX(),
+                viewportY + ImGui.getCursorPosY());
     }
 
     private static ImVec2 GetTopLeft()

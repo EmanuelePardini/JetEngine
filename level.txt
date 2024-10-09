@@ -1855,9 +1855,9 @@
         "type": "gameengine.Components.SpriteRenderer",
         "properties": {
           "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
+            "x": 0.7733333,
+            "y": 0.054992568,
+            "z": 0.054992568,
             "w": 1.0
           },
           "sprite": {
@@ -2583,9 +2583,9 @@
         "type": "gameengine.Components.SpriteRenderer",
         "properties": {
           "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
+            "x": 0.25777775,
+            "y": 0.04353579,
+            "z": 0.04353579,
             "w": 1.0
           },
           "sprite": {
