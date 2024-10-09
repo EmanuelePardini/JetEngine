@@ -26,11 +26,14 @@ public class LevelEditorScene extends Scene
     @Override
     public void Init()
     {
+        this.camera = new Camera(new Vector2f(-250.f, 0));
+
         levelEditorStuff.AddComponent(new MouseControls());
         levelEditorStuff.AddComponent(new GridLines());
+        levelEditorStuff.AddComponent(new EditorCamera(this.camera));
 
         LoadResources();
-        this.camera = new Camera(new Vector2f(-250.f, 0));
+
 
         sprites = AssetPool.GetSpritesheet("assets/images/spritesheets/decorationsandblocks.png");
     }
@@ -121,6 +124,8 @@ public class LevelEditorScene extends Scene
 
         //mouseControls.Update(DeltaTime);
         levelEditorStuff.Update(DeltaTime);
+        //adjusts camera projection
+        this.camera.adjustProjection();
 
         for(GameObject go : this.gameObjects)
         {

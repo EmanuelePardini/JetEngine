@@ -247,6 +247,8 @@ public class Window
             //swaps back buffer with front buffer
             glfwSwapBuffers(glfwWindow);
 
+            MouseListener.EndFrame();
+
             //calculating dt, and updating time vars
             endFrameTime = (float)glfwGetTime();
             DeltaTime = endFrameTime - beginFrameTime;

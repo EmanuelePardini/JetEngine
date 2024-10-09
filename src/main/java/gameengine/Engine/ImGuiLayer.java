@@ -141,6 +141,7 @@ public class ImGuiLayer
         glfwSetScrollCallback(glfwWindow, (w, xOffset, yOffset) -> {
             io.setMouseWheelH(io.getMouseWheelH() + (float) xOffset);
             io.setMouseWheel(io.getMouseWheel() + (float) yOffset);
+            MouseListener.MouseScrollCallback(w, xOffset, yOffset);
         });
 
         io.setSetClipboardTextFn(new ImStrConsumer() {

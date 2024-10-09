@@ -1,6 +1,7 @@
 package gameengine.Components;
 
 import Renderer.DebugDraw;
+import gameengine.Engine.Camera;
 import gameengine.Engine.Window;
 import gameengine.Util.Settings;
 import org.joml.Vector2f;
@@ -12,20 +13,22 @@ public class GridLines extends Component
     @Override
     public void Update(float dt)
     {
-        Vector2f cameraPos = Window.GetScene().camera().position;
-        Vector2f projectionSize = Window.GetScene().camera().GetProjectionSize();
+        Camera camera = Window.GetScene().camera();
+
+        Vector2f cameraPos = camera.position;
+        Vector2f projectionSize = camera.GetProjectionSize();
 
         //Calculate where our first X and Y are
         int firstX = ((int)(cameraPos.x / Settings.GRID_WIDTH) - 1) * Settings.GRID_WIDTH;
         int firstY = ((int)(cameraPos.y / Settings.GRID_HEIGHT) -1) * Settings.GRID_HEIGHT;
 
         //Calculate how many vertical and horizontal lines we can have
-        int numVtLines = (int)(projectionSize.x / Settings.GRID_WIDTH) + 2;
-        int numHzLines = (int)(projectionSize.y / Settings.GRID_HEIGHT) + 2;
+        int numVtLines = (int)(projectionSize.x * camera.GetZoom() / Settings.GRID_WIDTH) + 2;
+        int numHzLines = (int)(projectionSize.y * camera.GetZoom()/ Settings.GRID_HEIGHT) + 2;
 
         //Set a limit to avoid infinite lines
-        int height = (int)projectionSize.y + Settings.GRID_HEIGHT * 2;
-        int width = (int)projectionSize.x + Settings.GRID_WIDTH * 2;
+        int height = (int)(projectionSize.y * camera.GetZoom()) + Settings.GRID_HEIGHT * 2;
+        int width = (int)(projectionSize.x * camera.GetZoom()) + Settings.GRID_WIDTH * 2;
 
         int maxLines = Math.max(numVtLines,numHzLines);
         Vector3f color = new Vector3f(0.2f,0.2f,0.2f);
