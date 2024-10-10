@@ -94,7 +94,19 @@ public abstract class Scene
         {
             //write gameobject as a json
             FileWriter writer = new FileWriter("level.txt");
-            writer.write(gson.toJson(this.gameObjects));
+
+            //Init an array that contains only the GameObjects to serialize
+            List<GameObject> objToSerialize = new ArrayList<>();
+            //Populate the array
+            for(GameObject obj : this.gameObjects)
+            {
+                if(obj.ToSerialize())
+                {
+                    objToSerialize.add(obj);
+                }
+            }
+
+            writer.write(gson.toJson(objToSerialize));
             writer.close();
         }
         catch (IOException e)

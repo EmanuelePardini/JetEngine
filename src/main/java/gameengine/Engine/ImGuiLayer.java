@@ -278,7 +278,7 @@ public class ImGuiLayer
         ImGui.popStyleVar(2);
 
         ImGui.dockSpace(ImGui.getID("Dockspace")); //It hash this to some string and set the dockspace based on this hash id
-
-
     }
+
+    public  PropertiesWindow GetPropertiesWindow(){return this.propertiesWindow;}
 }

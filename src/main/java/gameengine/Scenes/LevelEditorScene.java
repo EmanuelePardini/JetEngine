@@ -26,51 +26,21 @@ public class LevelEditorScene extends Scene
     @Override
     public void Init()
     {
-        this.camera = new Camera(new Vector2f(-250.f, 0));
+        LoadResources();
 
+        sprites = AssetPool.GetSpritesheet("assets/images/spritesheets/decorationsandblocks.png");
+        Spritesheet gizmos = AssetPool.GetSpritesheet("assets/images/gizmos.png");
+
+        this.camera = new Camera(new Vector2f(-250.f, 0));
         levelEditorStuff.AddComponent(new MouseControls());
         levelEditorStuff.AddComponent(new GridLines());
         levelEditorStuff.AddComponent(new EditorCamera(this.camera));
+        levelEditorStuff.AddComponent(new TranslateGizmo(gizmos.GetSprite(1),
+                Window.GetImGuiLayer().GetPropertiesWindow())); //It's a bad design, but we will change it with an event system
+        levelEditorStuff.Start();
 
-        LoadResources();
 
-
-        sprites = AssetPool.GetSpritesheet("assets/images/spritesheets/decorationsandblocks.png");
     }
-/*
-        if (levelLoaded && !gameObjects.isEmpty())
-        {
-            this.activeGameObject = gameObjects.get(0); //It will get the zeroth gameobject
-        }
-        else
-        {
-            //AddTestObj();
-            //AddTestObj();
-        }
-
-
-
-    //MY OBJECT CREATION REFORMATTED(Only for Test purpose)
-    public void AddTestObj()
-    {
-        float newX = gameObjects.isEmpty() ? 200 : gameObjects.get(gameObjects.size()-1).transform.position.x + 200;
-        float newY = gameObjects.isEmpty() ? 200 : gameObjects.get(gameObjects.size()-1).transform.position.y + 200;
-
-        GameObject obj = new GameObject("Obj",
-                new Transform(new Vector2f(newX, newY),
-                        new Vector2f(256,256)), -1);
-
-        //temp solution for current setup, will be later edited via editor
-        SpriteRenderer obj1Sprite = new SpriteRenderer();
-        obj1Sprite.SetColor(new Vector4f(1,0,0,1));
-
-        obj.AddComponent(obj1Sprite);
-        obj.AddComponent(new RigidBody());
-        this.AddGameObjectToScene(obj);
-
-        this.activeGameObject = obj;
-    }
-*/
 
     private void LoadResources()
     {
@@ -80,7 +50,8 @@ public class LevelEditorScene extends Scene
                 new Spritesheet(AssetPool.GetTexture("assets/images/spritesheets/decorationsandblocks.png"),
                         16,16, 81, 0));
 
-        //TODO: Fix and review asset pool
+        AssetPool.AddSpritesheet("assets/images/gizmos.png",
+                new Spritesheet(AssetPool.GetTexture("assets/images/gizmos.png"), 24, 48, 2, 0));
         AssetPool.GetTexture("assets/images/blendImage2.png");
 
         //Go trought each gameobject and riassign the one texture the obj should have checking in the filepath
@@ -94,17 +65,6 @@ public class LevelEditorScene extends Scene
             }
         }
     }
-
-
-    //You can remove, made only for testing
-//    float t = 0.0f;
-//    private void TestDebugLines()
-//    {
-//        float x = ((float)Math.sin(t) * 200.f) + 600.f;
-//        float y = ((float)Math.cos(t) * 200.f) + 400.f;
-//        t += 0.05f;
-//        DebugDraw.AddLine2D(new Vector2f(Window.GetWidth() / 2, Window.GetHeight() / 2), new Vector2f(x, y), new Vector3f(0,0,1), 10);
-//    }
 
     float x = 0.0f;
     float y = 0.0f;
@@ -142,7 +102,12 @@ public class LevelEditorScene extends Scene
     @Override
     public void ImGUI()
     {
+        ImGui.begin("Level Editor Stuff");
+        levelEditorStuff.ImGUI();
+        ImGui.end();
+
         ImGui.begin("BlocksList");
+
 
         //Var decl
         ImVec2 windowPos = new ImVec2();

@@ -41,8 +41,8 @@ public class Viewport
 
     public boolean GetWantCaptureMouse()
     {
-       System.out.println("Capturing: " + leftX + "|" +rightX+ "|" +bottomY+ "|" +topY);
-        System.out.println("Viewport: " +MouseListener.GetX() +"|" + MouseListener.GetY());
+        //System.out.println("Capturing: " + leftX + "|" +rightX+ "|" +bottomY+ "|" +topY);
+        //System.out.println("Viewport: " +MouseListener.GetX() +"|" + MouseListener.GetY());
 
         return MouseListener.GetX() >= leftX && MouseListener.GetX() <= rightX &&
                 MouseListener.GetY() >= bottomY && MouseListener.GetY() <= topY;

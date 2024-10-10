@@ -16,6 +16,7 @@ public class GameObject
     private List<Component> components;
     public Transform transform;
     private int zIndex;
+    private transient boolean doSerialization = true;
 
 //    public GameObject(String name)
 //    {
@@ -105,4 +106,7 @@ public class GameObject
     public static void Init(int maxId){ID_COUNTER = maxId;}
 
     public List<Component> GetAllComponents(){return this.components;}
+
+    public void SetSerialize(boolean toSerialize){this.doSerialization = toSerialize;}
+    public boolean ToSerialize(){return this.doSerialization;}
 }

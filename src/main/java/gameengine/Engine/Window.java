@@ -258,6 +258,8 @@ public class Window
         currentScene.SaveExit();
     }
 
+    public static ImGuiLayer GetImGuiLayer(){return Get().imGuiLayer;}
+
     public static int GetWidth() {return Get().width;}
 
     public static int GetHeight() {return Get().height;}
