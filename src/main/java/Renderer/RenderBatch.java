@@ -245,7 +245,7 @@ public class RenderBatch implements Comparable<RenderBatch>
             vertices[offset +8] = texID;
 
             //Load entity id(Entity is intended as GameObject)
-            vertices[offset +9] = sprite.gameObject.GetUid();
+            vertices[offset +9] = sprite.gameObject.GetUid() + 1;
 
             offset += VERTEX_SIZE;
         }
