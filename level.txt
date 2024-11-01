@@ -45,7 +45,7 @@
     ],
     "transform": {
       "position": {
-        "x": 448.0,
+        "x": 473.20404,
         "y": 512.0
       },
       "scale": {
@@ -102,12 +102,12 @@
     ],
     "transform": {
       "position": {
-        "x": 480.0,
-        "y": 512.0
+        "x": 561.61365,
+        "y": 797.6444
       },
       "scale": {
-        "x": 32.0,
-        "y": 32.0
+        "x": 21.198486,
+        "y": 24.798828
       },
       "rotation": 0.0
     },
@@ -387,8 +387,8 @@
     ],
     "transform": {
       "position": {
-        "x": 416.0,
-        "y": 512.0
+        "x": 892.4754,
+        "y": 849.2519
       },
       "scale": {
         "x": 32.0,
@@ -444,8 +444,65 @@
     ],
     "transform": {
       "position": {
-        "x": 384.0,
-        "y": 512.0
+        "x": 975.69275,
+        "y": 513.19904
+      },
+      "scale": {
+        "x": 32.0,
+        "y": 32.0
+      },
+      "rotation": 0.0
+    },
+    "zIndex": 0
+  },
+  {
+    "uid": 13,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 16.0,
+            "height": 16.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/decorationsandblocks.png",
+              "width": 112,
+              "height": 192
+            },
+            "textCoords": [
+              {
+                "x": 0.14285715,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.14285715,
+                "y": 0.5833333
+              },
+              {
+                "x": 0.0,
+                "y": 0.5833333
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              }
+            ]
+          },
+          "uid": 30
+        }
+      }
+    ],
+    "transform": {
+      "position": {
+        "x": 434.4679,
+        "y": 689.5978
       },
       "scale": {
         "x": 32.0,

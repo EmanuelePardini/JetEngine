@@ -5,21 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be5a7dae-daae-4114-a210-103589ae3a55" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Images/gizmos.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/TranslateGizmo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/Gizmo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/GizmoSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/NonPickable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/ScaleGizmo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/RenderBatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Renderer/RenderBatch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/EditorCamera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/EditorCamera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/TranslateGizmo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/TranslateGizmo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Editor/PropertiesWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Editor/PropertiesWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Editor/Viewport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Editor/Viewport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/GameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/ImGuiLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/ImGuiLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Transform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Transform.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/MouseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/MouseListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Scenes/LevelEditorScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Scenes/LevelEditorScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Scenes/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Scenes/Scene.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,32 +69,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Build JetEngine.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Download Sources.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.JetEngine [:Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.JetEngine [:gameengine.Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.JetEngine [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.JetEngine.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;test&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Gradle.Build JetEngine.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
+    "Gradle.JetEngine [:Main.main()].executor": "Run",
+    "Gradle.JetEngine [:gameengine.Main.main()].executor": "Run",
+    "Gradle.JetEngine [build].executor": "Run",
+    "Gradle.JetEngine.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="gameengine.Engine" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Programmazione\Java\JetEngine\Assets\Images\spritesheets" />
       <recent name="D:\Programmazione\Java\JetEngine\Assets\Images" />
+      <recent name="D:\Programmazione\Java\JetEngine\Assets\Images\spritesheets" />
       <recent name="D:\Programmazione\Java\JetEngine\src\main\java" />
       <recent name="D:\Programmazione\Java\JetEngine\src\main\java\gameengine" />
       <recent name="D:\Programmazione\Java\JetEngine\libs" />

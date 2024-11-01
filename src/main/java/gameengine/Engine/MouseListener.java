@@ -17,6 +17,11 @@ public class MouseListener
     private double yPos;
     private double lastY;
     private double lastX;
+    private double worldX;
+    private double worldY;
+    private double lastWorldX;
+    private double lastWorldY;
+
 
     private boolean mouseButtonPressed[] = new boolean[9];
     private boolean isDragging;
@@ -26,6 +31,8 @@ public class MouseListener
 
     private int screenWidth;
     private int screenHeight;
+    //Numb of the mouse btn pressed
+    private int mouseBtnDown = 0;
 
     private MouseListener()
     {
@@ -48,13 +55,20 @@ public class MouseListener
 
     public static void MousePosCallback(long window, double xpos, double ypos)
     {
+        if(get().mouseBtnDown > 0) get().isDragging = true;
         //save last x and y pos
         get().lastX = get().xPos;
         get().lastY = get().yPos;
 
+        get().lastWorldX = get().worldX;
+        get().lastWorldY = get().worldY;
+
         //set new x and y
         get().xPos = xpos;
         get().yPos = ypos;
+
+        CalcOrthoX();
+        CalcOrthoY();
 
         //If mouse is moved while any button is pressed, dragging is true (user is dragging)
         get().isDragging = get().mouseButtonPressed[0] || get().mouseButtonPressed[1] || get().mouseButtonPressed[2];
@@ -65,6 +79,8 @@ public class MouseListener
         //Check if mouse was pressed
         if (action == GLFW_PRESS)
         {
+            get().mouseBtnDown++;
+
             //Check if only one button was pressed
             if (button < get().mouseButtonPressed.length)
             {
@@ -72,6 +88,7 @@ public class MouseListener
             }
         } else if (action == GLFW_RELEASE)
         {
+            get().mouseBtnDown--;
             if (button < get().mouseButtonPressed.length)
             {
                 get().mouseButtonPressed[button] = false;
@@ -92,6 +109,8 @@ public class MouseListener
         get().scrollY = 0;
         get().lastX = get().xPos;
         get().lastY = get().yPos;
+        get().lastWorldX = get().worldX;
+        get().lastWorldY = get().worldY;
     }
 
     //GETTERS and SETTERS Region
@@ -118,7 +137,10 @@ public class MouseListener
         return currentY;
     }
 
-    public static float GetOrthoX() {
+    public static float GetOrthoX() {return (float)get().worldX;}
+
+    private static void CalcOrthoX()
+    {
         // Calculate the current X position relative to the viewport position
         float currentX = GetX() - get().GetViewportPos().x;
 
@@ -132,13 +154,13 @@ public class MouseListener
         tmp.mul(ViewProjection());
 
         // Update currentX with the transformed X coordinate
-        currentX = tmp.x;
-
-        // Return the transformed X coordinate
-        return currentX;
+        get().worldX = tmp.x;
     }
 
-    public static float GetOrthoY() {
+    public static float GetOrthoY() {return (float)get().worldY;}
+
+    public static void CalcOrthoY()
+    {
         // Calculate the current Y position relative to the viewport position
         float currentY = GetY() - get().GetViewportPos().y;
 
@@ -152,10 +174,7 @@ public class MouseListener
         tmp.mul(ViewProjection());
 
         // Update currentY with the transformed Y coordinate
-        currentY = tmp.y;
-
-        // Return the transformed Y coordinate
-        return currentY;
+        get().worldY = tmp.y;
     }
 
     private static Matrix4f ViewProjection()
@@ -194,6 +213,16 @@ public class MouseListener
         return (float) (get().lastY - get().yPos);
     }
 
+    public static float GetWorldDx()
+    {
+        return (float) (get().lastWorldX - get().worldX);
+    }
+
+    public static float GetWorldDy()
+    {
+        return (float) (get().lastWorldY - get().worldY);
+    }
+
     public static float GetScrollX()
     {
         return (float) get().scrollX;
@@ -213,13 +242,9 @@ public class MouseListener
     public static boolean MouseButtonDown(int button)
     {
         if (button < get().mouseButtonPressed.length)
-        {
             return get().mouseButtonPressed[button];
-        }
         else
-        {
             return false;
-        }
     }
 
     public  Vector2f GetViewportSize() {return viewportSize;}

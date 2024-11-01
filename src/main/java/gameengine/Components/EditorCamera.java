@@ -5,8 +5,7 @@ import gameengine.Engine.KeyListener;
 import gameengine.Engine.MouseListener;
 import org.joml.Vector2f;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_E;
-import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_MIDDLE;
+import static org.lwjgl.glfw.GLFW.*;
 
 //Different from a regular game camera
 public class EditorCamera extends Component
@@ -63,11 +62,7 @@ public class EditorCamera extends Component
             levelEditorCamera.AddZoom(addValue);
         }
 
-        //he uses GLFW_KEY_KP_DECIMAL, I REFUSED
-        if(KeyListener.IsKeyPressed(GLFW_KEY_E))
-        {
-            reset = true;
-        }
+        if(KeyListener.IsKeyPressed(GLFW_KEY_SPACE)) reset = true;
 
         if(reset)
         {

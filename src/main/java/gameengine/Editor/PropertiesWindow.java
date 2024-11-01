@@ -1,6 +1,7 @@
 package gameengine.Editor;
 
 import Renderer.PickingTexture;
+import gameengine.Components.NonPickable;
 import gameengine.Engine.GameObject;
 import gameengine.Engine.MouseListener;
 import gameengine.Scenes.Scene;
@@ -24,7 +25,16 @@ public class PropertiesWindow
             int x = (int)MouseListener.GetScreenX();  // Get the current x position of the mouse on the screen
             int y = (int)MouseListener.GetScreenY();  // Get the current y position of the mouse on the screen
             int gameObjectId = pickingTexture.ReadPixel(x, y);  // Use the picking texture to read the object ID at the mouse's position
-            activeGameObject = currentScene.GetGameObject(gameObjectId);  // Fetch the game object from the scene using the object ID
+            GameObject pickedObj = currentScene.GetGameObject(gameObjectId);
+            if(pickedObj != null && pickedObj.GetComponent(NonPickable.class) == null)
+            {
+                activeGameObject = pickedObj;  // Fetch the game object from the scene using the object ID
+            }
+            else if(pickedObj == null && !MouseListener.IsDragging())
+            {
+                activeGameObject = null;
+            }
+
             this.debounce = 0.2f;  // Reset the debounce timer to 0.2 seconds to prevent immediate re-triggering
         }
     }

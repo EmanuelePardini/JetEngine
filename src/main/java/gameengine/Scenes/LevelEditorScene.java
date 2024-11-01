@@ -35,8 +35,8 @@ public class LevelEditorScene extends Scene
         levelEditorStuff.AddComponent(new MouseControls());
         levelEditorStuff.AddComponent(new GridLines());
         levelEditorStuff.AddComponent(new EditorCamera(this.camera));
-        levelEditorStuff.AddComponent(new TranslateGizmo(gizmos.GetSprite(1),
-                Window.GetImGuiLayer().GetPropertiesWindow())); //It's a bad design, but we will change it with an event system
+        levelEditorStuff.AddComponent(new GizmoSystem(gizmos));
+
         levelEditorStuff.Start();
 
 
@@ -51,7 +51,7 @@ public class LevelEditorScene extends Scene
                         16,16, 81, 0));
 
         AssetPool.AddSpritesheet("assets/images/gizmos.png",
-                new Spritesheet(AssetPool.GetTexture("assets/images/gizmos.png"), 24, 48, 2, 0));
+                new Spritesheet(AssetPool.GetTexture("assets/images/gizmos.png"), 24, 48, 3, 0));
         AssetPool.GetTexture("assets/images/blendImage2.png");
 
         //Go trought each gameobject and riassign the one texture the obj should have checking in the filepath
