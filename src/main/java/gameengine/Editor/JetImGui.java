@@ -82,8 +82,7 @@ public class JetImGui
         ImGui.text(label);
         ImGui.nextColumn();
 
-        float[] valArr = {value}; //Used only to pass by reference
-
+        float[] valArr = {value};
         ImGui.dragFloat("##dragFloat", valArr, 0.1f);
 
         ImGui.columns(1);
@@ -92,7 +91,7 @@ public class JetImGui
         return valArr[0];
     }
 
-    public static float DragInt(String label, int value)
+    public static int DragInt(String label, int value)
     {
         ImGui.pushID(label);
 
@@ -101,8 +100,7 @@ public class JetImGui
         ImGui.text(label);
         ImGui.nextColumn();
 
-        int[] valArr = {value}; //Used only to pass by reference
-
+        int[] valArr = {value};
         ImGui.dragInt("##dragInt", valArr, 0.1f);
 
         ImGui.columns(1);

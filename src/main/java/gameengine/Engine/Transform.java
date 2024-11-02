@@ -29,7 +29,7 @@ public class Transform extends Component
     {
         this.position = position;
         this.scale = scale;
-        this.zIndex = 0;
+
     }
 
     // Creates a copy of the current Transform object and returns it.
@@ -56,6 +56,7 @@ public class Transform extends Component
 
         //We can cast now
         Transform t = (Transform)o;
+
         return t.position.equals(this.position)
                 && t.scale.equals(this.scale)
                 && t.rotation == this.rotation
@@ -67,7 +68,7 @@ public class Transform extends Component
     {
         JetImGui.DrawVec2Control("Position", this.position);
         JetImGui.DrawVec2Control("Scale", this.scale, 32.0f);
-        JetImGui.DragFloat("Rotation", this.rotation);
-        JetImGui.DragInt("Z-Index", this.zIndex);
+        this.rotation = JetImGui.DragFloat("Rotation", this.rotation);
+        this.zIndex = JetImGui.DragInt("Z-Index", this.zIndex);
     }
 }

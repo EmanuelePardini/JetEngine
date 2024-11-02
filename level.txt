@@ -8,10 +8,10 @@
         "properties": {
           "position": {
             "x": 0.0,
-            "y": 735.1898
+            "y": 735.3703
           },
           "scale": {
-            "x": 32.0,
+            "x": 54.8,
             "y": 32.0
           },
           "rotation": 0.0,
@@ -129,12 +129,12 @@
         "type": "gameengine.Engine.Transform",
         "properties": {
           "position": {
-            "x": -7.197815,
-            "y": 769.30054
+            "x": 64.7796,
+            "y": 736.9107
           },
           "scale": {
             "x": 32.0,
-            "y": 32.0
+            "y": 30.3
           },
           "rotation": 0.0,
           "zIndex": 0,
@@ -145,7 +145,7 @@
         "type": "gameengine.Components.SpriteRenderer",
         "properties": {
           "color": {
-            "x": 0.78039217,
+            "x": 1.0,
             "y": 1.0,
             "z": 1.0,
             "w": 1.0
@@ -178,6 +178,67 @@
             ]
           },
           "uid": 60
+        }
+      }
+    ]
+  },
+  {
+    "uid": 4,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 38.777893,
+            "y": 928.0
+          },
+          "scale": {
+            "x": 32.0,
+            "y": 32.0
+          },
+          "rotation": -1.3,
+          "zIndex": 6,
+          "uid": 79
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 16.0,
+            "height": 16.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/decorationsandblocks.png",
+              "width": 112,
+              "height": 192
+            },
+            "textCoords": [
+              {
+                "x": 0.85714287,
+                "y": 0.9166667
+              },
+              {
+                "x": 0.85714287,
+                "y": 0.8333333
+              },
+              {
+                "x": 0.71428573,
+                "y": 0.8333333
+              },
+              {
+                "x": 0.71428573,
+                "y": 0.9166667
+              }
+            ]
+          },
+          "uid": 80
         }
       }
     ]
