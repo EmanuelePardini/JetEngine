@@ -1,6 +1,6 @@
 package gameengine.Components;
 
-import Renderer.Texture;
+import gameengine.Renderer.Texture;
 import org.joml.Vector2f;
 
 public class Sprite

@@ -1,7 +1,7 @@
 package gameengine.Util;
 
-import Renderer.Shader;
-import Renderer.Texture;
+import gameengine.Renderer.Shader;
+import gameengine.Renderer.Texture;
 import gameengine.Components.Spritesheet;
 
 import java.io.File;

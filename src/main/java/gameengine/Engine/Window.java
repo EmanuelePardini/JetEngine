@@ -1,18 +1,17 @@
 package gameengine.Engine;
 
-import Renderer.DebugDraw;
-import Renderer.Framebuffer;
-import Renderer.PickingTexture;
-import Renderer.Renderer;
+import gameengine.Renderer.DebugDraw;
+import gameengine.Renderer.Framebuffer;
+import gameengine.Renderer.PickingTexture;
+import gameengine.Renderer.Renderer;
 import gameengine.Scenes.LevelEditorScene;
 import gameengine.Scenes.LevelScene;
 import gameengine.Scenes.Scene;
 import gameengine.Util.AssetPool;
-import org.joml.Vector2f;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
-import Renderer.Shader;
+import gameengine.Renderer.Shader;
 
 import java.awt.*;
 

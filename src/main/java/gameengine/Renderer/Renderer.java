@@ -1,10 +1,9 @@
-package Renderer;
+package gameengine.Renderer;
 
 import gameengine.Components.SpriteRenderer;
 import gameengine.Engine.GameObject;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 

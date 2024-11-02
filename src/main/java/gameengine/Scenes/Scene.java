@@ -1,6 +1,6 @@
 package gameengine.Scenes;
 
-import Renderer.Renderer;
+import gameengine.Renderer.Renderer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import gameengine.Components.Component;
@@ -9,7 +9,6 @@ import gameengine.Engine.Camera;
 import gameengine.Engine.GameObject;
 import gameengine.Engine.GameObjectDeserializer;
 import gameengine.Engine.Transform;
-import imgui.ImGui;
 
 import java.io.FileWriter;
 import java.io.IOException;

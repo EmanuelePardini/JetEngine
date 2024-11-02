@@ -1,6 +1,6 @@
 package gameengine.Engine;
 
-import Renderer.PickingTexture;
+import gameengine.Renderer.PickingTexture;
 import gameengine.Editor.PropertiesWindow;
 import gameengine.Editor.Viewport;
 import gameengine.Scenes.Scene;
@@ -11,8 +11,6 @@ import imgui.flag.*;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.type.ImBoolean;
 
-
-import javax.swing.plaf.ViewportUI;
 
 import static org.lwjgl.glfw.GLFW.*;
 

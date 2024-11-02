@@ -117,6 +117,9 @@ dependencies {
   implementation files('libs/imgui-binding-1.76-0.14.jar')
   implementation files('libs/imgui-lwjgl3-1.76-0.14.jar')
 
+  //JBox2D
+  implementation files('libs/jbox2d-library.jar')
+
   // LWJGL dependencies
   implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
 

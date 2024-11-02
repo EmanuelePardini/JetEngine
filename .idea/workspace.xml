@@ -5,10 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be5a7dae-daae-4114-a210-103589ae3a55" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/libs/jbox2d-library.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Physics/Components/CircleCollider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Physics/Components/RigidBody2D.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Physics/Enums/BodyType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Physics/Physics2D.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Editor/JetImGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Editor/JetImGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Transform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Transform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/DebugDraw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Renderer/DebugDraw.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/Framebuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Renderer/Framebuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/Line2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Renderer/Line2D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/PickingTexture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Renderer/PickingTexture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/RenderBatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Renderer/RenderBatch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Renderer/Renderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/Shader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Renderer/Shader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Renderer/Texture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Renderer/Texture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/GridLines.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/GridLines.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/Sprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/Sprite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/SpriteRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/SpriteRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/Spritesheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/Spritesheet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Editor/PropertiesWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Editor/PropertiesWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/ImGuiLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/ImGuiLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Scenes/LevelEditorScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Scenes/LevelEditorScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Scenes/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Scenes/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Util/AssetPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Util/AssetPool.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,11 +108,11 @@
       <recent name="gameengine.Engine" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Programmazione\Java\JetEngine\libs" />
       <recent name="D:\Programmazione\Java\JetEngine\Assets\Images" />
       <recent name="D:\Programmazione\Java\JetEngine\Assets\Images\spritesheets" />
       <recent name="D:\Programmazione\Java\JetEngine\src\main\java" />
       <recent name="D:\Programmazione\Java\JetEngine\src\main\java\gameengine" />
-      <recent name="D:\Programmazione\Java\JetEngine\libs" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">

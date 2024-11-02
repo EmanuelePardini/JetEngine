@@ -1,17 +1,13 @@
-package Renderer;
+package gameengine.Renderer;
 
 import gameengine.Components.SpriteRenderer;
 import gameengine.Engine.Window;
-import gameengine.Util.AssetPool;
-import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
-import org.lwjgl.opengl.GL15;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import static org.lwjgl.opengl.ARBVertexArrayObject.glBindVertexArray;
 import static org.lwjgl.opengl.ARBVertexArrayObject.glGenVertexArrays;

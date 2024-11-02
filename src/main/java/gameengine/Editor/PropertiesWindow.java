@@ -1,6 +1,6 @@
 package gameengine.Editor;
 
-import Renderer.PickingTexture;
+import gameengine.Renderer.PickingTexture;
 import gameengine.Components.NonPickable;
 import gameengine.Engine.GameObject;
 import gameengine.Engine.MouseListener;

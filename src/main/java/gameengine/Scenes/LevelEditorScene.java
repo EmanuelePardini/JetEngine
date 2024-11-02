@@ -1,14 +1,12 @@
 package gameengine.Scenes;
-import Renderer.DebugDraw;
+import gameengine.Renderer.DebugDraw;
 import gameengine.Components.*;
 import gameengine.Engine.*;
 import gameengine.Util.AssetPool;
 import imgui.ImGui;
 import imgui.ImVec2;
-import kotlin.random.URandomKt;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
-import org.joml.Vector4f;
 
 
 public class LevelEditorScene extends Scene
@@ -76,8 +74,8 @@ public class LevelEditorScene extends Scene
         // System.out.println("FPS: " + (1.0 / DeltaTime));
 
         //TestDebugLines();
-        DebugDraw.AddBox2D(new Vector2f(800,500), new Vector2f(64,32), angle, new Vector3f(0,1,0),1);
-        DebugDraw.AddCircle2D(new Vector2f(x,y), 64, new Vector3f(0,1,0),1);
+        //DebugDraw.AddBox2D(new Vector2f(800,500), new Vector2f(64,32), angle, new Vector3f(0,1,0),1);
+        //DebugDraw.AddCircle2D(new Vector2f(x,y), 64, new Vector3f(0,1,0),1);
         x += 50f * DeltaTime;
         y += 50f * DeltaTime;
         angle += 40 * DeltaTime;

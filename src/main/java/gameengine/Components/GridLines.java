@@ -1,6 +1,6 @@
 package gameengine.Components;
 
-import Renderer.DebugDraw;
+import gameengine.Renderer.DebugDraw;
 import gameengine.Engine.Camera;
 import gameengine.Engine.Window;
 import gameengine.Util.Settings;
