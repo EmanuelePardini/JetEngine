@@ -1,12 +1,15 @@
 package gameengine.Engine;
 
+import gameengine.Components.Component;
+import gameengine.Editor.JetImGui;
 import org.joml.Vector2f;
 
-public class Transform
+public class Transform extends Component
 {
     public Vector2f position;
     public Vector2f scale;
     public float rotation = 0.0f;
+    public int zIndex;
 
     public Transform()
     {
@@ -26,12 +29,8 @@ public class Transform
     {
         this.position = position;
         this.scale = scale;
+        this.zIndex = 0;
     }
-
-    //(TEST KO) I create this functions to test if it get the work done like Copy,
-    // but it only reference the same instance, that's not good(USE COPY)
-    public Transform GetTransform() {return this;}
-
 
     // Creates a copy of the current Transform object and returns it.
     public Transform Copy()
@@ -57,6 +56,18 @@ public class Transform
 
         //We can cast now
         Transform t = (Transform)o;
-        return t.position.equals(this.position) && t.scale.equals(this.scale);
+        return t.position.equals(this.position)
+                && t.scale.equals(this.scale)
+                && t.rotation == this.rotation
+                && t.zIndex == this.zIndex;
+    }
+
+    @Override
+    public void ImGui()
+    {
+        JetImGui.DrawVec2Control("Position", this.position);
+        JetImGui.DrawVec2Control("Scale", this.scale, 32.0f);
+        JetImGui.DragFloat("Rotation", this.rotation);
+        JetImGui.DragInt("Z-Index", this.zIndex);
     }
 }

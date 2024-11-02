@@ -1,5 +1,6 @@
 package gameengine.Components;
 
+import gameengine.Editor.JetImGui;
 import gameengine.Engine.GameObject;
 import imgui.ImGui;
 import org.joml.Vector2f;
@@ -30,7 +31,7 @@ public abstract class Component
 
     }
 
-    public void ImGUI()
+    public void ImGui()
     {
         try
         {
@@ -65,21 +66,13 @@ public abstract class Component
         if(type == int.class)
         {
             int val = (int)value;
-            int[] imInt = {val};
-            if(ImGui.dragInt(name + ": ", imInt))
-            { //It makes a field in the ImGui with the field we just made
-                field.set(this, imInt[0]);
-            }
+            field.set(this, JetImGui.DragInt(name, val));
         }
         //FLOATS
         else if(type == float.class)
         {
             float val = (float)value;
-            float[] imFloat = {val};
-            if(ImGui.dragFloat(name + ": ", imFloat))
-            {
-                field.set(this, imFloat[0]);
-            }
+            field.set(this, JetImGui.DragFloat(name, val));
         }
         //BOOLEANS
         else if(type == boolean.class)
@@ -94,11 +87,7 @@ public abstract class Component
         else if(type == Vector2f.class)
         {
             Vector2f val = (Vector2f)value;
-            float[] imVec = {val.x, val.y};
-            if(ImGui.dragFloat2(name + ": ", imVec))
-            {
-                val.set(imVec[0], imVec[1]);
-            }
+            JetImGui.DrawVec2Control(name, val);
         }
         //VECTOR 3F
         else if(type == Vector3f.class)

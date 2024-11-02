@@ -8,6 +8,7 @@ import gameengine.Components.ComponentDeserializer;
 import gameengine.Engine.Camera;
 import gameengine.Engine.GameObject;
 import gameengine.Engine.GameObjectDeserializer;
+import gameengine.Engine.Transform;
 import imgui.ImGui;
 
 import java.io.FileWriter;
@@ -80,6 +81,14 @@ public abstract class Scene
     public void ImGUI()
     {
 
+    }
+
+    public GameObject CreateGameObject(String name)
+    {
+        GameObject go = new GameObject(name);
+        go.AddComponent(new Transform());
+        go.transform = go.GetComponent(Transform.class);
+        return go;
     }
 
     //Serialize gameobject

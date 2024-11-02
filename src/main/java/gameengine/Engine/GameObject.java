@@ -1,6 +1,7 @@
 package gameengine.Engine;
 
 import gameengine.Components.Component;
+import imgui.ImGui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,24 +15,13 @@ public class GameObject
 
     private String name;
     private List<Component> components;
-    public Transform transform;
-    private int zIndex;
+    public transient Transform transform;
     private transient boolean doSerialization = true;
 
-//    public GameObject(String name)
-//    {
-//        this.name = name;
-//        components = new ArrayList<>();
-//        this.transform = new Transform();
-//        this.zIndex = 0;
-//    }
-
-    public  GameObject(String name, Transform transform, int zIndex)
+    public  GameObject(String name)
     {
         this.name = name;
         components = new ArrayList<>();
-        this.transform = transform;
-        this.zIndex = zIndex;
         this.uid = ID_COUNTER++; //TODO: Recheck, it potentially cause problems in the future in the constructor
     }
 
@@ -95,11 +85,12 @@ public class GameObject
     {
         for(Component c : components)
         {
-            c.ImGUI();
+            if(ImGui.collapsingHeader(c.getClass().getSimpleName()))
+                c.ImGui();
         }
     }
 
-    public int ZIndex() {return zIndex;}
+    //public int ZIndex() {return transform.zIndex;}
 
     public int GetUid(){return uid;}
 

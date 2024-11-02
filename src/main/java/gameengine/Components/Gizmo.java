@@ -59,6 +59,8 @@ public class Gizmo extends Component
     {
         this.xAxisObject.transform.rotation = 90;
         this.yAxisObject.transform.rotation = 180;
+        this.xAxisObject.transform.zIndex = 99;
+        this.yAxisObject.transform.zIndex = 99;
         this.xAxisObject.SetSerialize(false);
         this.yAxisObject.SetSerialize(false);
     }
@@ -143,7 +145,6 @@ public class Gizmo extends Component
                 mousePos.y <= yAxisObject.transform.position.y &&
                 mousePos.y >= yAxisObject.transform.position.y - gizmoHeight)
         {
-            System.out.println("Hover");
             yAxisSprite.SetColor(yAxisColorHover);
             return true;
         }

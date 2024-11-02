@@ -8,8 +8,9 @@ public class Prefabs
 {
     public static GameObject GenerateSpriteObject(Sprite sprite, float sizeX, float sizeY)
     {
-        GameObject block = new GameObject("Sprite_Object_Gen",
-                new Transform(new Vector2f(), new Vector2f(sizeX, sizeY)), 0);
+        GameObject block = Window.GetScene().CreateGameObject("Sprite_Object_Gen");
+        block.transform.scale.x = sizeX;
+        block.transform.scale.y = sizeY;
         SpriteRenderer renderer = new SpriteRenderer();
         renderer.SetSprite(sprite);
         block.AddComponent(renderer);

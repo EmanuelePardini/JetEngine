@@ -32,7 +32,7 @@ private static Shader currentShader;
         for(RenderBatch batch : batches)
         {   //Check if the batch has more space and Add to this batch only if has the same ZIndex
             //That means by now we will divide the Batches per zIndex groups
-            if(batch.HasRoom() && batch.ZIndex() == sprite.gameObject.ZIndex())
+            if(batch.HasRoom() && batch.ZIndex() == sprite.gameObject.transform.zIndex)
             {
                 Texture tex = sprite.GetTexture();
                 //check to avoid missing textures
@@ -47,7 +47,7 @@ private static Shader currentShader;
 
         if(!added)
         {
-            RenderBatch newBatch = new RenderBatch(MAX_BATCH_SIZE, sprite.gameObject.ZIndex());
+            RenderBatch newBatch = new RenderBatch(MAX_BATCH_SIZE, sprite.gameObject.transform.zIndex);
             newBatch.Start();
 
             batches.add(newBatch);

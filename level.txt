@@ -4,12 +4,28 @@
     "name": "Sprite_Object_Gen",
     "components": [
       {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 0.0,
+            "y": 735.1898
+          },
+          "scale": {
+            "x": 32.0,
+            "y": 32.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 19
+        }
+      },
+      {
         "type": "gameengine.Components.SpriteRenderer",
         "properties": {
           "color": {
-            "x": 0.76,
-            "y": 0.0,
-            "z": 0.0,
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
             "w": 1.0
           },
           "sprite": {
@@ -22,51 +38,55 @@
             },
             "textCoords": [
               {
-                "x": 1.0,
+                "x": 0.14285715,
                 "y": 1.0
               },
               {
-                "x": 1.0,
+                "x": 0.14285715,
                 "y": 0.9166667
               },
               {
-                "x": 0.85714287,
+                "x": 0.0,
                 "y": 0.9166667
               },
               {
-                "x": 0.85714287,
+                "x": 0.0,
                 "y": 1.0
               }
             ]
           },
-          "uid": 2
+          "uid": 20
         }
       }
-    ],
-    "transform": {
-      "position": {
-        "x": 473.20404,
-        "y": 512.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      },
-      "rotation": 0.0
-    },
-    "zIndex": 0
+    ]
   },
   {
     "uid": 2,
     "name": "Sprite_Object_Gen",
     "components": [
       {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": -30.0,
+            "y": 351.7
+          },
+          "scale": {
+            "x": 32.0,
+            "y": 32.0
+          },
+          "rotation": 361.0,
+          "zIndex": 0,
+          "uid": 39
+        }
+      },
+      {
         "type": "gameengine.Components.SpriteRenderer",
         "properties": {
           "color": {
-            "x": 0.18803416,
-            "y": 0.6666666,
-            "z": 0.26166984,
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
             "w": 1.0
           },
           "sprite": {
@@ -79,220 +99,53 @@
             },
             "textCoords": [
               {
-                "x": 1.0,
+                "x": 0.2857143,
                 "y": 1.0
               },
               {
-                "x": 1.0,
+                "x": 0.2857143,
                 "y": 0.9166667
               },
               {
-                "x": 0.85714287,
+                "x": 0.14285715,
                 "y": 0.9166667
               },
               {
-                "x": 0.85714287,
+                "x": 0.14285715,
                 "y": 1.0
               }
             ]
           },
-          "uid": 3
+          "uid": 40
         }
       }
-    ],
-    "transform": {
-      "position": {
-        "x": 561.61365,
-        "y": 797.6444
-      },
-      "scale": {
-        "x": 21.198486,
-        "y": 24.798828
-      },
-      "rotation": 0.0
-    },
-    "zIndex": 0
+    ]
   },
   {
     "uid": 3,
     "name": "Sprite_Object_Gen",
     "components": [
       {
-        "type": "gameengine.Components.SpriteRenderer",
+        "type": "gameengine.Engine.Transform",
         "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 0.99999,
-            "z": 0.99999,
-            "w": 1.0
+          "position": {
+            "x": -7.197815,
+            "y": 769.30054
           },
-          "sprite": {
-            "width": 16.0,
-            "height": 16.0,
-            "texture": {
-              "filePath": "assets/images/spritesheets/decorationsandblocks.png",
-              "width": 112,
-              "height": 192
-            },
-            "textCoords": [
-              {
-                "x": 1.0,
-                "y": 1.0
-              },
-              {
-                "x": 1.0,
-                "y": 0.9166667
-              },
-              {
-                "x": 0.85714287,
-                "y": 0.9166667
-              },
-              {
-                "x": 0.85714287,
-                "y": 1.0
-              }
-            ]
+          "scale": {
+            "x": 32.0,
+            "y": 32.0
           },
-          "uid": 4
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 59
         }
-      }
-    ],
-    "transform": {
-      "position": {
-        "x": 512.0,
-        "y": 512.0
       },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      },
-      "rotation": 0.0
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 4,
-    "name": "Sprite_Object_Gen",
-    "components": [
       {
         "type": "gameengine.Components.SpriteRenderer",
         "properties": {
           "color": {
-            "x": 0.75,
-            "y": 0.0,
-            "z": 0.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16.0,
-            "height": 16.0,
-            "texture": {
-              "filePath": "assets/images/spritesheets/decorationsandblocks.png",
-              "width": 112,
-              "height": 192
-            },
-            "textCoords": [
-              {
-                "x": 0.85714287,
-                "y": 1.0
-              },
-              {
-                "x": 0.85714287,
-                "y": 0.9166667
-              },
-              {
-                "x": 0.71428573,
-                "y": 0.9166667
-              },
-              {
-                "x": 0.71428573,
-                "y": 1.0
-              }
-            ]
-          },
-          "uid": 5
-        }
-      }
-    ],
-    "transform": {
-      "position": {
-        "x": 544.0,
-        "y": 512.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      },
-      "rotation": 0.0
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 5,
-    "name": "Sprite_Object_Gen",
-    "components": [
-      {
-        "type": "gameengine.Components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16.0,
-            "height": 16.0,
-            "texture": {
-              "filePath": "assets/images/spritesheets/decorationsandblocks.png",
-              "width": 112,
-              "height": 192
-            },
-            "textCoords": [
-              {
-                "x": 0.5714286,
-                "y": 0.9166667
-              },
-              {
-                "x": 0.5714286,
-                "y": 0.8333333
-              },
-              {
-                "x": 0.42857143,
-                "y": 0.8333333
-              },
-              {
-                "x": 0.42857143,
-                "y": 0.9166667
-              }
-            ]
-          },
-          "uid": 9
-        }
-      }
-    ],
-    "transform": {
-      "position": {
-        "x": -735712.0,
-        "y": -465088.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      },
-      "rotation": 0.0
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 6,
-    "name": "Sprite_Object_Gen",
-    "components": [
-      {
-        "type": "gameengine.Components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
+            "x": 0.78039217,
             "y": 1.0,
             "z": 1.0,
             "w": 1.0
@@ -308,208 +161,25 @@
             "textCoords": [
               {
                 "x": 0.2857143,
-                "y": 0.9166667
+                "y": 1.0
               },
               {
                 "x": 0.2857143,
-                "y": 0.8333333
-              },
-              {
-                "x": 0.14285715,
-                "y": 0.8333333
+                "y": 0.9166667
               },
               {
                 "x": 0.14285715,
                 "y": 0.9166667
-              }
-            ]
-          },
-          "uid": 10
-        }
-      }
-    ],
-    "transform": {
-      "position": {
-        "x": -667840.0,
-        "y": -605824.0
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      },
-      "rotation": 0.0
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 7,
-    "name": "Sprite_Object_Gen",
-    "components": [
-      {
-        "type": "gameengine.Components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 0.0,
-            "z": 6.0081482E-5,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16.0,
-            "height": 16.0,
-            "texture": {
-              "filePath": "assets/images/spritesheets/decorationsandblocks.png",
-              "width": 112,
-              "height": 192
-            },
-            "textCoords": [
-              {
-                "x": 1.0,
-                "y": 0.9166667
-              },
-              {
-                "x": 1.0,
-                "y": 0.8333333
-              },
-              {
-                "x": 0.85714287,
-                "y": 0.8333333
-              },
-              {
-                "x": 0.85714287,
-                "y": 0.9166667
-              }
-            ]
-          },
-          "uid": 14
-        }
-      }
-    ],
-    "transform": {
-      "position": {
-        "x": 892.4754,
-        "y": 849.2519
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      },
-      "rotation": 0.0
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 8,
-    "name": "Sprite_Object_Gen",
-    "components": [
-      {
-        "type": "gameengine.Components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 0.08197732,
-            "y": 0.6730769,
-            "z": 0.6730769,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16.0,
-            "height": 16.0,
-            "texture": {
-              "filePath": "assets/images/spritesheets/decorationsandblocks.png",
-              "width": 112,
-              "height": 192
-            },
-            "textCoords": [
-              {
-                "x": 1.0,
-                "y": 0.9166667
-              },
-              {
-                "x": 1.0,
-                "y": 0.8333333
-              },
-              {
-                "x": 0.85714287,
-                "y": 0.8333333
-              },
-              {
-                "x": 0.85714287,
-                "y": 0.9166667
-              }
-            ]
-          },
-          "uid": 15
-        }
-      }
-    ],
-    "transform": {
-      "position": {
-        "x": 975.69275,
-        "y": 513.19904
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      },
-      "rotation": 0.0
-    },
-    "zIndex": 0
-  },
-  {
-    "uid": 13,
-    "name": "Sprite_Object_Gen",
-    "components": [
-      {
-        "type": "gameengine.Components.SpriteRenderer",
-        "properties": {
-          "color": {
-            "x": 1.0,
-            "y": 1.0,
-            "z": 1.0,
-            "w": 1.0
-          },
-          "sprite": {
-            "width": 16.0,
-            "height": 16.0,
-            "texture": {
-              "filePath": "assets/images/spritesheets/decorationsandblocks.png",
-              "width": 112,
-              "height": 192
-            },
-            "textCoords": [
-              {
-                "x": 0.14285715,
-                "y": 0.6666667
               },
               {
                 "x": 0.14285715,
-                "y": 0.5833333
-              },
-              {
-                "x": 0.0,
-                "y": 0.5833333
-              },
-              {
-                "x": 0.0,
-                "y": 0.6666667
+                "y": 1.0
               }
             ]
           },
-          "uid": 30
+          "uid": 60
         }
       }
-    ],
-    "transform": {
-      "position": {
-        "x": 434.4679,
-        "y": 689.5978
-      },
-      "scale": {
-        "x": 32.0,
-        "y": 32.0
-      },
-      "rotation": 0.0
-    },
-    "zIndex": 0
+    ]
   }
 ]

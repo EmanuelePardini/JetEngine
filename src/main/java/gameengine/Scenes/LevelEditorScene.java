@@ -16,7 +16,7 @@ public class LevelEditorScene extends Scene
     private Spritesheet sprites;
 
     //This is a Temporarily GameObject to hold all the Level Editor Rules
-    GameObject levelEditorStuff = new GameObject("LevelEditor", new Transform(new Vector2f()), 0); //for testing editor comps
+    GameObject levelEditorStuff = this.CreateGameObject("LevelEditor"); //for testing editor comps
 
     public LevelEditorScene()
     {

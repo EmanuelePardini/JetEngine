@@ -16,16 +16,16 @@ public class GameObjectDeserializer implements JsonDeserializer<GameObject>
 
         //We need to deserialize all the properties a gameobject has
         JsonArray components = jsonObject.getAsJsonArray("components");
-        Transform transform = context.deserialize(jsonObject.get("transform"), Transform.class);
-        int zIndex = context.deserialize(jsonObject.get("zIndex"), int.class);
 
-        GameObject go = new GameObject(name, transform, zIndex);
+        GameObject go = new GameObject(name);
 
         for (JsonElement e : components)
         {
             Component c = context.deserialize(e, Component.class);
             go.AddComponent(c);
         }
+
+        go.transform = go.GetComponent(Transform.class);
 
         return go;
     }
