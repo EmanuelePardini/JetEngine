@@ -1,6 +1,7 @@
 package gameengine.Engine;
 
 import gameengine.Editor.SaveMenu;
+import gameengine.Editor.SceneHierarchyWindow;
 import gameengine.Renderer.PickingTexture;
 import gameengine.Editor.PropertiesWindow;
 import gameengine.Editor.Viewport;
@@ -29,6 +30,7 @@ public class ImGuiLayer
     private Viewport viewport;
     private PropertiesWindow propertiesWindow;
     private SaveMenu saveMenu;
+    private SceneHierarchyWindow sceneHierarchyWindow;
 
     public ImGuiLayer(long glfwWindow, PickingTexture pickingTexture)
     {
@@ -36,6 +38,7 @@ public class ImGuiLayer
         this.viewport = new Viewport();
         this.propertiesWindow = new PropertiesWindow(pickingTexture);
         this.saveMenu = new SaveMenu();
+        this.sceneHierarchyWindow = new SceneHierarchyWindow();
     }
 
     // Initialize Dear ImGui.
@@ -207,6 +210,8 @@ public class ImGuiLayer
         propertiesWindow.ImGui();
         propertiesWindow.Update(DeltaTime, currentScene);
         saveMenu.ImGui();
+        sceneHierarchyWindow.ImGui();
+
         ImGui.end(); //This End the setup of the dockspace, check SetupDockspace() for the ImGui.begin()
         ImGui.render();
 
