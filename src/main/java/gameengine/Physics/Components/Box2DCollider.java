@@ -27,7 +27,7 @@ public class Box2DCollider extends Collider
     @Override
     public void EditorUpdate(float DeltaTime)
     {
-        Vector2f center = new Vector2f(this.gameObject.transform.position.add(this.offset));
+        Vector2f center = new Vector2f(this.gameObject.transform.position).add(this.offset);
         DebugDraw.AddBox2D(center, this.halfSize, this.gameObject.transform.rotation);
     }
 

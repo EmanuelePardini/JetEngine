@@ -1,6 +1,7 @@
 package gameengine.Scenes;
 
 import gameengine.Physics.Physics2D;
+import gameengine.Renderer.DebugDraw;
 import gameengine.Renderer.Renderer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,7 +32,6 @@ public class Scene
 
     public Scene(SceneInitializer sceneInitializer)
     {
-        this.camera = new Camera(new Vector2f(-250.f,0));
         this.sceneInitializer = sceneInitializer;
         this.physics2D = new Physics2D();
         this.renderer = new Renderer();
@@ -41,6 +41,7 @@ public class Scene
 
     public void Init()
     {
+        this.camera = new Camera(new Vector2f(-250f,0));
         this.sceneInitializer.LoadResources(this);
         this.sceneInitializer.Init(this);
     }
@@ -54,6 +55,7 @@ public class Scene
             this.renderer.Add(go);
             this.physics2D.Add(go);
         }
+
         isRunning = true;
     }
 
@@ -138,9 +140,7 @@ public class Scene
             for(GameObject obj : this.gameObjects)
             {
                 if(obj.ToSerialize())
-                {
                     objToSerialize.add(obj);
-                }
             }
 
             writer.write(gson.toJson(objToSerialize));

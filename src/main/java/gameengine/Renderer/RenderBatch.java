@@ -48,7 +48,9 @@ public class RenderBatch implements Comparable<RenderBatch>
     private int maxBatchSize;
     private int zIndex;
 
-    public RenderBatch(int maxBatchSize, int zIndex)
+    private Renderer renderer;
+
+    public RenderBatch(int maxBatchSize, int zIndex, Renderer renderer)
     {
         this.zIndex = zIndex;
         //this way you only you reference it (after creating it in LevelEditor)
@@ -61,6 +63,8 @@ public class RenderBatch implements Comparable<RenderBatch>
         this.numSprites = 0;
         this.hasRoom = true;
         this.textures = new ArrayList<>();
+
+        this.renderer = renderer;
     }
 
     public void Start()
@@ -134,10 +138,17 @@ public class RenderBatch implements Comparable<RenderBatch>
                 spr.SetClean();
                 rebufferData = true;
             }
+
+            if(spr.gameObject.transform.zIndex != zIndex)
+            {
+                DestroyGameObject(spr.gameObject);
+                renderer.Add(spr.gameObject);
+                i--;
+
+            }
         }
 
-
-        //GABE METHOD: If the flag is clean do not re-buffer
+        //If the flag is clean do not re-buffer
         if(rebufferData)
         {
             glBindBuffer(GL_ARRAY_BUFFER, vboID);
@@ -216,18 +227,18 @@ public class RenderBatch implements Comparable<RenderBatch>
 
 
         //Add vertice with the appropriate properties
-        float xAdd = 1.f;
-        float yAdd = 1.f;
+        float xAdd = 0.5f;
+        float yAdd = 0.5f;
 
         //Assign properties to vertices
         for(int i = 0; i < 4; i++)
         {
             if(i==1)
-                yAdd = 0.f;
+                yAdd = -0.5f;
             else if(i == 2)
-                xAdd = 0.f;
+                xAdd = -0.5f;
             else if(i == 3)
-                yAdd = 1.f;
+                yAdd = 0.5f;
 
             //Load position
             Vector4f currentPos = new Vector4f(sprite.gameObject.transform.position.x + (xAdd * sprite.gameObject.transform.scale.x),

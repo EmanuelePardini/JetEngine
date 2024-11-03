@@ -10,7 +10,6 @@ import static org.lwjgl.glfw.GLFW.*;
 //Different from a regular game camera
 public class EditorCamera extends Component
 {
-    //todo: nel futuro verrà usato il metodo isDragging da mouselistener
     private float dragDebounce = 0.032f;
 
     private Camera levelEditorCamera;

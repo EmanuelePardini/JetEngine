@@ -4,7 +4,6 @@ import gameengine.Engine.GameObject;
 import gameengine.Engine.Transform;
 import gameengine.Physics.Components.Box2DCollider;
 import gameengine.Physics.Components.CircleCollider;
-import gameengine.Physics.Components.Collider;
 import gameengine.Physics.Components.RigidBody2D;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
@@ -13,8 +12,6 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.World;
 import org.joml.Vector2f;
-
-import java.awt.*;
 
 //This will be a wrapper class of the JBox library
 public class Physics2D
@@ -58,7 +55,7 @@ public class Physics2D
             // Advances the physics simulation by one step with the specified timestep and iterations.
             // `world.step()` updates all entities based on physics laws, with
             // parameters for the timestep, velocity iterations, and position iterations.
-            world.step(physicsTime, velocityIterations, positionIterations);
+            world.step(physicsTimeStep, velocityIterations, positionIterations);
         }
     }
 
@@ -128,7 +125,7 @@ public class Physics2D
         else if (boxCollider != null)
         {
             // Get half of the box's size to use with the Box2DCollider (Box2D typically requires half-sizes).
-            Vector2f halfSize = new Vector2f(boxCollider.getHalfSize().mul(0.5f));
+            Vector2f halfSize = new Vector2f(boxCollider.getHalfSize()).mul(0.5f);
             // Retrieve the offset and origin of the box collider, which determine its position and center within the GameObject.
             Vector2f offset = boxCollider.GetOffset();
             Vector2f origin = new Vector2f(boxCollider.getOrigin());

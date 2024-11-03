@@ -46,7 +46,7 @@ private static Shader currentShader;
 
         if(!added)
         {
-            RenderBatch newBatch = new RenderBatch(MAX_BATCH_SIZE, sprite.gameObject.transform.zIndex);
+            RenderBatch newBatch = new RenderBatch(MAX_BATCH_SIZE, sprite.gameObject.transform.zIndex, this);
             newBatch.Start();
 
             batches.add(newBatch);
@@ -75,8 +75,9 @@ private static Shader currentShader;
     public void Render()
     {
         currentShader.Use();
-        for(RenderBatch batch : batches)
+        for(int i = 0; i < batches.size(); i++)
         {
+            RenderBatch batch = batches.get(i);
             batch.Render();
         }
     }

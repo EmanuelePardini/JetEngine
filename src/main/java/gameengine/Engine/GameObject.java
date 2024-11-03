@@ -1,6 +1,10 @@
 package gameengine.Engine;
 
 import gameengine.Components.Component;
+import gameengine.Observers.EventSystem;
+import gameengine.Observers.Events.Event;
+import gameengine.Observers.Events.EventType;
+import gameengine.Scenes.Scene;
 import imgui.ImGui;
 
 import java.util.ArrayList;
@@ -110,6 +114,36 @@ public class GameObject
             components.get(i).Destroy();
         }
     }
+
+    public GameObject Copy() {
+        // Create a new GameObject instance with the same name
+        GameObject newGameObject = new GameObject(this.name);
+
+        // Set a new unique ID by incrementing the static ID counter
+        newGameObject.uid = ID_COUNTER++;
+
+        // Copy each component from the original to the new instance
+        for (Component component : this.components) {
+            // Call Copy on each component to get a deep copy
+            Component newComponent = component.Copy();
+            newGameObject.AddComponent(newComponent);
+        }
+
+        // Copy the serialization flag
+        newGameObject.doSerialization = this.doSerialization;
+
+        // Handle the transform copy if necessary
+        if (this.transform != null)
+        {
+            newGameObject.transform = this.transform.Copy();  // Assumes Transform has a Copy() method
+        }
+
+        //TODO: Reload level to save new object when changing scene
+        //EventSystem.Notify(this, new Event(EventType.SaveLevel));
+        //EventSystem.Notify(this, new Event(EventType.LoadLevel));
+        return newGameObject;
+    }
+
 
     public List<Component> GetAllComponents(){return this.components;}
     public int GetUid(){return uid;}

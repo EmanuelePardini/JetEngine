@@ -3,6 +3,7 @@ package gameengine.Components;
 import gameengine.Editor.JetImGui;
 import gameengine.Engine.GameObject;
 import imgui.ImGui;
+import imgui.type.ImInt;
 import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -109,6 +110,17 @@ public abstract class Component
                 val.set(imVec[0], imVec[1], imVec[2], imVec[3]);
             }
         }
+        //ENUM
+        else if(type.isEnum())
+        {
+            String[] enumValues = getEnumValues(type);
+            String enumType = ((Enum)value).name();
+            ImInt index = new ImInt(indexOf(enumType, enumValues));
+            if(ImGui.combo(field.getName(), index, enumValues, enumValues.length))
+            {
+                field.set(this, type.getEnumConstants()[index.get()]);
+            }
+        }
     }
 
     public void GenerateId()
@@ -119,6 +131,41 @@ public abstract class Component
 
     public void Destroy() {}
 
+    private <T extends Enum<T>> String[] getEnumValues(Class<T> enumType)
+    {
+        String[] enumValues = new String[enumType.getEnumConstants().length];
+        int i = 0;
+        for(T enumIntegerValue : enumType.getEnumConstants())
+        {
+            enumValues[i] = enumIntegerValue.name();
+            i++;
+        }
+        return enumValues;
+    }
+
+    public Component Copy() {
+        try {
+            Component newComponent = this.getClass().getDeclaredConstructor().newInstance();
+            // Return the new component copy
+            return newComponent;
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return null; // In case of an error, return null
+        }
+    }
+
+
+    private int indexOf(String str, String[] arr)
+    {
+        for(int i = 0; i < arr.length; i++)
+        {
+            if(str.equals(arr[i])) return i;
+        }
+        return -1;
+    }
     public int GetUid(){return uid;}
 
     public static void Init(int maxId){ID_COUNTER = maxId;}

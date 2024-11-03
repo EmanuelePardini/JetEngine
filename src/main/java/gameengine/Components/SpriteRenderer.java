@@ -29,7 +29,25 @@ public class SpriteRenderer extends Component
 //        this.color = new Vector4f(1,1,1,1);
 //        this.isDirty = true;
 //    }
+    @Override
+    public Component Copy()
+    {
+        SpriteRenderer copy = new SpriteRenderer();
 
+        // Copy color by creating a new Vector4f with the same values
+        copy.color = new Vector4f(this.color);
+
+        // Copy sprite by creating a new Sprite instance if it exists
+        copy.sprite = this.sprite != null ? this.sprite.Copy() : new Sprite();
+
+        // Copy the isDirty status
+        copy.isDirty = this.isDirty;
+
+        // Copy lastTransform by creating a new Transform instance if it exists
+        copy.lastTransform = this.lastTransform != null ? this.lastTransform.Copy() : null;
+
+        return copy;
+    }
     @Override
     public void Start()
     {
@@ -99,4 +117,6 @@ public class SpriteRenderer extends Component
     {
         this.sprite.SetTexture(texture);
     }
+
+    public Sprite GetSprite() {return sprite;}
 }

@@ -1,14 +1,14 @@
 package gameengine.Components;
 
 import gameengine.Editor.PropertiesWindow;
-import gameengine.Engine.GameObject;
-import gameengine.Engine.MouseListener;
-import gameengine.Engine.Prefabs;
-import gameengine.Engine.Window;
+import gameengine.Engine.*;
+import gameengine.Observers.EventSystem;
+import gameengine.Observers.Events.Event;
+import gameengine.Observers.Events.EventType;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
-import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_LEFT;
+import static org.lwjgl.glfw.GLFW.*;
 
 public class Gizmo extends Component
 {
@@ -26,13 +26,15 @@ public class Gizmo extends Component
     private SpriteRenderer yAxisSprite;
     //We will center the gizmos on the active GameObject
     protected GameObject activeGameObject;
+    //protected Sprite goSprite = activeGameObject.GetComponent(SpriteRenderer.class).GetSprite();
     //Referencing to the properties window
     private PropertiesWindow propertiesWindow;
-    private Vector2f xAxisOffset = new Vector2f(64, -5);
-    private Vector2f yAxisOffset = new Vector2f(16, 61);
 
-    private int gizmoWidth = 16;
-    private int gizmoHeight = 48;
+    private Vector2f xAxisOffset =  new Vector2f(16, -16);//new Vector2f(-goSprite.GetWidth()/2, goSprite.GetWidth() / 2);
+    private Vector2f yAxisOffset = new Vector2f(-16, 16);//new Vector2f(-goSprite.GetHeight() / 2, goSprite.GetHeight() / 2);
+
+    private int gizmoWidth = 16;//(int)goSprite.GetWidth() / 2;
+    private int gizmoHeight = 16;//(int)goSprite.GetHeight() / 2;
 
     private boolean using = false;
 
@@ -77,9 +79,26 @@ public class Gizmo extends Component
             this.SetInactive();
             return;
         }
+
         //BELOW ONLY IF THERE IS A ACTIVE OBJ
 
         this.SetActive();
+
+        //TODO: Move into it's own class
+        if(KeyListener.IsKeyPressed(GLFW_KEY_LEFT_CONTROL) && KeyListener.KeyBeginPress(GLFW_KEY_D))
+        {
+            GameObject newObj = this.activeGameObject.Copy();
+            Window.GetScene().AddGameObjectToScene(newObj);
+            this.propertiesWindow.SetActiveGameObject(newObj);
+            return;
+        }
+        else if(KeyListener.KeyBeginPress(GLFW_KEY_DELETE))
+        {
+            activeGameObject.Destroy();
+            this.SetInactive();
+            this.propertiesWindow.SetActiveGameObject(null);
+            return;
+        }
 
         boolean xAxisHot = CheckXHoverState();
         boolean yAxisHot = CheckYHoverState();
@@ -129,10 +148,10 @@ public class Gizmo extends Component
     {
         Vector2f mousePos = new Vector2f(MouseListener.GetOrthoX(), MouseListener.GetOrthoY());
 
-        if(mousePos.x <= xAxisObject.transform.position.x &&
-                mousePos.x >= xAxisObject.transform.position.x - gizmoHeight &&
-                mousePos.y >= xAxisObject.transform.position.y &&
-                mousePos.y <= xAxisObject.transform.position.y + gizmoWidth)
+        if(mousePos.x <= xAxisObject.transform.position.x + (gizmoHeight / 2.f) &&
+                mousePos.x >= xAxisObject.transform.position.x - (gizmoHeight / 2.f) &&
+                mousePos.y >= xAxisObject.transform.position.y - (gizmoHeight / 2.f) &&
+                mousePos.y <= xAxisObject.transform.position.y + (gizmoWidth / 2.f))
         {
             xAxisSprite.SetColor(xAxisColorHover);
             return true;
@@ -146,10 +165,10 @@ public class Gizmo extends Component
     {
         Vector2f mousePos = new Vector2f(MouseListener.GetOrthoX(), MouseListener.GetOrthoY());
 
-        if(mousePos.x <= yAxisObject.transform.position.x &&
-                mousePos.x >= yAxisObject.transform.position.x - gizmoWidth &&
-                mousePos.y <= yAxisObject.transform.position.y &&
-                mousePos.y >= yAxisObject.transform.position.y - gizmoHeight)
+        if(mousePos.x <= yAxisObject.transform.position.x  + (gizmoWidth / 2.f) &&
+                mousePos.x >= yAxisObject.transform.position.x - (gizmoWidth / 2.f)  &&
+                mousePos.y <= yAxisObject.transform.position.y + (gizmoHeight / 2.f) &&
+                mousePos.y >= yAxisObject.transform.position.y - (gizmoHeight / 2.f))
         {
             yAxisSprite.SetColor(yAxisColorHover);
             return true;

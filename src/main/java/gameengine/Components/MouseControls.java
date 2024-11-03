@@ -3,8 +3,9 @@ package gameengine.Components;
 import gameengine.Engine.GameObject;
 import gameengine.Engine.MouseListener;
 import gameengine.Engine.Window;
-import gameengine.Util.Settings;
 
+import static gameengine.Components.GridLines.GRID_HEIGHT;
+import static gameengine.Components.GridLines.GRID_WIDTH;
 import static org.lwjgl.glfw.GLFW.GLFW_MOUSE_BUTTON_LEFT;
 
 public class MouseControls extends Component
@@ -31,8 +32,8 @@ public class MouseControls extends Component
             holdingObject.transform.position.x = MouseListener.GetOrthoX();
             holdingObject.transform.position.y = MouseListener.GetOrthoY();
             //snap position
-            holdingObject.transform.position.x = (int)(holdingObject.transform.position.x / Settings.GRID_WIDTH) * Settings.GRID_WIDTH;
-            holdingObject.transform.position.y = (int)(holdingObject.transform.position.y / Settings.GRID_HEIGHT) * Settings.GRID_HEIGHT;
+            holdingObject.transform.position.x = (int)(holdingObject.transform.position.x / GRID_WIDTH) * GRID_WIDTH;
+            holdingObject.transform.position.y = (int)(holdingObject.transform.position.y / GRID_HEIGHT) * GRID_HEIGHT;
 
             //System.out.println("ObjX: " + holdingObject.transform.position.x);
             //System.out.println("ObjY: " + holdingObject.transform.position.y);

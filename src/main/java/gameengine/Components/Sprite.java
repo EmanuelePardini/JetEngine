@@ -17,6 +17,25 @@ public class Sprite
                         new Vector2f(0,1)
                 };
 
+    public Sprite Copy() {
+        Sprite copy = new Sprite();
+
+        // Copy width and height values
+        copy.width = this.width;
+        copy.height = this.height;
+
+        // Reference the same texture, assuming we want to share it
+        copy.texture = this.texture;
+
+        // Create a new array for textCoords and copy each Vector2f element
+        copy.textCoords = new Vector2f[this.textCoords.length];
+        for (int i = 0; i < this.textCoords.length; i++) {
+            copy.textCoords[i] = new Vector2f(this.textCoords[i]); // Creates a new Vector2f with the same values
+        }
+
+        return copy;
+    }
+
 
     public Texture GetTexture() {return this.texture;}
 

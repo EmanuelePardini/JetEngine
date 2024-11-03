@@ -21,7 +21,7 @@ import static org.lwjgl.opengl.GL20C.glDisableVertexAttribArray;
 
 public class DebugDraw
 {
-    private static int MAX_LINES = 500;
+    private static int MAX_LINES = 1024;
 
     private static List<Line2D> lines = new ArrayList<>();
 
@@ -127,17 +127,6 @@ public class DebugDraw
         shader.Detach();
     }
 
-    /*
-    public static void Destroy()
-    {
-        for(int i = lines.size()-1; i > 0; i--)
-        {
-            lines.get(i).Destroy();
-            lines.remove(i);
-        }
-    }
-    */
-
     //==========================
     //Add Line2D Methods
     //==========================
@@ -173,32 +162,34 @@ public class DebugDraw
 
     public static void AddBox2D(Vector2f center, Vector2f dimensions,float rotation, Vector3f color, int lifetime)
     {
+        // TODO: ADD CONSTANTS FOR COMMON COLORS
+        addBox2D(center, dimensions, rotation, new Vector3f(0, 1, 0), 1);
+    }
 
-        //Take the center and subtract half the size to take the bottom
-       Vector2f min = new Vector2f(center).sub(new Vector2f(dimensions).mul(0.5f)); //multiply to get the half sizes
-       //Take the center and add half the side to take the top
+    public static void addBox2D(Vector2f center, Vector2f dimensions, float rotation, Vector3f color) {
+        addBox2D(center, dimensions, rotation, color, 1);
+    }
+
+    public static void addBox2D(Vector2f center, Vector2f dimensions, float rotation,
+                                Vector3f color, int lifetime) {
+        Vector2f min = new Vector2f(center).sub(new Vector2f(dimensions).mul(0.5f));
         Vector2f max = new Vector2f(center).add(new Vector2f(dimensions).mul(0.5f));
 
-       Vector2f[] vertices =
-        {
-            new Vector2f(min.x,min.y), new Vector2f(min.x, max.y),
-            new Vector2f(max.x, max.y), new Vector2f(max.x,min.y)
+        Vector2f[] vertices = {
+                new Vector2f(min.x, min.y), new Vector2f(min.x, max.y),
+                new Vector2f(max.x, max.y), new Vector2f(max.x, min.y)
         };
 
-       if(rotation != 0.0f)
-       { //Rotate all vertices
-           for (Vector2f vert : vertices)
-           {
-               //had to copy and paste entire class from GitHub cuz the animal never made it in this series...
-               JMath.rotate(vert, rotation, center);
-           }
-       }
+        if (rotation != 0.0f) {
+            for (Vector2f vert : vertices) {
+                JMath.rotate(vert, rotation, center);
+            }
+        }
 
-        //Draw the lines
-       AddLine2D(vertices[0], vertices[1], color, lifetime);
-       AddLine2D(vertices[0], vertices[3], color, lifetime);
-       AddLine2D(vertices[1], vertices[2], color, lifetime);
-       AddLine2D(vertices[2], vertices[3], color, lifetime);
+        AddLine2D(vertices[0], vertices[1], color, lifetime);
+        AddLine2D(vertices[0], vertices[3], color, lifetime);
+        AddLine2D(vertices[1], vertices[2], color, lifetime);
+        AddLine2D(vertices[2], vertices[3], color, lifetime);
     }
     //==========================
     //Add Circle2D Methods

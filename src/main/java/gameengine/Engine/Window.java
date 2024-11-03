@@ -79,6 +79,7 @@ public class Window implements Observer
 
         //Reset the active GameObject(Since we are changing scene we are destroying old obj, we don't want reference to null)
         GetImGuiLayer().GetPropertiesWindow().SetActiveGameObject(null);
+
         currentScene = new Scene(sceneInitializer);
         currentScene.Load();
         currentScene.Init();
@@ -220,13 +221,17 @@ public class Window implements Observer
             //Calling the framebuffer here override the scene to render
             if (DeltaTime >= 0)
             {
-                DebugDraw.Draw();
                 Renderer.BindShader(defaultShader);
 
                 if(isRunTime)
+                {
                     currentScene.Update(DeltaTime);
+                }
                 else
+                { //TODO: Eventually review debugdraw for drawing only colliders in runtime
+                    DebugDraw.Draw();
                     currentScene.EditorUpdate(DeltaTime);
+                }
 
                 currentScene.Render();
             }
