@@ -26,7 +26,7 @@ public class GizmoSystem extends Component
     }
 
     @Override
-    public void Update(float DeltaTime)
+    public void EditorUpdate(float DeltaTime)
     {
         if(usingGizmo == 0)
         {

@@ -66,7 +66,7 @@ public class Gizmo extends Component
     }
 
     @Override
-    public void Update(float DeltaTime)
+    public void EditorUpdate(float DeltaTime)
     {
         if(!using) return;
 
@@ -104,6 +104,12 @@ public class Gizmo extends Component
         this.yAxisObject.transform.position.set(this.activeGameObject.transform.position);
         this.xAxisObject.transform.position.add(xAxisOffset);
         this.yAxisObject.transform.position.add(yAxisOffset);
+    }
+
+    @Override
+    public void Update(float DeltaTime)
+    {
+        SetInactive();
     }
 
     private void SetActive()

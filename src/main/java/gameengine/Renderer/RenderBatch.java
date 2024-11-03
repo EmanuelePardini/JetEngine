@@ -1,6 +1,7 @@
 package gameengine.Renderer;
 
 import gameengine.Components.SpriteRenderer;
+import gameengine.Engine.GameObject;
 import gameengine.Engine.Window;
 import org.joml.Matrix4f;
 import org.joml.Vector2f;
@@ -143,16 +144,6 @@ public class RenderBatch implements Comparable<RenderBatch>
             glBufferSubData(GL_ARRAY_BUFFER,0,vertices);
         }
 
-        //MY TEST: If the flag is clean do not re-render
-        //     Do not use this is Buggy, but i want to understand why we need to keep rendering
-        // if(!rebufferData) return;
-        //
-        // glBindBuffer(GL_ARRAY_BUFFER, vboID);
-        // glBufferSubData(GL_ARRAY_BUFFER,0,vertices);
-        //
-
-
-        // der
         Shader shader = Renderer.GetBoundShader();
         shader.Use();
         shader.UploadMat4f("uProjection", Window.GetScene().camera().GetProjectionMatrix());
@@ -283,6 +274,26 @@ public class RenderBatch implements Comparable<RenderBatch>
         return elements;
     }
 
+    public boolean DestroyGameObject(GameObject go)
+    {
+        SpriteRenderer sprite = go.GetComponent(SpriteRenderer.class);
+
+        for(int i = 0; i < numSprites; i++)
+        {   //If is the gameobject sprite this is the one we want to remove
+            if(sprites[i] == sprite)
+            {   //Realign Sprites array
+                for(int j=i; j < numSprites -1; j++)
+                {
+                    sprites[j] = sprites[j + 1];
+                    sprites[j].SetDirty(true);
+                } //We just move everything back one
+                numSprites--;
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void LoadElementIndices(int[] elements, int index)
     {
         int offsetArrayIndex = 6 * index;
@@ -297,7 +308,6 @@ public class RenderBatch implements Comparable<RenderBatch>
         elements[offsetArrayIndex + 3] = offset; //offset + 0
         elements[offsetArrayIndex + 4] = offset + 2;
         elements[offsetArrayIndex + 5] = offset + 1;
-
     }
 
     public boolean HasRoom()

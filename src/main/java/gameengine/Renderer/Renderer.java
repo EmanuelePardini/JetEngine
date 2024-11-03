@@ -56,6 +56,16 @@ private static Shader currentShader;
         }
     }
 
+    public void DestroyGameObject(GameObject go)
+    { //If we don't have a sprite renderer it means that we don't have the gameobject(we're not rendering anything)
+        if(go.GetComponent(SpriteRenderer.class ) == null) return;
+
+        for(RenderBatch batch : batches)
+        {   //Destroy if exists
+            if(batch.DestroyGameObject(go)) return;
+        }
+    }
+
     public static void BindShader(Shader shader)
     {
         currentShader = shader;

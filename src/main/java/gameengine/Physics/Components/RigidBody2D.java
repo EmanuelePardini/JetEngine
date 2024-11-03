@@ -1,35 +1,28 @@
 package gameengine.Physics.Components;
 
-import com.almasb.fxgl.physics.box2d.dynamics.Body;
 import gameengine.Components.Component;
 import gameengine.Physics.Enums.BodyType;
+import org.jbox2d.dynamics.Body;
 import org.joml.Vector2f;
 
 public class RigidBody2D extends Component
 {
     // Object's velocity vector.
     private Vector2f velocity = new Vector2f();
-
-    // Rate at which angular velocity decreases over time.
+    //  Angular Damping controls how much they resist rotating
     private float angularDamping = 0.8f;
-
-    // Rate at which linear velocity decreases over time.
+    //  Linear Damping controls how much the Physics Body or Constraint resists translation
     private float linearDamping = 0.9f;
-
     // Mass of the object; 0 typically means a static object.
     private float mass = 0;
-
     // Type of body (e.g., dynamic, static, or kinematic).
     private BodyType bodyType = BodyType.Dynamic;
-
     // Disables rotation if true.
     private boolean fixedRotation = false;
-
-    // Enables continuous collision detection.
+    // To decide if on a collision it has to go trought the collider or hit it
     private boolean continuousCollision = true;
-
     //JBox2D Body
-    private Body rawBody = null;
+    private transient Body rawBody = null;
 
     // Updates the game object’s transform to match the physics body position and rotation.
     @Override

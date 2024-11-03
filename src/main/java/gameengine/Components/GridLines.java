@@ -11,7 +11,7 @@ import org.joml.Vector3f;
 public class GridLines extends Component
 {
     @Override
-    public void Update(float dt)
+    public void EditorUpdate(float dt)
     {
         Camera camera = Window.GetScene().camera();
 

@@ -12,9 +12,9 @@ public class ScaleGizmo extends Gizmo
     }
 
     @Override
-    public void Update(float DeltaTime)
+    public void EditorUpdate(float DeltaTime)
     {
-        super.Update(DeltaTime);
+        super.EditorUpdate(DeltaTime);
 
         if (activeGameObject != null)
         {

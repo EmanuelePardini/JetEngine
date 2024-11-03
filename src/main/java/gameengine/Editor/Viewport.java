@@ -2,6 +2,9 @@ package gameengine.Editor;
 
 import gameengine.Engine.MouseListener;
 import gameengine.Engine.Window;
+import gameengine.Observers.EventSystem;
+import gameengine.Observers.Events.Event;
+import gameengine.Observers.Events.EventType;
 import imgui.ImGui;
 import imgui.ImVec2;
 import imgui.flag.ImGuiWindowFlags;
@@ -11,10 +14,29 @@ import org.joml.Vector2f;
 public class Viewport
 {
     private static float leftX, rightX, topY, bottomY;
+    private boolean isPlaying = false;
 
     public void ImGui()
     {   //Create the ImGui Window
-        ImGui.begin("Game Viewport", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse);
+        ImGui.begin("Game Viewport",
+                ImGuiWindowFlags.NoScrollbar
+                | ImGuiWindowFlags.NoScrollWithMouse
+                | ImGuiWindowFlags.MenuBar);
+
+        ImGui.beginMenuBar();
+
+        if(ImGui.menuItem("Play", "", isPlaying, !isPlaying))
+        {
+            isPlaying = true;
+            EventSystem.Notify(null, new Event(EventType.GameEngineStartPlay));
+        }
+        if(ImGui.menuItem("Stop","",!isPlaying, isPlaying))
+        {
+           isPlaying = false;
+           EventSystem.Notify(null, new Event(EventType.GameEngineStopPlay));
+        }
+
+        ImGui.endMenuBar();
 
         ImVec2 windowSize = GetLargestSizeForViewport();
         ImVec2 windowPos = GetCenteredPositionForViewport(windowSize);

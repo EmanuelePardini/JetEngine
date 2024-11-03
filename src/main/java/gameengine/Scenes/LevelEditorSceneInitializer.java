@@ -1,46 +1,38 @@
 package gameengine.Scenes;
-import gameengine.Renderer.DebugDraw;
 import gameengine.Components.*;
 import gameengine.Engine.*;
 import gameengine.Util.AssetPool;
 import imgui.ImGui;
 import imgui.ImVec2;
 import org.joml.Vector2f;
-import org.joml.Vector3f;
 
 
-public class LevelEditorScene extends Scene
+public class LevelEditorSceneInitializer  extends SceneInitializer
 {
     private Spritesheet sprites;
 
-    //This is a Temporarily GameObject to hold all the Level Editor Rules
-    GameObject levelEditorStuff = this.CreateGameObject("LevelEditor"); //for testing editor comps
+    private GameObject levelEditorObj;
 
-    public LevelEditorScene()
-    {
-
-    }
+    public LevelEditorSceneInitializer() {}
 
     @Override
-    public void Init()
+    public void Init(Scene scene)
     {
-        LoadResources();
-
         sprites = AssetPool.GetSpritesheet("assets/images/spritesheets/decorationsandblocks.png");
         Spritesheet gizmos = AssetPool.GetSpritesheet("assets/images/gizmos.png");
 
-        this.camera = new Camera(new Vector2f(-250.f, 0));
-        levelEditorStuff.AddComponent(new MouseControls());
-        levelEditorStuff.AddComponent(new GridLines());
-        levelEditorStuff.AddComponent(new EditorCamera(this.camera));
-        levelEditorStuff.AddComponent(new GizmoSystem(gizmos));
+        levelEditorObj = scene.CreateGameObject("levelEditorObj");
+        levelEditorObj.SetSerialize(false);
+        levelEditorObj.AddComponent(new MouseControls());
+        levelEditorObj.AddComponent(new GridLines());
+        levelEditorObj.AddComponent(new EditorCamera(scene.camera()));
+        levelEditorObj.AddComponent(new GizmoSystem(gizmos));
 
-        levelEditorStuff.Start();
-
-
+        scene.AddGameObjectToScene(levelEditorObj);
     }
 
-    private void LoadResources()
+    @Override
+    public void LoadResources(Scene scene)
     {
         AssetPool.getShader("assets/shaders/default.glsl");
 
@@ -53,7 +45,7 @@ public class LevelEditorScene extends Scene
         AssetPool.GetTexture("assets/images/blendImage2.png");
 
         //Go trought each gameobject and riassign the one texture the obj should have checking in the filepath
-        for(GameObject g : gameObjects)
+        for(GameObject g : scene.GetGameObjects())
         {
             if(g.GetComponent(SpriteRenderer.class) != null)
             {
@@ -64,44 +56,11 @@ public class LevelEditorScene extends Scene
         }
     }
 
-    float x = 0.0f;
-    float y = 0.0f;
-    float angle = 0.0f;
     @Override
-    public void Update(float DeltaTime)
-    {
-        //Monitor constantly performances
-        // System.out.println("FPS: " + (1.0 / DeltaTime));
-
-        //TestDebugLines();
-        //DebugDraw.AddBox2D(new Vector2f(800,500), new Vector2f(64,32), angle, new Vector3f(0,1,0),1);
-        //DebugDraw.AddCircle2D(new Vector2f(x,y), 64, new Vector3f(0,1,0),1);
-        x += 50f * DeltaTime;
-        y += 50f * DeltaTime;
-        angle += 40 * DeltaTime;
-
-        //mouseControls.Update(DeltaTime);
-        levelEditorStuff.Update(DeltaTime);
-        //adjusts camera projection
-        this.camera.adjustProjection();
-
-        for(GameObject go : this.gameObjects)
-        {
-            go.Update(DeltaTime);
-        }
-    }
-
-    @Override
-    public void Render()
-    {
-        this.renderer.Render();
-    }
-
-    @Override
-    public void ImGUI()
+    public void ImGui()
     {
         ImGui.begin("Level Editor Stuff");
-        levelEditorStuff.ImGUI();
+        levelEditorObj.ImGUI();
         ImGui.end();
 
         ImGui.begin("BlocksList");
@@ -137,7 +96,7 @@ public class LevelEditorScene extends Scene
                 GameObject object = Prefabs.GenerateSpriteObject(sprite, spriteWidth, spriteHeight);
 
                 //Attach this to the mouse cursor
-                levelEditorStuff.GetComponent(MouseControls.class).PickUpObject(object);
+                levelEditorObj.GetComponent(MouseControls.class).PickUpObject(object);
             }
             ImGui.popID(); //Drop the ImGui ID after assignment
 

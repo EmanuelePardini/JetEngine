@@ -1,5 +1,8 @@
 package gameengine.Editor;
 
+import gameengine.Physics.Components.Box2DCollider;
+import gameengine.Physics.Components.CircleCollider;
+import gameengine.Physics.Components.RigidBody2D;
 import gameengine.Renderer.PickingTexture;
 import gameengine.Components.NonPickable;
 import gameengine.Engine.GameObject;
@@ -44,10 +47,39 @@ public class PropertiesWindow
         if(activeGameObject != null)
         {
             ImGui.begin("Properties");
+
+            PopUpAvailableComps();
+
             activeGameObject.ImGUI();
             ImGui.end();
         }
     }
 
+    private void PopUpAvailableComps()
+    {
+        if (ImGui.beginPopupContextWindow("ComponentAdder")) {
+            if (ImGui.menuItem("Add Rigidbody"))
+            {
+                if (activeGameObject.GetComponent(RigidBody2D.class) == null)
+                    activeGameObject.AddComponent(new RigidBody2D());
+            }
+
+            if (ImGui.menuItem("Add Box Collider"))
+            {
+                if (activeGameObject.GetComponent(Box2DCollider.class) == null && activeGameObject.GetComponent(CircleCollider.class) == null)
+                    activeGameObject.AddComponent(new Box2DCollider());
+            }
+
+            if (ImGui.menuItem("Add Circle Collider"))
+            {
+                if (activeGameObject.GetComponent(Box2DCollider.class) == null && activeGameObject.GetComponent(CircleCollider.class) == null)
+                    activeGameObject.AddComponent(new CircleCollider());
+            }
+
+            ImGui.endPopup();
+        }
+    }
+
     public GameObject GetActiveGameObject(){return activeGameObject;}
+    public void SetActiveGameObject(GameObject go){this.activeGameObject = go;}
 }

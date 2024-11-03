@@ -1,5 +1,7 @@
 package gameengine.Renderer;
 
+import gameengine.Components.SpriteRenderer;
+import gameengine.Engine.GameObject;
 import gameengine.Engine.Window;
 import gameengine.Util.AssetPool;
 import gameengine.Util.JMath;
@@ -125,6 +127,17 @@ public class DebugDraw
         shader.Detach();
     }
 
+    /*
+    public static void Destroy()
+    {
+        for(int i = lines.size()-1; i > 0; i--)
+        {
+            lines.get(i).Destroy();
+            lines.remove(i);
+        }
+    }
+    */
+
     //==========================
     //Add Line2D Methods
     //==========================
@@ -141,7 +154,7 @@ public class DebugDraw
 
     public static void AddLine2D(Vector2f from, Vector2f to, Vector3f color, int lifetime)
     {
-        if(lines.size() >= MAX_LINES) return;
+        if (lines.size() >= MAX_LINES) return;
         DebugDraw.lines.add(new Line2D(from, to, color, lifetime));
     }
 
@@ -160,6 +173,7 @@ public class DebugDraw
 
     public static void AddBox2D(Vector2f center, Vector2f dimensions,float rotation, Vector3f color, int lifetime)
     {
+
         //Take the center and subtract half the size to take the bottom
        Vector2f min = new Vector2f(center).sub(new Vector2f(dimensions).mul(0.5f)); //multiply to get the half sizes
        //Take the center and add half the side to take the top
@@ -179,12 +193,12 @@ public class DebugDraw
                JMath.rotate(vert, rotation, center);
            }
        }
+
         //Draw the lines
        AddLine2D(vertices[0], vertices[1], color, lifetime);
        AddLine2D(vertices[0], vertices[3], color, lifetime);
        AddLine2D(vertices[1], vertices[2], color, lifetime);
        AddLine2D(vertices[2], vertices[3], color, lifetime);
-
     }
     //==========================
     //Add Circle2D Methods

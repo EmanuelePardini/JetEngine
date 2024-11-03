@@ -39,5 +39,14 @@ public class Line2D
         return from;
     }
 
+    /*
+    public void Destroy()
+    {
+        from = new Vector2f(0,0);
+        to = new Vector2f(0,0);
+        color = new Vector3f(0,0,0);
+        lifetime = 0;
+    }
+    */
 
 }

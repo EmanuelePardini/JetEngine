@@ -1,12 +1,16 @@
 package gameengine.Engine;
 
+import gameengine.Observers.EventSystem;
+import gameengine.Observers.Events.Event;
+import gameengine.Observers.Events.EventType;
+import gameengine.Observers.Observer;
 import gameengine.Renderer.DebugDraw;
 import gameengine.Renderer.Framebuffer;
 import gameengine.Renderer.PickingTexture;
 import gameengine.Renderer.Renderer;
-import gameengine.Scenes.LevelEditorScene;
-import gameengine.Scenes.LevelScene;
+import gameengine.Scenes.LevelEditorSceneInitializer;
 import gameengine.Scenes.Scene;
+import gameengine.Scenes.SceneInitializer;
 import gameengine.Util.AssetPool;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -20,7 +24,7 @@ import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11C.*;
 import static org.lwjgl.system.MemoryUtil.NULL;
 
-public class Window
+public class Window implements Observer
 {
 
     //Resolution and info
@@ -36,15 +40,8 @@ public class Window
     private PickingTexture pickingTexture; //Color Picking pattern(ID Buffer Picking)
     //We color that invisible texture with the original id infos
 
-    //Colors
-    public float r;
-    public float g;
-    public float b;
-    public float a;
-
-
     private static Window window = null;
-
+    private boolean isRunTime = false;
     private static Scene currentScene = null;
 
     private Window()
@@ -59,11 +56,7 @@ public class Window
         MouseListener.SetScreenHeight(screenHeight);
 
         this.title = "JetEngine";
-
-        this.r = 1;
-        this.g = 1;
-        this.b = 1;
-        this.a = 1;
+        EventSystem.AddObserver(this);
     }
 
     //Singleton
@@ -80,20 +73,13 @@ public class Window
     }
 
     //Changes scene dynamically
-    public static void ChangeScene(int newScene)
+    public static void ChangeScene(SceneInitializer sceneInitializer)
     {
-        switch (newScene)
-        {
-            case 0:
-                currentScene = new LevelEditorScene();
-                break;
-            case 1:
-                currentScene = new LevelScene();
-                break;
-            default:
-                assert false : "Unknown scene'" + newScene + "'";
-        }
+        if(currentScene != null) currentScene.Destroy();
 
+        //Reset the active GameObject(Since we are changing scene we are destroying old obj, we don't want reference to null)
+        GetImGuiLayer().GetPropertiesWindow().SetActiveGameObject(null);
+        currentScene = new Scene(sceneInitializer);
         currentScene.Load();
         currentScene.Init();
         currentScene.Start();
@@ -176,7 +162,7 @@ public class Window
         this.imGuiLayer = new ImGuiLayer(glfwWindow, pickingTexture);
         this.imGuiLayer.InitImGui();
 
-        Window.ChangeScene(0);
+        Window.ChangeScene(new LevelEditorSceneInitializer());
     }
 
     public void Loop()
@@ -225,7 +211,8 @@ public class Window
             this.framebuffer.Bind();
 
             //choose color buffer color
-            glClearColor(r, g, b, a);
+            glClearColor(1,1,1,1);
+
             //clears buffer, meaning it fills it in this case
             glClear(GL_COLOR_BUFFER_BIT);
 
@@ -235,7 +222,12 @@ public class Window
             {
                 DebugDraw.Draw();
                 Renderer.BindShader(defaultShader);
-                currentScene.Update(DeltaTime);
+
+                if(isRunTime)
+                    currentScene.Update(DeltaTime);
+                else
+                    currentScene.EditorUpdate(DeltaTime);
+
                 currentScene.Render();
             }
             this.framebuffer.Unbind();
@@ -253,11 +245,34 @@ public class Window
             DeltaTime = endFrameTime - beginFrameTime;
             beginFrameTime = endFrameTime;
         }
+    }
 
-        currentScene.SaveExit();
+    @Override
+    public void OnNotify(GameObject object, Event event)
+    {
+        switch (event.type)
+        {
+            case GameEngineStartPlay:
+                this.isRunTime = true;
+                currentScene.Save();
+                Window.ChangeScene(new LevelEditorSceneInitializer());
+                break;
+            case GameEngineStopPlay:
+                this.isRunTime = false;
+                Window.ChangeScene(new LevelEditorSceneInitializer());
+                break;
+            case LoadLevel:
+                Window.ChangeScene(new LevelEditorSceneInitializer());
+                break;
+            case SaveLevel:
+                currentScene.Save();
+                break;
+        }
     }
 
     public static ImGuiLayer GetImGuiLayer(){return Get().imGuiLayer;}
+
+    //public static boolean IsRunTime(){return Get().isRunTime;}
 
     public static int GetWidth() {return Get().width;}
 

@@ -17,6 +17,7 @@ public class GameObject
     private List<Component> components;
     public transient Transform transform;
     private transient boolean doSerialization = true;
+    private boolean isDead = false;
 
     public  GameObject(String name)
     {
@@ -73,6 +74,14 @@ public class GameObject
         }
     }
 
+    public void EditorUpdate(float DeltaTime)
+    {
+        for(int i = 0; i < components.size(); i++)
+        {
+            components.get(i).EditorUpdate(DeltaTime);
+        }
+    }
+
     public void Start()
     {
         for(int i=0; i < components.size(); i++)
@@ -90,14 +99,21 @@ public class GameObject
         }
     }
 
-    //public int ZIndex() {return transform.zIndex;}
-
-    public int GetUid(){return uid;}
-
     public static void Init(int maxId){ID_COUNTER = maxId;}
 
-    public List<Component> GetAllComponents(){return this.components;}
+    public void Destroy()
+    {
+        this.isDead = true;
 
+        for(int i = 0 ; i < components.size(); i++)
+        {
+            components.get(i).Destroy();
+        }
+    }
+
+    public List<Component> GetAllComponents(){return this.components;}
+    public int GetUid(){return uid;}
+    public boolean IsDead() {return isDead;}
     public void SetSerialize(boolean toSerialize){this.doSerialization = toSerialize;}
     public boolean ToSerialize(){return this.doSerialization;}
 }

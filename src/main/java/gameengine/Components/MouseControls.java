@@ -24,7 +24,7 @@ public class MouseControls extends Component
     }
 
     @Override
-    public void Update(float DeltaTime)
+    public void EditorUpdate(float DeltaTime)
     {
         if(holdingObject != null)
         { //Keep it attached to the mouse cursor for the placement period

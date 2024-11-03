@@ -18,6 +18,7 @@ module gameengine {
     requires imgui.binding;
     requires imgui.lwjgl3;
     requires com.google.gson;
+    requires jbox2d.library;
 
 
     opens gameengine to javafx.fxml;

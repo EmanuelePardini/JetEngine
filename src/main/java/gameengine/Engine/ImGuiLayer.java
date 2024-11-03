@@ -1,5 +1,6 @@
 package gameengine.Engine;
 
+import gameengine.Editor.SaveMenu;
 import gameengine.Renderer.PickingTexture;
 import gameengine.Editor.PropertiesWindow;
 import gameengine.Editor.Viewport;
@@ -25,14 +26,16 @@ public class ImGuiLayer
 
     // LWJGL3 renderer (SHOULD be initialized)
     private final ImGuiImplGl3 imGuiGl3 = new ImGuiImplGl3();
-    private Viewport viewport = new Viewport();
+    private Viewport viewport;
     private PropertiesWindow propertiesWindow;
+    private SaveMenu saveMenu;
 
     public ImGuiLayer(long glfwWindow, PickingTexture pickingTexture)
     {
         this.glfwWindow = glfwWindow;
         this.viewport = new Viewport();
         this.propertiesWindow = new PropertiesWindow(pickingTexture);
+        this.saveMenu = new SaveMenu();
     }
 
     // Initialize Dear ImGui.
@@ -199,10 +202,11 @@ public class ImGuiLayer
         ImGui.newFrame();
         SetupDockspace(); //Setup the Dockspace
         currentScene.ImGUI();
+        //ImGui.showDemoWindow();
+        viewport.ImGui(); //Setup the ViewPort ImGui
         propertiesWindow.ImGui();
         propertiesWindow.Update(DeltaTime, currentScene);
-        ImGui.showDemoWindow();
-        viewport.ImGui(); //Setup the ViewPort ImGui
+        saveMenu.ImGui();
         ImGui.end(); //This End the setup of the dockspace, check SetupDockspace() for the ImGui.begin()
         ImGui.render();
 
@@ -216,17 +220,6 @@ public class ImGuiLayer
         double[] mousePosX = {0};
         double[] mousePosY = {0};
         glfwGetCursorPos(glfwWindow, mousePosX, mousePosY);
-
-        /*
-        // Set the clear color and clear the window
-        glClearColor(exampleUi.backgroundColor[0], exampleUi.backgroundColor[1], exampleUi.backgroundColor[2], 0.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        // Get window properties and mouse position
-        glfw(glfwWindow, winWidth[0], winHeight[0]);
-        nglfwGetFramebufferSize(glfwWindow, winWidth[0], winHeight[0]);
-        glfwGetCursorPos(glfwWindow, mousePosX, mousePosY);
-        */
 
         // We SHOULD call those methods to update Dear ImGui state for the current frame
         final ImGuiIO io = ImGui.getIO();

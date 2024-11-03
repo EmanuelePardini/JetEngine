@@ -47,6 +47,16 @@ public class SpriteRenderer extends Component
     }
 
     @Override
+    public void EditorUpdate(float DeltaTime)
+    {
+        if(!this.lastTransform.equals(this.gameObject.transform))
+        {
+            this.gameObject.transform.Copy(this.lastTransform);
+            this.isDirty = true;
+        }
+    }
+
+    @Override
     public void ImGui()
     {
         if(JetImGui.ColorPicker("Color Picker", this.color))
@@ -58,6 +68,8 @@ public class SpriteRenderer extends Component
     public Texture GetTexture(){return sprite.GetTexture();}
 
     public boolean IsDirty() {return isDirty;}
+
+    public void SetDirty(boolean isDirty){this.isDirty = isDirty;}
 
     public Vector2f[] GetTextCoords()
     {

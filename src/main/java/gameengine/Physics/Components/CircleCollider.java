@@ -3,10 +3,10 @@ package gameengine.Physics.Components;
 import gameengine.Components.Component;
 import org.joml.Vector2f;
 
-public class CircleCollider extends Component
+public class CircleCollider extends Collider
 {
-    private Vector2f halfSize = new Vector2f(1);
+    private float radius = 1.0f;
 
-    public Vector2f GetHalfSize(){return  halfSize;}
-    public void SetHalfSize(Vector2f halfSize){this.halfSize = halfSize;}
+    public float GetRadius(){return  radius;}
+    public void SetRadius(float radius){this.radius = radius;}
 }

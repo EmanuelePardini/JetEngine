@@ -26,10 +26,10 @@ public abstract class Component
     {
 
     }
-    public void Update(float DeltaTime)
-    {
 
-    }
+    public void Update(float DeltaTime) {}
+
+    public void EditorUpdate(float DeltaTime) {}
 
     public void ImGui()
     {
@@ -116,6 +116,8 @@ public abstract class Component
         if(this.uid == -1)
             this.uid = ID_COUNTER++;
     }
+
+    public void Destroy() {}
 
     public int GetUid(){return uid;}
 
