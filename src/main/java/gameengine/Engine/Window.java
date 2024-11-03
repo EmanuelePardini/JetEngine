@@ -277,7 +277,7 @@ public class Window implements Observer
 
     public static ImGuiLayer GetImGuiLayer(){return Get().imGuiLayer;}
 
-    //public static boolean IsRunTime(){return Get().isRunTime;}
+    public static boolean IsRunTime(){return Get().isRunTime;}
 
     public static int GetWidth() {return Get().width;}
 

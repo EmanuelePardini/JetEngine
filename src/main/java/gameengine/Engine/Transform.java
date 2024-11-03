@@ -65,6 +65,7 @@ public class Transform extends Component
     @Override
     public void ImGui()
     {
+        gameObject.name = JetImGui.InputText("Name", gameObject.name);
         JetImGui.DrawVec2Control("Position", this.position);
         JetImGui.DrawVec2Control("Scale", this.scale, 32.0f);
         this.rotation = JetImGui.DragFloat("Rotation", this.rotation);

@@ -3,6 +3,7 @@ package gameengine.Editor;
 import imgui.ImGui;
 import imgui.flag.ImGuiCol;
 import imgui.flag.ImGuiStyleVar;
+import imgui.type.ImString;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 
@@ -130,5 +131,25 @@ public class JetImGui
         ImGui.popID();
 
         return res;
+    }
+
+    public static String InputText(String label, String text)
+    {
+        ImGui.pushID(label);
+
+        ImGui.columns(2);
+        ImGui.setColumnWidth(0, defaultColumnWidth);
+        ImGui.text(label);
+        ImGui.nextColumn();
+
+        ImString outString = new ImString(text,  256);
+
+        if(ImGui.inputText("##" + label, outString))
+            text = outString.get(); //Update Text with the value of the Input field
+
+        ImGui.columns(1);
+        ImGui.popID();
+
+        return text;
     }
 }

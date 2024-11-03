@@ -206,11 +206,16 @@ public class ImGuiLayer
         SetupDockspace(); //Setup the Dockspace
         currentScene.ImGUI();
         //ImGui.showDemoWindow();
+
         viewport.ImGui(); //Setup the ViewPort ImGui
         propertiesWindow.ImGui();
         propertiesWindow.Update(DeltaTime, currentScene);
-        saveMenu.ImGui();
         sceneHierarchyWindow.ImGui();
+
+        if(!Window.IsRunTime())
+        {
+            saveMenu.ImGui();
+        }
 
         ImGui.end(); //This End the setup of the dockspace, check SetupDockspace() for the ImGui.begin()
         ImGui.render();
