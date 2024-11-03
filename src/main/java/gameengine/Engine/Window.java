@@ -40,6 +40,12 @@ public class Window implements Observer
     private PickingTexture pickingTexture; //Color Picking pattern(ID Buffer Picking)
     //We color that invisible texture with the original id infos
 
+    //Colors
+    public float r = 0.53f;
+    public float g = 0.81f;
+    public float b = 0.92f;
+    public float a = 1.0f;
+
     private static Window window = null;
     private boolean isRunTime = false;
     private static Scene currentScene = null;
@@ -212,7 +218,7 @@ public class Window implements Observer
             this.framebuffer.Bind();
 
             //choose color buffer color
-            glClearColor(1,1,1,1);
+            glClearColor(r,g,b,a);
 
             //clears buffer, meaning it fills it in this case
             glClear(GL_COLOR_BUFFER_BIT);

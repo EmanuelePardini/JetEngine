@@ -18,7 +18,7 @@ public class LevelEditorSceneInitializer  extends SceneInitializer
     @Override
     public void Init(Scene scene)
     {
-        sprites = AssetPool.GetSpritesheet("assets/images/spritesheets/decorationsandblocks.png");
+        sprites = AssetPool.GetSpritesheet("assets/images/spritesheets/MinecraftBlocks.png");
         Spritesheet gizmos = AssetPool.GetSpritesheet("assets/images/gizmos.png");
 
         levelEditorObj = scene.CreateGameObject("levelEditorObj");
@@ -36,9 +36,9 @@ public class LevelEditorSceneInitializer  extends SceneInitializer
     {
         AssetPool.getShader("assets/shaders/default.glsl");
 
-        AssetPool.AddSpritesheet("assets/images/spritesheets/decorationsandblocks.png",
-                new Spritesheet(AssetPool.GetTexture("assets/images/spritesheets/decorationsandblocks.png"),
-                        16,16, 81, 0));
+        AssetPool.AddSpritesheet("assets/images/spritesheets/MinecraftBlocks.png",
+                new Spritesheet(AssetPool.GetTexture("assets/images/spritesheets/MinecraftBlocks.png"),
+                        80,80, 18, 0));
 
         AssetPool.AddSpritesheet("assets/images/gizmos.png",
                 new Spritesheet(AssetPool.GetTexture("assets/images/gizmos.png"), 24, 48, 3, 0));

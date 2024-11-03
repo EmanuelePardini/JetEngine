@@ -1,18 +1,824 @@
 [
   {
-    "uid": 28,
-    "name": "Block1",
+    "uid": 0,
+    "name": "Sprite_Object_Gen",
     "components": [
       {
         "type": "gameengine.Engine.Transform",
         "properties": {
           "position": {
-            "x": 386.94244,
-            "y": 736.0
+            "x": -176.0,
+            "y": 80.0
           },
           "scale": {
-            "x": 32.0,
-            "y": 32.0
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 19
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 20
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 1,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": -16.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 21
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 22
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 2,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 144.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 23
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 24
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 3,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 304.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 25
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 26
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 4,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 464.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 27
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 28
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 5,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 624.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 48
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 49
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 6,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 784.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 50
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 51
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 7,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 944.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 52
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 53
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 8,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 1104.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 54
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 55
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 9,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 1264.0,
+            "y": 80.398865
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 56
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 57
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 10,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 1424.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 58
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 59
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 11,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 1584.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 60
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 61
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 12,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 1744.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 62
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 63
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 13,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 1904.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
           },
           "rotation": 0.0,
           "zIndex": 0,
@@ -29,68 +835,176 @@
             "w": 1.0
           },
           "sprite": {
-            "width": 16.0,
-            "height": 16.0,
+            "width": 80.0,
+            "height": 80.0,
             "texture": {
-              "filePath": "assets/images/spritesheets/decorationsandblocks.png",
-              "width": 112,
-              "height": 192
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
             },
             "textCoords": [
               {
-                "x": 0.85714287,
-                "y": 0.75
+                "x": 0.16666667,
+                "y": 1.0
               },
               {
-                "x": 0.85714287,
+                "x": 0.16666667,
                 "y": 0.6666667
               },
               {
-                "x": 0.71428573,
+                "x": 0.0,
                 "y": 0.6666667
               },
               {
-                "x": 0.71428573,
-                "y": 0.75
+                "x": 0.0,
+                "y": 1.0
               }
             ]
           },
           "uid": 65
-        }
-      },
-      {
-        "type": "gameengine.Physics.Components.RigidBody2D",
-        "properties": {
-          "velocity": {
-            "x": 0.0,
-            "y": 0.0
-          },
-          "angularDamping": 0.8,
-          "linearDamping": 0.9,
-          "mass": 0.0,
-          "bodyType": "Dynamic",
-          "fixedRotation": false,
-          "continuousCollision": true,
-          "uid": 66
         }
       }
     ],
     "isDead": false
   },
   {
-    "uid": 29,
-    "name": "Block2",
+    "uid": 14,
+    "name": "Sprite_Object_Gen",
     "components": [
       {
         "type": "gameengine.Engine.Transform",
         "properties": {
           "position": {
-            "x": 384.0,
-            "y": 589.977
+            "x": 2064.0,
+            "y": 80.0
           },
           "scale": {
-            "x": 32.0,
-            "y": 32.0
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 66
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 67
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 15,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 2224.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 68
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 69
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 16,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": 2384.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
           },
           "rotation": 0.0,
           "zIndex": 0,
@@ -107,33 +1021,95 @@
             "w": 1.0
           },
           "sprite": {
-            "width": 16.0,
-            "height": 16.0,
+            "width": 80.0,
+            "height": 80.0,
             "texture": {
-              "filePath": "assets/images/spritesheets/decorationsandblocks.png",
-              "width": 112,
-              "height": 192
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
             },
             "textCoords": [
               {
-                "x": 0.85714287,
-                "y": 0.75
+                "x": 0.16666667,
+                "y": 1.0
               },
               {
-                "x": 0.85714287,
+                "x": 0.16666667,
                 "y": 0.6666667
               },
               {
-                "x": 0.71428573,
+                "x": 0.0,
                 "y": 0.6666667
               },
               {
-                "x": 0.71428573,
-                "y": 0.75
+                "x": 0.0,
+                "y": 1.0
               }
             ]
           },
           "uid": 90
+        }
+      }
+    ],
+    "isDead": false
+  },
+  {
+    "uid": 17,
+    "name": "Sprite_Object_Gen",
+    "components": [
+      {
+        "type": "gameengine.Engine.Transform",
+        "properties": {
+          "position": {
+            "x": -336.0,
+            "y": 80.0
+          },
+          "scale": {
+            "x": 160.0,
+            "y": 160.0
+          },
+          "rotation": 0.0,
+          "zIndex": 0,
+          "uid": 91
+        }
+      },
+      {
+        "type": "gameengine.Components.SpriteRenderer",
+        "properties": {
+          "color": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0,
+            "w": 1.0
+          },
+          "sprite": {
+            "width": 80.0,
+            "height": 80.0,
+            "texture": {
+              "filePath": "assets/images/spritesheets/MinecraftBlocks.png",
+              "width": 480,
+              "height": 240
+            },
+            "textCoords": [
+              {
+                "x": 0.16666667,
+                "y": 1.0
+              },
+              {
+                "x": 0.16666667,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 0.6666667
+              },
+              {
+                "x": 0.0,
+                "y": 1.0
+              }
+            ]
+          },
+          "uid": 92
         }
       }
     ],
