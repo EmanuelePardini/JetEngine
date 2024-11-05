@@ -1,5 +1,7 @@
 package gameengine.Editor;
 
+import gameengine.Components.Spawner;
+import gameengine.Components.StateMachine;
 import gameengine.Physics.Components.Box2DCollider;
 import gameengine.Physics.Components.CircleCollider;
 import gameengine.Physics.Components.RigidBody2D;
@@ -75,6 +77,21 @@ public class PropertiesWindow
                 if (activeGameObject.GetComponent(Box2DCollider.class) == null && activeGameObject.GetComponent(CircleCollider.class) == null)
                     activeGameObject.AddComponent(new CircleCollider());
             }
+
+            if (ImGui.menuItem("Add Spawner Component"))
+            {
+                if (activeGameObject.GetComponent(Spawner.class) == null && activeGameObject.GetComponent(Spawner.class) == null)
+                    activeGameObject.AddComponent(new Spawner());
+            }
+
+
+            /*
+            if (ImGui.menuItem("Add State Machine"))
+            {
+                if (activeGameObject.GetComponent(StateMachine.class) == null && activeGameObject.GetComponent(StateMachine.class) == null)
+                    activeGameObject.AddComponent(new StateMachine());
+            }
+            */
 
             ImGui.endPopup();
         }

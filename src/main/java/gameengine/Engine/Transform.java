@@ -34,7 +34,7 @@ public class Transform extends Component
     // Creates a copy of the current Transform object and returns it.
     public Transform Copy()
     {
-        Vector2f newPosition = new Vector2f(this.position).add(this.scale);
+        Vector2f newPosition = new Vector2f(this.position.x + this.scale.x, this.position.y);
         return new Transform(newPosition, new Vector2f(this.scale));
     }
 

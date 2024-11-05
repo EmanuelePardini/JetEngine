@@ -137,8 +137,6 @@ public class MouseListener
         return currentY;
     }
 
-    public static float GetOrthoX() {return (float)get().worldX;}
-
     private static void CalcOrthoX()
     {
         // Calculate the current X position relative to the viewport position
@@ -157,9 +155,9 @@ public class MouseListener
         get().worldX = tmp.x;
     }
 
-    public static float GetOrthoY() {return (float)get().worldY;}
+    public static float GetOrthoX() {return (float)get().worldX;}
 
-    public static void CalcOrthoY()
+    private static void CalcOrthoY()
     {
         // Calculate the current Y position relative to the viewport position
         float currentY = GetY() - get().GetViewportPos().y;
@@ -176,6 +174,8 @@ public class MouseListener
         // Update currentY with the transformed Y coordinate
         get().worldY = tmp.y;
     }
+
+    public static float GetOrthoY() {return (float)get().worldY;}
 
     private static Matrix4f ViewProjection()
     {

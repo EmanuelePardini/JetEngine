@@ -5,9 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be5a7dae-daae-4114-a210-103589ae3a55" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/AnimationState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/Frame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/Spawner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/StateMachine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgui.ini" beforeDir="false" afterPath="$PROJECT_DIR$/imgui.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level.txt" beforeDir="false" afterPath="$PROJECT_DIR$/level.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Editor/SaveMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Editor/SaveMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Components/MouseControls.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Components/MouseControls.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Editor/PropertiesWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Editor/PropertiesWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/GameObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/MouseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/MouseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Prefabs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Prefabs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Transform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Engine/Transform.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gameengine/Scenes/LevelEditorSceneInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gameengine/Scenes/LevelEditorSceneInitializer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

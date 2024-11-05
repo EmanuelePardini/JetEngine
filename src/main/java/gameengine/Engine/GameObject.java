@@ -134,13 +134,8 @@ public class GameObject
 
         // Handle the transform copy if necessary
         if (this.transform != null)
-        {
             newGameObject.transform = this.transform.Copy();  // Assumes Transform has a Copy() method
-        }
 
-        //TODO: Reload level to save new object when changing scene
-        //EventSystem.Notify(this, new Event(EventType.SaveLevel));
-        //EventSystem.Notify(this, new Event(EventType.LoadLevel));
         return newGameObject;
     }
 
