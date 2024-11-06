@@ -17,7 +17,7 @@ import org.joml.Vector2f;
 public class Physics2D
 {
     // Defines a gravity vector with a y-component of -10.0 (indicating downward acceleration).
-    private Vec2 gravity = new Vec2(0, -10.f);
+    private Vec2 gravity = new Vec2(0, -250.f);
 
     // Creates a new physics world with the specified gravity vector.
 // This `world` object will handle all physics simulations.

@@ -24,11 +24,12 @@ public class Prefabs
         AnimationState run = new AnimationState();
         run.title = "Run";
 
-        float defaultFrameTime = 0.23f;
+        float defaultFrameTime = 0.250f;
         run.AddFrame(spritesheet.GetSprite(0), defaultFrameTime);
-        run.AddFrame(spritesheet.GetSprite(2), defaultFrameTime);
-        run.AddFrame(spritesheet.GetSprite(3), defaultFrameTime);
-        run.AddFrame(spritesheet.GetSprite(2), defaultFrameTime);
+        run.AddFrame(spritesheet.GetSprite(8), defaultFrameTime);
+        run.AddFrame(spritesheet.GetSprite(16), defaultFrameTime);
+
+
 
         run.SetLoop(true);
 
@@ -36,6 +37,9 @@ public class Prefabs
         stateMachine.AddState(run);
         stateMachine.SetDefaultState(run.title);
         character.AddComponent(stateMachine);
+
+        Movement movement = new Movement();
+        character.AddComponent(movement);
 
         return character;
     }

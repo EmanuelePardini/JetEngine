@@ -1,5 +1,6 @@
 package gameengine.Editor;
 
+import gameengine.Components.Movement;
 import gameengine.Components.Spawner;
 import gameengine.Components.StateMachine;
 import gameengine.Physics.Components.Box2DCollider;
@@ -82,6 +83,12 @@ public class PropertiesWindow
             {
                 if (activeGameObject.GetComponent(Spawner.class) == null && activeGameObject.GetComponent(Spawner.class) == null)
                     activeGameObject.AddComponent(new Spawner());
+            }
+
+            if (ImGui.menuItem("Add Movement Component"))
+            {
+                if (activeGameObject.GetComponent(Movement.class) == null && activeGameObject.GetComponent(Movement.class) == null)
+                    activeGameObject.AddComponent(new Movement());
             }
 
 

@@ -7,7 +7,7 @@ public class Sprite
 {
     private float width, height;
     private Texture texture = null;
-
+    private boolean isFlipped = false;
 
     private Vector2f[] textCoords =
                 {
@@ -36,6 +36,16 @@ public class Sprite
         return copy;
     }
 
+    public void FlipHorizontally() {
+        // Swap the x values of each corner to flip horizontally
+        for (Vector2f coord : textCoords) {
+            coord.x = 1 - coord.x;
+        }
+        isFlipped = !isFlipped;
+    }
+
+
+    public boolean IsFlipped() {return this.isFlipped;}
 
     public Texture GetTexture() {return this.texture;}
 
