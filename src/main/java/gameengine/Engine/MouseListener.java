@@ -17,9 +17,12 @@ public class MouseListener
     private double yPos;
     private double lastY;
     private double lastX;
+    private double worldX, worldY, lastWorldX, lastWorldY;
 
     private boolean mouseButtonPressed[] = new boolean[9];
     private boolean isDragging;
+
+    private int mouseButtonDown = 0;
 
     private Vector2f viewportPos = new Vector2f();
     private Vector2f viewportSize = new Vector2f();
@@ -48,16 +51,28 @@ public class MouseListener
 
     public static void MousePosCallback(long window, double xpos, double ypos)
     {
+        if(get().mouseButtonDown > 0){
+            get().isDragging = true;
+        }
+
         //save last x and y pos
         get().lastX = get().xPos;
         get().lastY = get().yPos;
+
+        //save last x and y world pos
+        get().lastWorldX = get().worldX;
+        get().lastWorldY = get().worldY;
 
         //set new x and y
         get().xPos = xpos;
         get().yPos = ypos;
 
+        //Call functions to calculate current worldX and worldY
+        CalcOrthoX();
+        CalcOrthoY();
+
         //If mouse is moved while any button is pressed, dragging is true (user is dragging)
-        get().isDragging = get().mouseButtonPressed[0] || get().mouseButtonPressed[1] || get().mouseButtonPressed[2];
+        //get().isDragging = get().mouseButtonPressed[0] || get().mouseButtonPressed[1] || get().mouseButtonPressed[2];
     }
 
     public static void MouseButtonCallback(long window, int button, int action, int mods)
@@ -65,6 +80,8 @@ public class MouseListener
         //Check if mouse was pressed
         if (action == GLFW_PRESS)
         {
+            get().mouseButtonDown++;
+
             //Check if only one button was pressed
             if (button < get().mouseButtonPressed.length)
             {
@@ -72,6 +89,8 @@ public class MouseListener
             }
         } else if (action == GLFW_RELEASE)
         {
+            get().mouseButtonDown--;
+
             if (button < get().mouseButtonPressed.length)
             {
                 get().mouseButtonPressed[button] = false;
@@ -119,6 +138,11 @@ public class MouseListener
     }
 
     public static float GetOrthoX() {
+
+        return (float)get().worldX;
+    }
+
+    private static void CalcOrthoX(){
         // Calculate the current X position relative to the viewport position
         float currentX = GetX() - get().GetViewportPos().x;
 
@@ -135,10 +159,14 @@ public class MouseListener
         currentX = tmp.x;
 
         // Return the transformed X coordinate
-        return currentX;
+        get().worldX = currentX;
     }
 
     public static float GetOrthoY() {
+       return (float)get().worldY;
+    }
+
+    private static void CalcOrthoY(){
         // Calculate the current Y position relative to the viewport position
         float currentY = GetY() - get().GetViewportPos().y;
 
@@ -155,7 +183,7 @@ public class MouseListener
         currentY = tmp.y;
 
         // Return the transformed Y coordinate
-        return currentY;
+        get().worldY = currentY;
     }
 
     private static Matrix4f ViewProjection()
@@ -192,6 +220,16 @@ public class MouseListener
     public static float GetDy()
     {
         return (float) (get().lastY - get().yPos);
+    }
+
+    public static float GetWorldDX()
+    {
+        return (float) (get().lastWorldX - get().worldX);
+    }
+
+    public static float GetWorldDY()
+    {
+        return (float) (get().lastWorldY - get().worldY);
     }
 
     public static float GetScrollX()
